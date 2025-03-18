@@ -1,6 +1,3 @@
-<?php
-    include("header1.html")
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <p> about us / our project page </p>
+    <p>Basic dashboard page for tasks or profile once the user logs in</p>
+    <p>Don't worry about this for now</p>
 </body>
 </html>
