@@ -6,10 +6,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About</title>
-    <link rel="stylesheet" href="styles/about.css">
+    <title>Contact</title>
+    <link rel="stylesheet" href="styles/contact.css">
 </head>
 <body>
-    <p> about us / our project page </p>
+    Fill out the form below to contact us about any feedback, questions, or concerns you may have
+
 </body>
 </html>

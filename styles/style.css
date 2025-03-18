@@ -1,0 +1,174 @@
+/* Import Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+/* General Wrapper Styles */
+.wrapper {
+  max-width: 1140px;
+  padding-left: 0rem;
+  padding-right: 0rem;
+  margin-left: 2rem;
+  margin-right: 0rem;
+}
+
+/* Universal Box Sizing */
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+/* Link Styling */
+a {
+  text-decoration: none;
+  color: #222;
+}
+
+/* Smooth Font Rendering */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Body Font */
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+/* Visually Hidden Class (used for accessibility) */
+.sr-only {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
+
+/* Button Styles */
+.button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  color: #fff;
+  background-color: #2fa0f6;
+  min-width: 120px;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.button svg {
+  display: inline-block;
+  vertical-align: middle;
+  width: 24px;
+  height: 24px;
+  fill: #fff;
+}
+
+.button span {
+  display: none;
+}
+
+@media (min-width: 600px) {
+  .button span {
+    display: initial;
+  }
+}
+
+.button--icon {
+  min-width: initial;
+  padding: 0.5rem;
+}
+
+/* Header Styles */
+
+/* Brand styling */
+.brand {
+    display: inline-block;
+}
+
+.brand img {
+    height: 50px; /* Adjust to fit header */
+    width: auto;  /* Maintain aspect ratio */
+    display: block;
+    padding: 0;
+    align-items: center;
+}
+
+/* Site header styling */
+.site-header {
+    position: relative;
+    background-color: #767676; /* Light green background */
+    padding: 0.5rem 0; /* Top and bottom padding */
+}
+
+/* Wrapper styling to position the header content */
+.site-header__wrapper {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+/* Media query for screens larger than 500px */
+@media (min-width: 500px) {
+    .site-header__wrapper {
+        display: flex;
+        justify-content: space-between; /* Align brand and navigation */
+        align-items: center;
+    }
+}
+
+/* Navigation styling */
+.nav__wrapper {
+    display: flex;
+    gap: 20px;
+}
+
+.nav__item a {
+    display: block;
+    padding: 0rem 1rem;
+    text-decoration: none;
+    color: #333; /* Dark text color */
+}
+
+/* Mobile menu styling for smaller screens */
+@media (max-width: 900px) {
+    .nav__wrapper {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        z-index: -1;
+        background-color: #636363; /* Light yellow background */
+        visibility: hidden;
+        opacity: 0;
+        transform: translateY(-100%);
+        transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    }
+
+    .nav__wrapper.active {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Toggle button (hamburger) for mobile screens */
+.nav__toggle {
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .nav__toggle {
+        display: block;
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+    }
+}
+
+/* Styling for active links */
+.nav__item a:hover {
+    color: #777777; /* Green color when hovering over links */
+    text-decoration: underline;
+}
