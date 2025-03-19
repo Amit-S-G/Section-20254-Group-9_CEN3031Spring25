@@ -7,8 +7,61 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f4f8;
-    color: #333;
+    background-color: #e8f5e9;
     margin: 0;
     padding-top: 100px; /* Adjust this depending on header height */
+
+}
+
+.mission {
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+    background: linear-gradient(to right, #23a12b, #1dffd2);
+}
+
+h1{
+    font-size: 2.5em;
+    margin-bottom: 15px;
+}
+
+p {
+    font-size: 1.2em;
+}
+
+.cta-button {
+    background-color: #f8ff3b;
+    color: #2e7d32;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+.cta-button:hover {
+    background-color: #b1ff99;
+}
+
+.features {
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.feature {
+    background: rgb(46, 46, 46);
+    color: white;
+    margin: 20px auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0, 0.5);
+    margin-bottom: 20px;
+}
+
+h2{
+    font-size: 2em;
+    color: #17d397;
 }
