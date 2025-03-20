@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica&family=Cinzel+Decorative:wght@400;700&family=Uncial+Antiqua&display=swap');
+
 /* Basic Reset */
 * {
     margin: 0;
@@ -6,23 +8,37 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #e8f5e9;
+    font-family: 'IM Fell DW Pica', serif;
     margin: 0;
-    padding-top: 100px; /* Adjust this depending on header height */
-
+    padding-top: 80px; 
+    background-color: #121a13;
+    color: #d4ff00;
 }
 
 .mission {
-    color: white;
+    background: linear-gradient(to right, #1b5e20, #2e7d32);
     text-align: center;
-    padding: 50px 20px;
-    background: linear-gradient(to right, #23a12b, #1dffd2);
+    color: #d4ff00;
+    padding: 70px 20px;
+    padding-top: 100px;
+    padding-bottom: 50px;
+    margin-bottom: 30px;
 }
 
 h1{
+    margin-top: 20px;
+    font-size: 3.5em;
+    font-family: 'Cinzel Decorative', serif;
+    margin-bottom: 20px;
+}
+
+h2 {
     font-size: 2.5em;
-    margin-bottom: 15px;
+    color: #aeea00;
+    margin-top: 40px;
+    text-align: center;
+    font-family: 'IM Fell DW Pica', serif;
+    text-align: center;
 }
 
 p {
@@ -30,38 +46,38 @@ p {
 }
 
 .cta-button {
-    background-color: #f8ff3b;
-    color: #2e7d32;
-    border: none;
+    font-family: 'EB Garamond', serif;
+    margin-top: 50px;
+    background-color: #aeea00;
+    color: rgb(18, 32, 18);
+    font-size: 1.5em;
     padding: 15px 30px;
-    font-size: 1.2em;
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
-    border-radius: 5px;
-    margin-top: 15px;
 }
 
 .cta-button:hover {
-    background-color: #b1ff99;
+    background-color: #d4ff00;
 }
 
 .features {
-    text-align: center;
-    padding: 30px 20px;
+    width: 85%;
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 30px;
+    background: rgba(30, 50, 30, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);
 }
 
 .feature {
-    background: rgb(46, 46, 46);
-    color: white;
+    background: rgba(40, 60, 40, 0.9);
     margin: 20px auto;
-    padding: 20px;
-    width: 80%;
-    max-width: 600px;
+    padding: 25px;
+    width: 90%;
+    max-width: 700px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0, 0.5);
-    margin-bottom: 20px;
-}
-
-h2{
-    font-size: 2em;
-    color: #17d397;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
 }
