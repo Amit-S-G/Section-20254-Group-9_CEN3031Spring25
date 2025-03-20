@@ -19,7 +19,8 @@
         <h2>Get in Touch</h2>
         <p class ="get-in-touch">If you have any questions, feedback, or suggestions, feel free to reach out.</p>
 
-        <form class="contact-form">
+        <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
+        <input type="hidden" name="access_key" value="478ce53c-c683-40be-9770-6b2624c9f9dd">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" placeholder="Enter your name" required>
 

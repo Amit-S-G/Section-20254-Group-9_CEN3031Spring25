@@ -9,11 +9,12 @@
     <title>Home</title>
     <link rel="stylesheet" href="styles/index.css">
 </head>
+<script src="js/index.js"></script>
 <body>
     <section class  = "mission">
         <h1> Gotta Complete Them All </h1>
-        <p> Complete tasks, earn rewards, and keep your pet happy! </p>
-        <button class="cta-button"> Get Started </button>
+        <p class= "phrase"> Complete tasks, earn rewards, and keep your pet happy! </p>
+        <button id = "get-started-btn" class="cta-button"> Get Started </button>
     </section>
 
     <section class = "features">
