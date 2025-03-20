@@ -1,0 +1,93 @@
+/* CSS file for styling the header1.html file */
+
+/* Brand styling */
+.brand {
+    display: inline-block;
+}
+
+.brand img {
+    height: 50px; /* Adjust to fit header */
+    width: auto;  /* Maintain aspect ratio */
+    display: block;
+    padding: 0;
+    align-items: center;
+}
+
+/* Site header styling */
+
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    z-index: 1000; /* I give up with this z index bs */
+}
+
+.site-header .wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.site-header .nav {
+    display: flex;
+    gap: 20px;
+}
+
+.site-header .nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.site-header .nav a:hover {
+    text-decoration: underline;
+}
+
+/* Mobile menu styling for smaller screens */
+@media (max-width: 900px) {
+    .nav__wrapper {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        z-index: -1;
+        background-color: #767676;
+        visibility: hidden;
+        opacity: 0;
+        transform: translateY(-100%);
+        transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    }
+
+    .nav__wrapper.active {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Toggle button (hamburger) for mobile screens */
+.nav__toggle {
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .nav__toggle {
+        display: block;
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+    }
+}
+
+/* Styling for active links */
+.nav__item a:hover {
+    color: #93fea6; /* Green color when hovering over links */
+    text-decoration: underline;
+}
