@@ -10,7 +10,7 @@
 body {
     font-family: 'IM Fell DW Pica', serif;
     margin: 0;
-    padding-top: 80px; 
+    padding-top: 100px; 
     background-color: #121a13;
     color: #d4ff00;
 }
@@ -20,7 +20,6 @@ body {
     text-align: center;
     color: #d4ff00;
     padding: 70px 20px;
-    padding-top: 100px;
     padding-bottom: 50px;
     margin-bottom: 30px;
 }
@@ -33,6 +32,7 @@ h1{
     font-size: 3.5em;
     font-family: 'Cinzel Decorative', serif;
     margin-bottom: 20px;
+    font-weight: bold;
 }
 
 h2 {
