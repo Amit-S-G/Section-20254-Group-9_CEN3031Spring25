@@ -34,8 +34,9 @@
             }
             elseif(empty($password)) {
                 echo "<div class='error-message'>You must enter a password</div>";
-            }
-            else {
+            } elseif (!preg_match('/^(?=.*[A-Z])(?=.*[\W_]).{8,}$/', $password)) {
+                echo "<div class='error-message'>Password must be at least 8 characters long, contain at least one uppercase letter, and at least one symbol.</div>";
+            } else {
                 $hash = password_hash($password, PASSWORD_DEFAULT);
                 echo "<div class='error-message'>Username: {$username}</div>";
                 echo "<div class='error-message'>Password: {$password}</div>";
