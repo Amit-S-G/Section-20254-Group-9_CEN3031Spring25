@@ -47,6 +47,18 @@
                 echo "<div class='error-message'>Username: {$username}</div>";
                 echo "<div class='error-message'>Password: {$password}</div>";
                 echo "<div class='error-message'>Bcrypt Hash: {$hash}</div>";
+                
+                /* Temp Code for registration:
+                $sql = "INSERT INTO users (user, password) VALUES ('$username', '$password')";
+
+                try{
+                    mysqli_query($conn, $sql);
+                    echo "User is now registered";
+                }
+                catch(mysqli_sql_exception){
+                    echo "Could not register user";
+                }
+                */
             }
         }
         // Closes the database connection at end of file
