@@ -1,5 +1,6 @@
 <?php
-   include("header1.html")
+    include ("database.php"); // Includes database script for sql queries
+    include("header1.html");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,6 +49,8 @@
                 echo "<div class='error-message'>Bcrypt Hash: {$hash}</div>";
             }
         }
+        // Closes the database connection at end of file
+        mysqli_close($conn);
         ?>
     </div>
 </body>
