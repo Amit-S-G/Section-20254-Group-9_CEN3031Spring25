@@ -1,5 +1,6 @@
 <?php
-   include("header1.html")
+    include ("database.php"); // Includes database script for sql queries
+    include("header1.html");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,14 +40,29 @@
             }
             elseif(empty($password)) {
                 echo "<div class='error-message'>You must enter a password</div>";
-            }
-            else {
+            } elseif (!preg_match('/^(?=.*[A-Z])(?=.*[\W_]).{8,}$/', $password)) {
+                echo "<div class='error-message'>Password must be at least 8 characters long, contain at least one uppercase letter, and at least one symbol.</div>";
+            } else {
                 $hash = password_hash($password, PASSWORD_DEFAULT);
                 echo "<div class='error-message'>Username: {$username}</div>";
                 echo "<div class='error-message'>Password: {$password}</div>";
                 echo "<div class='error-message'>Bcrypt Hash: {$hash}</div>";
+                
+                /* Temp Code for registration:
+                $sql = "INSERT INTO users (user, password) VALUES ('$username', '$password')";
+
+                try{
+                    mysqli_query($conn, $sql);
+                    echo "User is now registered";
+                }
+                catch(mysqli_sql_exception){
+                    echo "Could not register user";
+                }
+                */
             }
         }
+        // Closes the database connection at end of file
+        mysqli_close($conn);
         ?>
     </div>
 </body>
