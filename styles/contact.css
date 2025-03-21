@@ -1,4 +1,5 @@
 /* Basic Reset */
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica&family=Cinzel+Decorative:wght@400;700&family=Uncial+Antiqua&display=swap');
 * {
     margin: 0;
     padding: 0;
@@ -6,9 +7,93 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f4f8;
-    color: #333;
+    background-color: #121a13;
+    color: #e8f5e9; 
+    font-family: 'IM Fell DW Pica', serif;
     margin: 0;
-    padding-top: 100px; /* Adjust this depending on header height */
+    padding-top: 100px;
+}
+
+.contact-header {
+    background: linear-gradient(to right, #1b5e20, #2e7d32);
+    text-align: center;
+    color: #aeea00;
+    padding: 70px 20px;
+    font-size: 2.5em;
+    font-family: 'Cinzel Decorative', serif;
+    font-weight: bold;
+}
+
+.get-in-touch
+{
+    color: #ffffff;
+    font-family: 'IM Fell DW Pica', serif;  
+}
+.contact-container {
+    width: 85%;
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 30px;
+    background: rgba(30, 50, 30, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
+
+h2 {
+    font-size: 2.5em;
+    color: #aeea00;
+    font-family: 'IM Fell DW Pica', serif;
+    margin-bottom: 20px;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-form label {
+    text-align: left;
+    font-weight: bold;
+    color: #cddc39;
+    font-size: 1.2em;
+}
+
+.contact-form input, 
+.contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    border: none;
+    background: rgba(50, 80, 50, 0.85);
+    color: #e8f5e9; 
+    font-size: 1em;
+}
+
+.contact-form input:focus, 
+.contact-form textarea:focus {
+    background: rgba(70, 110, 70, 0.9);
+    outline: none;
+    box-shadow: 0 0 8px #aeea00;
+}
+
+.contact-form textarea {
+    resize: none;
+    height: 150px;
+}
+
+.cta-button {
+    background-color: #4caf50;
+    color: white;
+    font-size: 1.2em;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'IM Fell DW Pica', serif;  
+}
+
+.cta-button:hover {
+    background-color: #388e3c;
 }

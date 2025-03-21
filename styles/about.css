@@ -1,4 +1,6 @@
 /* Basic Reset */
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica&family=Cinzel+Decorative:wght@400;700&family=Uncial+Antiqua&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -6,9 +8,59 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f4f8;
-    color: #333;
+    font-family: 'IM Fell DW Pica', serif;
+    background-color: #121a13;
+    color: #d4e157;
     margin: 0;
     padding-top: 100px; /* Adjust this depending on header height */
+}
+
+.about-header {
+    background: linear-gradient(to right, #1b5e20, #2e7d32);
+    text-align: center;
+    color: white;
+    padding: 50px 20px;
+    font-weight: bold;
+}
+
+h1 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 3em;
+    margin-bottom: 20px;
+    color: #aeea00;
+    text-align: center;
+}
+
+h2 {
+    font-family: 'Cinzel Decorative', serif;
+    color: #aeea00;
+    font-size: 2.2em;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+p, li {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+.about-content {
+    width: 80%;
+    max-width: 800px;
+    margin: 60px auto;
+    background: rgba(30,50,30,0.9);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0, 0.3);
+}
+
+u1{
+    list-style: none;
+    padding: 0;
+}
+
+ul li{
+    padding: 12px 0;
 }
