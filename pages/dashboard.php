@@ -13,7 +13,7 @@ include("../database.php");
 
 // Add task logic
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_task'])) {
-    $task = filter_input(INPUT_POST, 'task', FILTER_SANITIZE_SPECIAL_CHARS);
+    $task = trim($_POST['task']);
     $user_id = $_SESSION['user_id'];
 
     if (!empty($task)) {
