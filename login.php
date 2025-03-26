@@ -22,7 +22,7 @@ session_start(); // Start session for login
 
             <?php
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                $username = $_POST["username"];
+                $username = trim($_POST["username"]);
                 $password = $_POST["password"];
 
                 if(empty($username)) {
