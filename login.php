@@ -22,8 +22,8 @@ session_start(); // Start session for login
 
             <?php
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                $username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_SPECIAL_CHARS);
-                $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_SPECIAL_CHARS);
+                $username = $_POST["username"];
+                $password = $_POST["password"];
 
                 if(empty($username)) {
                     echo "<div class='error-message'>You must enter a username</div>";
