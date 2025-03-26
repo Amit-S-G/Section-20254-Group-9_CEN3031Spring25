@@ -11,7 +11,7 @@ body {
     background-color: #121a13;
     color: #e8f5e9;
     font-family: 'IM Fell DW Pica', serif;
-    padding-top: 210px; /* Adjust this depending on header height */
+    padding-top: 100px; /* Adjust this depending on header height */
 }
 
 
@@ -89,8 +89,8 @@ input[type="submit"]:hover {
     text-align: center;
 }
 
-/* "Don't have an account?" message */
-.register-link a {
+/* "Already have an Account?" message */
+.login-link a {
     color: #4caf50; /* Link color */
     font-size: 1em;
     text-align: center;
@@ -100,7 +100,7 @@ input[type="submit"]:hover {
     font-weight: bold;
 }
 
-.register-link a:hover {
+.login-link a:hover {
     color: #d4ff00; /* Hover color */
     text-decoration: underline;
 }
