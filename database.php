@@ -16,8 +16,39 @@
     catch(mysqli_sql_exception){
         echo "Could not connect to db";
     }
+   
+/* 
 
-    if($conn){
-        echo "Connected to db";
-    }
+################################################
+####  SQL QUERY FOR CREATING 'users' TABLE  ####
+################################################
+
+
+CREATE TABLE users (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    user VARCHAR(30) NOT NULL,
+    password CHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    display_name VARCHAR(50) NOT NULL,
+    reg_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    UNIQUE (user)
+) ENGINE = InnoDB; 
+ 
+
+################################################
+####  SQL QUERY FOR CREATING 'tasks' TABLE  ####
+################################################
+
+
+CREATE TABLE tasks (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    task VARCHAR(255),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+) ENGINE = InnoDB;
+
+
+*/
+
  ?>

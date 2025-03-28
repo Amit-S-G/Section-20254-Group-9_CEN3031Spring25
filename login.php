@@ -1,6 +1,10 @@
 <?php
-   include("header1.html")
+include("database.php"); // Includes database script
+include("header1.html");
+
+session_start(); // Start session for login
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,39 +19,60 @@
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <h2>Welcome to Taskemon</h2>
             <br><br>
-            <!-- The required tags make the error message when one is not filled. Remove to replace with custom message from php script below -->
+
+            <?php
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $username = trim($_POST["username"]);
+                $password = $_POST["password"];
+
+                if(empty($username)) {
+                    echo "<div class='error-message'>You must enter a username</div>";
+                }
+                elseif(empty($password)) {
+                    echo "<div class='error-message'>You must enter a password</div>";
+                } else {
+                    // Check if the user exists
+                    $stmt = $conn->prepare("SELECT id, user, password FROM users WHERE user = ?");
+                    $stmt->bind_param("s", $username);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+
+                    if ($result->num_rows == 1) {
+                        $row = $result->fetch_assoc();
+
+                        if (password_verify($password, $row["password"])) {
+                            $_SESSION["user_id"] = $row["id"];
+                            $_SESSION["username"] = $row["user"];
+                            header("Location: pages/dashboard.php"); // Redirect to dashboard after login
+                            exit();
+                        } else {
+                            echo "<div class='error-message'>Invalid username or password.</div>";
+                        }
+                    } else {
+                        echo "<div class='error-message'>Invalid username or password.</div>";
+                    }
+                    $stmt->close();
+                }
+            }
+            ?>
+
             <div class="input-container">
                 <i class="fas fa-user"></i>
-                <input type="text" id="username" name="username" placeholder="Username" required>
+                <input type="text" name="username" placeholder="Username" required>
             </div>
 
             <div class="input-container">
                 <i class="fas fa-key"></i>
-                <input type="password" id="password" name="password" placeholder="Password" required>
+                <input type="password" name="password" placeholder="Password" required>
             </div>
-            
+
             <input type="submit" name="login" value="Login">
         </form>
-
-        <?php
-        if($_SERVER["REQUEST_METHOD"] == "POST") {
-            $username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_SPECIAL_CHARS);
-            $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_SPECIAL_CHARS);
-
-            if(empty($username)) {
-                echo "<div class='error-message'>You must enter a username</div>";
-            }
-            elseif(empty($password)) {
-                echo "<div class='error-message'>You must enter a password</div>";
-            }
-            else {
-                $hash = password_hash($password, PASSWORD_DEFAULT);
-                echo "<div class='error-message'>Username: {$username}</div>";
-                echo "<div class='error-message'>Password: {$password}</div>";
-                echo "<div class='error-message'>Bcrypt Hash: {$hash}</div>";
-            }
-        }
-        ?>
+        <p class="register-link"><a href="register.php">Don't have an account? Create one</a></p>
     </div>
 </body>
 </html>
+
+<?php
+$conn->close(); // Close DB connection
+?>
