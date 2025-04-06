@@ -45,7 +45,7 @@ CREATE TABLE tasks (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     task_name VARCHAR(255),
-    task_duedate CHAR(10),
+    task_duedate DATE,
     task_description VARCHAR(255),
     task_completed TINYINT(1) NOT NULL DEFAULT 0,
     FOREIGN KEY (user_id) REFERENCES users(id)
