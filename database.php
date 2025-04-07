@@ -44,10 +44,68 @@ CREATE TABLE users (
 CREATE TABLE tasks (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
-    task VARCHAR(255),
+    task_name VARCHAR(255),
+    task_duedate CHAR(10),
+    task_description VARCHAR(255),
+    task_completed TINYINT(1) NOT NULL DEFAULT 0,
     FOREIGN KEY (user_id) REFERENCES users(id)
 ) ENGINE = InnoDB;
 
+
+################################################
+###  SQL QUERY FOR CREATING 'friends' TABLE  ###
+################################################
+
+
+CREATE TABLE friends (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    friend_username VARCHAR(30),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+) ENGINE = InnoDB;
+
+
+################################################
+#  SQL QUERY FOR CREATING 'inventories' TABLE  #
+################################################
+
+
+CREATE TABLE inventories (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    item_name VARCHAR(255),
+    item_description VARCHAR(255),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+) ENGINE = InnoDB;
+
+
+################################################
+###  SQL QUERY FOR CREATING 'pets' TABLE  ###
+################################################
+
+
+CREATE TABLE pets (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    pet_name VARCHAR(255),
+    pet_hunger TINYINT(10) UNSIGNED NOT NULL DEFAULT 100,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+) ENGINE = InnoDB;
+
+
+################################################
+###  SQL QUERY FOR CREATING 'shop' TABLE  ###
+################################################
+
+
+CREATE TABLE shop (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    item_name VARCHAR(255),
+    item_description VARCHAR(255),
+    food_or_house TINYINT(1) NOT NULL,
+    cost INT(5),
+    points INT(5)
+) ENGINE = InnoDB;
 
 */
 

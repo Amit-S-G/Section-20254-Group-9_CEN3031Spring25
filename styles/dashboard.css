@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica&family=Cinzel+Decorative:wght@400;700&family=Uncial+Antiqua&display=swap');
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: 'IM Fell DW Pica', serif;
+    background-color: #121a13;
+    color: #d4ff00;
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Container (Dashboard) */
+.container {
+    max-width: 500px;
+    width: 90%;
+    padding: 30px;
+    margin-top: 40px;
+    background: rgba(18,26,19,0.95);
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.7);
+    text-align: center;
+}
+
+/* Header Styling */
+header {
+    background: linear-gradient(to right, #1b5e20, #2e7d32);
+    padding: 40px 20px;
+    margin-bottom: 30px;
+    color: #aeea00;
+    font-family: 'Cinzel Decorative', serif;
+    font-weight: bold;
+}
+header h1 {
+    margin-bottom: 10px;
+    font-size: 2em;
+}
+header h2 {
+    font-size: 1.5em;
+    color: #d4ff00;
+}
+
+/* Progress Section */
+.progress-section {
+    display: flex;
+    justify-content: center;  /* centers the skill container horizontally */
+    margin-bottom: 30px;
+}
+
+.skill {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin: 0 auto;           /* ensures the skill block itself is centered */
+}
+
+/* No extra margins on .outer/.inner to keep them centered absolutely */
+.inner {
+    position: absolute;       /* let us position it in the center of .skill */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: #121a13;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 3px 3px 6px rgba(0,0,0,0.4),
+                inset -3px -3px 6px rgba(255,255,255,0.02);
+}
+
+#number {
+    font-weight: 600;
+    color: #d4ff00;
+    text-align: center;
+    font-size: 1.5em;
+}
+#number p {
+    font-size: 0.8rem;
+    color: #aeea00;
+    margin-top: 4px;
+}
+
+/* SVG rings */
+svg {
+    width: 220px;
+    height: 220px;
+    display: block;
+    margin: 0 auto;            /* center the SVG container */
+    position: relative;        /* keep it in normal flow so .inner can overlap */
+}
+
+/* Brown Outer Ring (larger circle) */
+.brown-ring {
+    fill: none;
+    stroke: #8B4513;
+    stroke-width: 10px;
+}
+
+/* Green Progress Ring (smaller circle) */
+.progress-ring {
+    fill: none;
+    stroke: url(#GradientColor);
+    stroke-width: 20px;
+    stroke-linecap: round;
+    stroke-dasharray: 502.65;  /* ~circumference for r=80 */
+    stroke-dashoffset: 502.65;
+    animation: dashAnim 2s linear forwards;
+}
+
+@keyframes dashAnim {
+  to {
+    stroke-dashoffset: var(--target-offset);
+  }
+}
+
+/* Add Task Form Section */
+.add-task-section {
+    margin-top: 20px;
+    background: rgba(18,26,19,0.95);
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.7);
+    text-align: center;
+}
+
+.add-task-section input[type="text"],
+.add-task-section input[type="date"],
+.add-task-section textarea {
+    padding: 8px;
+    border: 1px solid #2e7d32;
+    border-radius: 8px;
+    margin: 5px;
+    background: #1b5e20;
+    color: #d4ff00;
+    width: 90%;
+}
+
+.add-task-section input[type="submit"] {
+    padding: 8px 16px;
+    background-color: #2e7d32;
+    color: #d4ff00;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Uncial Antiqua', serif;
+    font-size: 1em;
+    margin-top: 10px;
+}
+.add-task-section input[type="submit"]:hover {
+    background-color: #aeea00;
+    color: #121a13;
+}
+
+/* Tasks Section */
+.tasks-section {
+    margin-top: 20px;
+    background: rgba(18,26,19,0.95);
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.7);
+}
+.tasks-section ul {
+    list-style: none;
+    padding: 0;
+}
+.tasks-section li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    background: rgba(46,125,50,0.2);
+    margin-bottom: 8px;
+    border-radius: 10px;
+}
+.task-left {
+    display: flex;
+    align-items: center;
+}
+.task-left input[type="checkbox"] {
+    transform: scale(1.2);
+    margin-right: 10px;
+    cursor: pointer;
+}
+.task-info {
+    text-align: left;
+}
+.task-info .task-name {
+    font-weight: 500;
+    color: #d4ff00;
+    display: block;
+    margin-bottom: 4px;
+    font-size: 1.1em;
+}
+.task-date {
+    font-size: 12px;
+    color: #aeea00;
+}
+.delete-button {
+    text-decoration: none;
+    color: #dc3545;
+    font-weight: bold;
+    font-size: 14px;
+    margin-left: 10px;
+}
+.no-tasks {
+    text-align: center;
+    color: #aeea00;
+    font-style: italic;
+    padding: 10px;
+}

@@ -21,11 +21,11 @@
         <p> We believe that completing tasks should be more enjoyable. By adding game like rewards, progress tracking, and a virtual pet, we make productivyt more engaging and fun!</p>
 
         <h2>Why Choose Us?</h2>
-        <u1>
+        <ul>
             <li>🌿 Immersive Nature-Themed UI – A calming and refreshing dark jungle aesthetic.</li>
             <li>🎮 Gamified Experience – Earn coins, take care of pets, and stay motivated.</li>
             <li>🌙 Dark Mode for Comfort – Reduce eye strain and enhance focus.</li>
-        </u1>
+        </ul>
     </section>
 
 </body>
