@@ -193,9 +193,7 @@ svg {
 .tasks-section::-webkit-scrollbar-track
 {
     background-color: rgba(18,26,19,0.95);
-    
 }
-
 
 /* Tasks Section */
 .tasks-section {
@@ -205,6 +203,7 @@ svg {
     border-radius: 16px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.7);
     overflow-y:auto;
+    overflow-x: hidden;
     max-height: 250px;
 }
 
@@ -233,6 +232,7 @@ svg {
 }
 .task-info {
     text-align: left;
+    max-width: 300px;
 }
 .task-info .task-name {
     font-weight: 500;
@@ -245,6 +245,14 @@ svg {
     font-size: 12px;
     color: #aeea00;
 }
+
+.desc {
+    /* Allow text to wrap normally */
+    white-space: normal;
+    word-wrap: break-word;       
+    overflow-wrap: break-word; 
+  }
+
 .delete-button {
     text-decoration: none;
     color: #dc404f;

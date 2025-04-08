@@ -128,7 +128,7 @@ $conn->close();
     <!-- Add Task Form Section -->
     <section class="add-task-section">
       <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <input type="text" id="task_name" name="task_name" placeholder="New task name" required>
+        <input type="text" id="task_name" name="task_name" placeholder="New task name" maxlength="25" required>
         <input type="date" id="task_duedate" name="task_duedate">
         <textarea id="task_description" name="task_description" placeholder="Task description"></textarea>
         <input type="submit" name="add_task" value="Add Task">
@@ -154,7 +154,7 @@ $conn->close();
                   </div>
                 </div>
                 <div class="task-right">
-                  <a class="delete-button" href="?delete_task_id=<?php echo $row['id']; ?>" onclick="return confirm('Delete this task?');">✕</a>
+                  <a class="delete-button" wrap="soft" href="?delete_task_id=<?php echo $row['id']; ?>" onclick="return confirm('Delete this task?');">✕</a>
                 </div>
               </li>
           <?php } ?>
@@ -164,7 +164,6 @@ $conn->close();
                 <a href="?clear_tasks=true" onclick="return confirm('Are you sure you want to clear all tasks?');">Clear All Tasks</a>
       </div>
     </section>
-
 
   </div>
   <script src="../js/task_progress.js"></script>
