@@ -10,12 +10,15 @@
 /* Body Styling */
 body {
     font-family: 'IM Fell DW Pica', serif;
-    background-color: #121a13;
+    /*background-color: #121a13;*/
+    background-image: url('../img/taskemon_background_2.png');
     color: #d4ff00;
     padding-top: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-repeat:no-repeat;
+    background-size:100% 120vh;
 }
 
 /* Container (Dashboard) */
@@ -23,8 +26,8 @@ body {
     max-width: 500px;
     width: 90%;
     padding: 30px;
-    margin-top: 40px;
-    background: rgba(18,26,19,0.95);
+    margin: -15px 0px 40px 1300px;
+    background: rgba(27, 34, 28, 0.95);
     border-radius: 16px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.7);
     text-align: center;
@@ -32,13 +35,14 @@ body {
 
 /* Header Styling */
 header {
-    background: linear-gradient(to right, #1b5e20, #2e7d32);
+    background: linear-gradient(to right, #1a4c1d, #309735);
     padding: 40px 20px;
-    margin-bottom: 30px;
+    margin: 0 -30px 30px;
     color: #aeea00;
     font-family: 'Cinzel Decorative', serif;
     font-weight: bold;
 }
+
 header h1 {
     margin-bottom: 10px;
     font-size: 2em;
@@ -54,6 +58,7 @@ header h2 {
     justify-content: center;  /* centers the skill container horizontally */
     margin-bottom: 30px;
 }
+
 
 .skill {
     position: relative;
@@ -71,11 +76,14 @@ header h2 {
     width: 140px;
     height: 140px;
     border-radius: 50%;
-    background: #121a13;
+    background: rgba(27, 34, 28, 0.95);
+
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: inset 3px 3px 6px rgba(0,0,0,0.4),
+
+    box-shadow: inset 3px 3px 6px rgba(0,0,0,0.7),
                 inset -3px -3px 6px rgba(255,255,255,0.02);
 }
 
@@ -113,10 +121,19 @@ svg {
     stroke: url(#GradientColor);
     stroke-width: 20px;
     stroke-linecap: round;
-    stroke-dasharray: 502.65;  /* ~circumference for r=80 */
+    stroke-dasharray: 502.65; 
     stroke-dashoffset: 502.65;
     animation: dashAnim 2s linear forwards;
 }
+
+.progress-info {
+    display: block;       
+    margin-top: 5px;       
+    font-size: 1em;        
+    color: #aeea00;        
+    text-align: center;    
+  }
+
 
 @keyframes dashAnim {
   to {
@@ -162,6 +179,24 @@ svg {
     color: #121a13;
 }
 
+.tasks-section::-webkit-scrollbar
+{
+    width: 15px;
+}
+
+.tasks-section::-webkit-scrollbar-thumb
+{
+    background: linear-gradient(#40ab45, #8acf37);
+    border-radius: 10px;
+}
+
+.tasks-section::-webkit-scrollbar-track
+{
+    background-color: rgba(18,26,19,0.95);
+    
+}
+
+
 /* Tasks Section */
 .tasks-section {
     margin-top: 20px;
@@ -169,7 +204,11 @@ svg {
     padding: 20px;
     border-radius: 16px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.7);
+    overflow-y:auto;
+    max-height: 250px;
 }
+
+
 .tasks-section ul {
     list-style: none;
     padding: 0;
@@ -208,14 +247,33 @@ svg {
 }
 .delete-button {
     text-decoration: none;
-    color: #dc3545;
+    color: #dc404f;
     font-weight: bold;
     font-size: 14px;
     margin-left: 10px;
 }
+
 .no-tasks {
     text-align: center;
     color: #aeea00;
     font-style: italic;
     padding: 10px;
+}
+
+.clear-tasks a {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #2e7d32;
+    color: #d4ff00;           
+    text-decoration: none;
+    border-radius: 8px;
+    font-family: 'Uncial Antiqua', serif;
+    font-size: 1em;
+    margin-top: 10px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.clear-tasks a:hover {
+    background-color: #aeea00;
+    color: #121a13;
 }

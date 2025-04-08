@@ -50,6 +50,16 @@ if (isset($_GET['delete_task_id'])) {
     $stmt->close();
 }
 
+//Clear Tasks
+if (isset($_GET['clear_tasks'])) {
+  $stmt = $conn->prepare("DELETE FROM tasks WHERE user_id = ?");
+  $stmt->bind_param("i", $_SESSION['user_id']);
+  $stmt->execute();
+  $stmt->close();
+  header("Location: " . strtok($_SERVER["REQUEST_URI"], '?'));
+  exit();
+}
+
 // Fetch tasks for the user
 $user_id = $_SESSION['user_id'];
 $stmt = $conn->prepare("SELECT id, task_name, task_duedate, task_description, task_completed FROM tasks WHERE user_id = ?");
@@ -68,7 +78,6 @@ $completedTasks = $countRow['completed'];
 $percentage = ($totalTasks > 0) ? round(($completedTasks / $totalTasks) * 100) : 0;
 $stmtCount->close();
 
-// For the green progress ring with r=80, circumference ≈ 2 * π * 80 ≈ 502.65
 $circumference = 2 * pi() * 80;
 $dashOffset = $circumference - ($circumference * $percentage / 100);
 
@@ -89,16 +98,18 @@ $conn->close();
       <h1>HELLO, <?php echo htmlspecialchars($_SESSION["username"]); ?></h1>
       <h2>Your Task Dashboard</h2>
     </header>
-
     <!-- Progress Section -->
     <div class="progress-section">
       <div class="skill">
         <div class="inner">
           <div id="number" data-target="<?php echo $percentage; ?>">
             <?php echo $percentage; ?>%
-            <p><?php echo $completedTasks; ?>/<?php echo $totalTasks; ?> Complete</p>
+          </div>
+          <div class="progress-info">
+            <?php echo $completedTasks . " / " . $totalTasks; ?> tasks complete
           </div>
         </div>
+
         <svg xmlns="http://www.w3.org/2000/svg" width="220" height="220">
           <defs>
             <linearGradient id="GradientColor">
@@ -128,28 +139,33 @@ $conn->close();
     <section class="tasks-section">
       <ul>
         <?php if ($totalTasks == 0): ?>
-          <li class="no-tasks">No tasks yet. Add one above!</li>
-        <?php else: ?>
-          <?php while ($row = $result->fetch_assoc()) { ?>
-            <li class="task-item">
-              <div class="task-left">
-                <input type="checkbox"
+          <li class="no-tasks">No tasks yet</li>
+          <?php else: ?>
+            <?php while ($row = $result->fetch_assoc()) { ?>
+              <li class="task-item">
+                <div class="task-left">
+                  <input type="checkbox"
                   <?php if ($row['task_completed']) echo 'checked'; ?>
                   onclick="window.location.href='?<?php echo $row['task_completed'] ? 'incomplete_task_id' : 'complete_task_id'; ?>=<?php echo $row['id']; ?>';" />
-                <div class="task-info">
-                  <strong class="task-name"><?php echo htmlspecialchars($row['task_name']); ?></strong>
-                  <span class="task-date">Due: <?php echo htmlspecialchars($row['task_duedate']); ?></span>
-                  <span class="desc"><?php echo htmlspecialchars($row['task_description']); ?></span>
+                  <div class="task-info">
+                    <strong class="task-name"><?php echo htmlspecialchars($row['task_name']); ?></strong>
+                    <span class="task-date">Due: <?php echo htmlspecialchars($row['task_duedate']); ?></span>
+                    <span class="desc"><?php echo htmlspecialchars($row['task_description']); ?></span>
+                  </div>
                 </div>
-              </div>
-              <div class="task-right">
-                <a class="delete-button" href="?delete_task_id=<?php echo $row['id']; ?>" onclick="return confirm('Delete this task?');">✕</a>
-              </div>
-            </li>
+                <div class="task-right">
+                  <a class="delete-button" href="?delete_task_id=<?php echo $row['id']; ?>" onclick="return confirm('Delete this task?');">✕</a>
+                </div>
+              </li>
           <?php } ?>
         <?php endif; ?>
       </ul>
+      <div class="clear-tasks">
+                <a href="?clear_tasks=true" onclick="return confirm('Are you sure you want to clear all tasks?');">Clear All Tasks</a>
+      </div>
     </section>
+
+
   </div>
   <script src="../js/task_progress.js"></script>
 </body>
