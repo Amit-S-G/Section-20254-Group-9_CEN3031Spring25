@@ -9,21 +9,22 @@ if (!isset($_SESSION["username"])) {
 
 include("../database.php");
 
-// Add task logic
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_task'])) {
     $task = trim($_POST['task']);
     $duedate = trim($_POST['duedate']);
     $description = trim($_POST['description']);
     $completed = isset($_POST['completed']) ? 1 : 0;
     $user_id = $_SESSION['user_id'];
+    $point_value = 10; // Default value
 
     if (!empty($task)) {
-        $stmt = $conn->prepare("INSERT INTO tasks (user_id, task_name, task_duedate, task_description, task_completed) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("isssi", $user_id, $task, $duedate, $description, $completed);
+        $stmt = $conn->prepare("INSERT INTO tasks (user_id, task_name, task_duedate, task_description, task_completed, point_value) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("isssii", $user_id, $task, $duedate, $description, $completed, $point_value);
         $stmt->execute();
         $stmt->close();
     }
 }
+
 
 // Delete task logic
 if (isset($_GET['delete_task_id'])) {
@@ -39,12 +40,41 @@ if (isset($_GET['toggle_complete_id']) && isset($_GET['current_status'])) {
     $task_id = (int)$_GET['toggle_complete_id'];
     $current_status = (int)$_GET['current_status'];
     $new_status = $current_status ? 0 : 1;
+    $user_id = $_SESSION['user_id'];
 
+    // Update the task's completion status
     $stmt = $conn->prepare("UPDATE tasks SET task_completed = ? WHERE id = ? AND user_id = ?");
-    $stmt->bind_param("iii", $new_status, $task_id, $_SESSION['user_id']);
+    $stmt->bind_param("iii", $new_status, $task_id, $user_id);
     $stmt->execute();
     $stmt->close();
+
+    // Get the point value of the task
+    $stmt = $conn->prepare("SELECT point_value FROM tasks WHERE id = ? AND user_id = ?");
+    $stmt->bind_param("ii", $task_id, $user_id);
+    $stmt->execute();
+    $stmt->bind_result($point_value);
+
+    if ($stmt->fetch()) {
+        $stmt->close();
+
+        // Update user's coins accordingly
+        if ($new_status === 1) {
+            // Task marked as complete — add coins
+            $stmt = $conn->prepare("UPDATE users SET coins = coins + ? WHERE id = ?");
+        } else {
+            // Task marked as incomplete — subtract coins
+            $stmt = $conn->prepare("UPDATE users SET coins = GREATEST(coins - ?, 0) WHERE id = ?");
+        }
+
+        $stmt->bind_param("ii", $point_value, $user_id);
+        $stmt->execute();
+        $stmt->close();
+    } else {
+        $stmt->close(); // Always close if fetch fails
+    }
 }
+
+
 
 // Fetch tasks
 $user_id = $_SESSION['user_id'];

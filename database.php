@@ -31,6 +31,7 @@ CREATE TABLE users (
     email VARCHAR(255) NOT NULL,
     display_name VARCHAR(50) NOT NULL,
     reg_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    coins INT(11) NOT NULL,
     PRIMARY KEY (id),
     UNIQUE (user)
 ) ENGINE = InnoDB; 
@@ -48,6 +49,7 @@ CREATE TABLE tasks (
     task_duedate DATE,
     task_description VARCHAR(255),
     task_completed TINYINT(1) NOT NULL DEFAULT 0,
+    point_value INT NOT NULL DEFAULT 10,
     FOREIGN KEY (user_id) REFERENCES users(id)
 ) ENGINE = InnoDB;
 
@@ -75,6 +77,8 @@ CREATE TABLE inventories (
     user_id INT,
     item_name VARCHAR(255),
     item_description VARCHAR(255),
+    food_or_house TINYINT(1) NOT NULL,
+    points INT(5)
     FOREIGN KEY (user_id) REFERENCES users(id)
 ) ENGINE = InnoDB;
 
