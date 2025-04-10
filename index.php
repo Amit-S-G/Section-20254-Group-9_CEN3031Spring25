@@ -27,7 +27,7 @@
 
       <div class="step">
         <!-- Example icon/image -->
-        <img src="img/capy.png" alt="Capybara" />
+        <img src="img/capy_art.png" alt="Capybara" />
         <h3>First, choose your pet!</h3>
         <p>Select your favorite companion.</p>
       </div>
