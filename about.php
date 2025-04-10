@@ -13,7 +13,7 @@
 <body>
     <header class = "about-header">
         <h1> About Taskemon </h1>
-        <p class = "slogan"> Gotta Complete Them All </p>
+        <p class = "slogan"> Gotta Finish 'em All </p>
     </header>
 
     <section class = "about-content">
