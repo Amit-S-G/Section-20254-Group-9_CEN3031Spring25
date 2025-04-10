@@ -13,12 +13,12 @@
 <body>
     <header class = "about-header">
         <h1> About Taskemon </h1>
-        <p> Gotta Complete Them All </p>
+        <p class = "slogan"> Gotta Complete Them All </p>
     </header>
 
     <section class = "about-content">
-        <h1> Our Mission</h1>
-        <p> We believe that completing tasks should be more enjoyable. By adding game like rewards, progress tracking, and a virtual pet, we make productivyt more engaging and fun!</p>
+        <h2 class="mission-title"> Our Mission</h2>
+        <p class="mission"> We believe that completing tasks should be more enjoyable. By adding game like rewards, progress tracking, and a virtual pet, we make productivyt more engaging and fun!</p>
 
         <h2>Why Choose Us?</h2>
         <ul>

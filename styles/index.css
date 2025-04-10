@@ -1,86 +1,116 @@
-@import url('https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica&family=Cinzel+Decorative:wght@400;700&family=Uncial+Antiqua&display=swap');
 
-/* Basic Reset */
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica&family=Cinzel+Decorative:wght@400;700&family=Uncial+Antiqua&family=EB+Garamond&display=swap');
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'IM Fell DW Pica', serif;
-    margin: 0;
-    padding-top: 100px; 
-    background-color: #121a13;
-    color: #d4ff00;
+  background-image: url('../img/taskemon_blur.png');
+  background-size: cover;
+  background-position: center;
+  color: #ffe29f;
+  font-family: 'EB Garamond', serif;
+  margin: 0;
 }
 
-.mission {
-    background: linear-gradient(to right, #1b5e20, #2e7d32);
-    text-align: center;
-    color: #d4ff00;
-    padding: 70px 20px;
-    padding-bottom: 50px;
-    margin-bottom: 30px;
+.container{
+  background: rgba(18, 26, 19, 0.85);
+  text-align: center;
+  padding: 120px 20px 60px 20px;
 }
-.phrase {
-    color: white;
-}
-
-h1{
-    margin-top: 20px;
-    font-size: 3.5em;
-    font-family: 'Cinzel Decorative', serif;
-    margin-bottom: 20px;
-    font-weight: bold;
+.main-heading {
+  font-size: 3.5em;
+  font-family: 'Cinzel Decorative', serif;
+  margin-bottom: 20px;
+  color: #ffe29f;
 }
 
-h2 {
-    font-size: 2.5em;
-    color: #aeea00;
-    margin-top: 40px;
-    text-align: center;
-    font-family: 'IM Fell DW Pica', serif;
-    text-align: center;
-}
-
-p {
-    font-size: 1.2em;
+.sub-heading {
+  font-size: 1.4em;
+  margin-bottom: 40px;
+  color: #ffe29f;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .cta-button {
-    font-family: 'EB Garamond', serif;
-    margin-top: 50px;
-    background-color: #aeea00;
-    color: rgb(18, 32, 18);
-    font-size: 1.5em;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
+  background-color: #61f2ff;
+  color: #5b5133;
+  font-size: 1.5em;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'IM Fell DW Pica', serif;  
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .cta-button:hover {
-    background-color: #d4ff00;
+  background-color: #ffe29f;
+  color: #241b2f;
 }
 
-.features {
-    width: 85%;
-    max-width: 900px;
-    margin: 60px auto;
-    padding: 30px;
-    background: rgba(30, 50, 30, 0.95);
-    border-radius: 12px;
-    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);
+.how-it-works {
+  text-align: center;
+  padding: 60px 20px;
+  width: 85%;
+  max-width: 1000px;
+  margin: 40px auto;
+  background: rgba(10, 15, 11, 0.95);
+  border-radius: 12px;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);
+  border: 3px solid transparent;
+  background-image:
+    linear-gradient(rgba(10, 15, 11, 0.95), rgba(10, 15, 11, 0.95)),
+    linear-gradient(#00ffaa, #00eaff);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
 }
 
-.feature {
-    background: rgba(40, 60, 40, 0.9);
-    margin: 20px auto;
-    padding: 25px;
-    width: 90%;
-    max-width: 700px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    text-align: center;
+.how-it-works h2 {
+  font-size: 2.5em;
+  color: #ffe29f;
+  font-family: 'Cinzel Decorative', serif;
+  margin-bottom: 30px;
+}
+
+/* STEPS CONTAINER */
+.steps-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center;
+}
+
+.step {
+  background: rgba(39, 95, 100, 0.468);
+  border: 1px solid #58d8e4;
+  border-radius: 10px;
+  width: 270px;
+  max-width: 90%;
+  padding: 20px;
+  text-align: center;
+  color: #ffe29f;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.step img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+.step h3 {
+  font-size: 1.4em;
+  margin-bottom: 10px;
+  font-family: 'EB Garamond', serif;
+  color: #ffe29f;
+}
+
+.step p {
+  font-size: 1.1em;
 }

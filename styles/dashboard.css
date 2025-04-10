@@ -10,15 +10,16 @@
 /* Body Styling */
 body {
     font-family: 'IM Fell DW Pica', serif;
-    /*background-color: #121a13;*/
-    background-image: url('../img/taskemon_background_2.png');
-    color: #d4ff00;
+    background-image: url('../img/tree_house.png');
+    /* A soft, muted gold or parchment color for text */
+    color: #e6d8af;
     padding-top: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-repeat:no-repeat;
-    background-size:100% 120vh;
+    background-repeat: no-repeat;
+    /* Adjust background-size if needed; “cover” often looks good */
+    background-size: cover; 
 }
 
 /* Container (Dashboard) */
@@ -26,19 +27,23 @@ body {
     max-width: 500px;
     width: 90%;
     padding: 30px;
+    /* Positioning & negative margin may be specific to your layout; adjust as needed */
     margin: -15px 0px 40px 1300px;
-    background: rgba(27, 34, 28, 0.95);
+    /* Deep purple backdrop, slightly transparent */
+    background: rgba(36, 27, 47, 0.95);
     border-radius: 16px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.7);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
     text-align: center;
 }
 
 /* Header Styling */
 header {
-    background: linear-gradient(to right, #1a4c1d, #309735);
+    /* Gradient from dark purple to a slightly lighter purple */
+    background: linear-gradient(to right, #64a1c6, rgb(47, 221, 227));
     padding: 40px 20px;
     margin: 0 -30px 30px;
-    color: #aeea00;
+    /* Gold-ish text color for the heading */
+    color: #ffe29f;
     font-family: 'Cinzel Decorative', serif;
     font-weight: bold;
 }
@@ -49,53 +54,53 @@ header h1 {
 }
 header h2 {
     font-size: 1.5em;
-    color: #d4ff00;
+    /* Slightly lighter gold so it still pops */
+    color: #ffe29f;
 }
 
 /* Progress Section */
 .progress-section {
     display: flex;
-    justify-content: center;  /* centers the skill container horizontally */
+    justify-content: center;
     margin-bottom: 30px;
 }
-
 
 .skill {
     position: relative;
     width: 220px;
     height: 220px;
-    margin: 0 auto;           /* ensures the skill block itself is centered */
+    margin: 0 auto;
 }
 
-/* No extra margins on .outer/.inner to keep them centered absolutely */
 .inner {
-    position: absolute;       /* let us position it in the center of .skill */
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 140px;
     height: 140px;
     border-radius: 50%;
-    background: rgba(27, 34, 28, 0.95);
+    /* Same container background color to keep it consistent */
+    background: rgba(36, 27, 47, 0.95);
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    box-shadow: inset 3px 3px 6px rgba(0,0,0,0.7),
-                inset -3px -3px 6px rgba(255,255,255,0.02);
+    box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.7),
+                inset -3px -3px 6px rgba(255, 255, 255, 0.02);
 }
 
 #number {
     font-weight: 600;
-    color: #d4ff00;
+    color: #ffe29f;
     text-align: center;
     font-size: 1.5em;
 }
 #number p {
     font-size: 0.8rem;
-    color: #aeea00;
+    color: #c7a557;
     margin-top: 4px;
 }
 
@@ -104,21 +109,22 @@ svg {
     width: 220px;
     height: 220px;
     display: block;
-    margin: 0 auto;            /* center the SVG container */
-    position: relative;        /* keep it in normal flow so .inner can overlap */
+    margin: 0 auto;
+    position: relative;
 }
 
-/* Brown Outer Ring (larger circle) */
+/* Brown Outer Ring */
 .brown-ring {
     fill: none;
-    stroke: #8B4513;
+    stroke: #ffe29f;
     stroke-width: 10px;
 }
 
-/* Green Progress Ring (smaller circle) */
+/* Teal Progress Ring */
 .progress-ring {
     fill: none;
-    stroke: url(#GradientColor);
+    /* Use a teal accent color */
+    stroke:  url(#GradientColor);
     stroke-width: 20px;
     stroke-linecap: round;
     stroke-dasharray: 502.65; 
@@ -127,13 +133,12 @@ svg {
 }
 
 .progress-info {
-    display: block;       
-    margin-top: 5px;       
-    font-size: 1em;        
-    color: #aeea00;        
-    text-align: center;    
-  }
-
+    display: block;
+    margin-top: 5px;
+    font-size: 1em;
+    color: #ffd87e;
+    text-align: center;
+}
 
 @keyframes dashAnim {
   to {
@@ -147,26 +152,28 @@ svg {
     background: rgba(18,26,19,0.95);
     padding: 20px;
     border-radius: 16px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.7);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
     text-align: center;
 }
 
+/* Inputs */
 .add-task-section input[type="text"],
 .add-task-section input[type="date"],
 .add-task-section textarea {
     padding: 8px;
-    border: 1px solid #2e7d32;
+    border: 1px solid #58d8e4;
     border-radius: 8px;
     margin: 5px;
-    background: #1b5e20;
-    color: #d4ff00;
+    background: rgba(39, 95, 100, 0.468);
+    color: #ffe29f;
     width: 90%;
 }
 
+/* Submit Button */
 .add-task-section input[type="submit"] {
     padding: 8px 16px;
-    background-color: #2e7d32;
-    color: #d4ff00;
+    background-color: #61f2ff;
+    color: #5b5133;
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -174,25 +181,11 @@ svg {
     font-size: 1em;
     margin-top: 10px;
 }
+
 .add-task-section input[type="submit"]:hover {
-    background-color: #aeea00;
-    color: #121a13;
-}
-
-.tasks-section::-webkit-scrollbar
-{
-    width: 15px;
-}
-
-.tasks-section::-webkit-scrollbar-thumb
-{
-    background: linear-gradient(#40ab45, #8acf37);
-    border-radius: 10px;
-}
-
-.tasks-section::-webkit-scrollbar-track
-{
-    background-color: rgba(18,26,19,0.95);
+    /* Swap to a gold on hover */
+    background-color: #ffe29f;
+    color: #241b2f;
 }
 
 /* Tasks Section */
@@ -201,26 +194,40 @@ svg {
     background: rgba(18,26,19,0.95);
     padding: 20px;
     border-radius: 16px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.7);
-    overflow-y:auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+    overflow-y: auto;
     overflow-x: hidden;
     max-height: 250px;
 }
 
+.tasks-section::-webkit-scrollbar {
+    width: 15px;
+}
+.tasks-section::-webkit-scrollbar-thumb {
+    background: linear-gradient(#00ffaa, #00eaff);
+    border-radius: 10px;
+}
+.tasks-section::-webkit-scrollbar-track {
+    background-color: rgba(36, 27, 47, 0.95);
+}
 
+/* Task List Items */
 .tasks-section ul {
     list-style: none;
     padding: 0;
 }
+
 .tasks-section li {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px 12px;
-    background: rgba(46,125,50,0.2);
+    /* Slightly lighter overlay for tasks */
+    background: rgba(39, 95, 100, 0.468);
     margin-bottom: 8px;
     border-radius: 10px;
 }
+
 .task-left {
     display: flex;
     align-items: center;
@@ -230,32 +237,36 @@ svg {
     margin-right: 10px;
     cursor: pointer;
 }
+
 .task-info {
     text-align: left;
     max-width: 300px;
 }
+
 .task-info .task-name {
     font-weight: 500;
-    color: #d4ff00;
+    color: #e6d8af;
     display: block;
     margin-bottom: 4px;
     font-size: 1.1em;
 }
+
 .task-date {
     font-size: 12px;
-    color: #aeea00;
+    color: #c7a557;
 }
 
 .desc {
-    /* Allow text to wrap normally */
     white-space: normal;
     word-wrap: break-word;       
     overflow-wrap: break-word; 
-  }
+    color: #ffe29f;
+}
 
 .delete-button {
     text-decoration: none;
-    color: #dc404f;
+    /* Muted red for delete */
+    color: #db5966;
     font-weight: bold;
     font-size: 14px;
     margin-left: 10px;
@@ -263,7 +274,7 @@ svg {
 
 .no-tasks {
     text-align: center;
-    color: #aeea00;
+    color: #ffde90;
     font-style: italic;
     padding: 10px;
 }
@@ -271,17 +282,91 @@ svg {
 .clear-tasks a {
     display: inline-block;
     padding: 8px 16px;
-    background-color: #2e7d32;
-    color: #d4ff00;           
+    background-color: #61f2ff;
+    color: #5b5133;;
     text-decoration: none;
     border-radius: 8px;
     font-family: 'Uncial Antiqua', serif;
     font-size: 1em;
     margin-top: 10px;
-    transition: background-color 0.3s, color 0.3s;
 }
 
 .clear-tasks a:hover {
-    background-color: #aeea00;
-    color: #121a13;
+    background-color: #ffd87e;
+    color: #241b2f;
 }
+
+/* Hamburger Menu Container */
+.hamburger-container {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+  }
+  
+  #hamburger {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(36, 27, 47, 0.95);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  #hamburger:hover {
+    background-color: #444;
+  }
+  
+  #hamburger .bar {
+    width: 30px;
+    height: 4px;
+    background: linear-gradient(#ffe29f,#fff4da);
+    margin: 3px 0;
+    transition: 0.3s;
+  }
+  
+  .dropdown-menu {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    position: absolute;
+    top: 60px;  /* Adjust spacing below the circular icon */
+    left: 0;
+    background: rgba(36, 27, 47, 0.90);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  }
+  
+  .dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .dropdown-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 10px;
+  }
+  
+  .dropdown-menu ul li {
+    margin: 5px 0;
+  }
+  
+  .dropdown-menu ul li a {
+    text-decoration: none;
+    color: #ffe29f;
+    font-family: 'Cinzel Decorative', serif;
+    display: block;
+    padding: 8px 12px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .dropdown-menu ul li a:hover {
+    background-color: #555;
+  }

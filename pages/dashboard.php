@@ -22,6 +22,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_task'])) {
         $stmt->execute();
         $stmt->close();
     }
+    header("Location: " . $_SERVER["PHP_SELF"]); //loads the same page again but via a get request, there was a bug were the task list would duplicate whenever user refreshed the page, this prevents that
+    exit();
 }
 
 // Mark task as complete/incomplete logic
@@ -98,6 +100,23 @@ $conn->close();
       <h1>HELLO, <?php echo htmlspecialchars($_SESSION["username"]); ?></h1>
       <h2>Your Task Dashboard</h2>
     </header>
+
+    <!-- Hamburger -->
+    <div class="hamburger-container">
+      <div id="hamburger" onclick="toggleMenu()">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+      <nav class="dropdown-menu" id="menu">
+        <ul>
+          <li><a href="dashboard.php">Dashboard</a></li>
+          <li><a href="profile.php">Profile</a></li>
+          <li><a href="friends.php">Friends</a></li>
+          <li><a href="shop.php">Shop</a></li>
+        </ul>
+      </nav>
+    </div>
     <!-- Progress Section -->
     <div class="progress-section">
       <div class="skill">
@@ -113,8 +132,8 @@ $conn->close();
         <svg xmlns="http://www.w3.org/2000/svg" width="220" height="220">
           <defs>
             <linearGradient id="GradientColor">
-              <stop offset="0%" stop-color="#aeea00" />
-              <stop offset="100%" stop-color="#02a641" />
+              <stop offset="0%" stop-color="#00ffaa" />
+              <stop offset="100%" stop-color="#00eaff" />
             </linearGradient>
           </defs>
           <!-- Brown Outer Ring (larger circle) -->
@@ -149,7 +168,10 @@ $conn->close();
                   onclick="window.location.href='?<?php echo $row['task_completed'] ? 'incomplete_task_id' : 'complete_task_id'; ?>=<?php echo $row['id']; ?>';" />
                   <div class="task-info">
                     <strong class="task-name"><?php echo htmlspecialchars($row['task_name']); ?></strong>
-                    <span class="task-date">Due: <?php echo htmlspecialchars($row['task_duedate']); ?></span>
+                    <?php
+                      $formattedDueDate = date("m/d/Y", strtotime($row['task_duedate']));
+                    ?>
+                    <span class="task-date">Due: <?php echo htmlspecialchars($formattedDueDate); ?></span>
                     <span class="desc"><?php echo htmlspecialchars($row['task_description']); ?></span>
                   </div>
                 </div>
@@ -167,5 +189,11 @@ $conn->close();
 
   </div>
   <script src="../js/task_progress.js"></script>
+  <script>
+    function toggleMenu() {
+      var menu = document.getElementById("menu");
+      menu.classList.toggle("show"); //targets the CSS class show to make the links visible
+    }
+  </script>
 </body>
 </html>
