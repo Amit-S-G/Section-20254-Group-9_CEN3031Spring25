@@ -17,7 +17,7 @@
   <section class="container">
     <h1 class="main-heading">Gotta Finish 'em All!</h1>
     <p class="sub-heading">Choose your Taskémon partner and become more productive today!</p>
-    <button id =  "get-started-btn" class="cta-button">Register Now</button>
+    <button id = "get-started-btn" class="cta-button">Register Now</button>
   </section>
 
   <!-- HOW IT WORKS SECTION -->

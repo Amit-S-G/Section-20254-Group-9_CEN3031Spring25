@@ -370,3 +370,24 @@ svg {
   .dropdown-menu ul li a:hover {
     background-color: #555;
   }
+  
+  .sound-button{
+    position: fixed;
+    top: 100px;
+    left: 20px;
+    z-index: 100;
+    background-color: #ffe29f;        
+    border-radius: 50%;          
+    width: 50px;                 
+    height: 50px;                
+    display: flex;               
+    align-items: center;        
+    justify-content: center;     
+    cursor: pointer;            
+  }
+
+  .sound-button img {
+    width: 24px;  
+    height: 24px; 
+    background-color: transparent; 
+  }

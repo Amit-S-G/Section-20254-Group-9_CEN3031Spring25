@@ -94,12 +94,20 @@ $conn->close();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../styles/dashboard.css">
 </head>
-<body>
   <div class="container"> 
     <header>
       <h1>HELLO, <?php echo htmlspecialchars($_SESSION["username"]); ?></h1>
       <h2>Your Task Dashboard</h2>
     </header>
+
+    <audio id="sound" loop muted>
+      <source src="../audio/ambient_rain.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+
+    <button class="sound-button" onclick="toggleMute();">
+      <img id="muteIcon" src="../img/speaker_muted.png" alt="Sound Icon">
+    </button>
 
     <!-- Hamburger -->
     <div class="hamburger-container">
@@ -188,12 +196,6 @@ $conn->close();
     </section>
 
   </div>
-  <script src="../js/task_progress.js"></script>
-  <script>
-    function toggleMenu() {
-      var menu = document.getElementById("menu");
-      menu.classList.toggle("show"); //targets the CSS class show to make the links visible
-    }
-  </script>
+  <script src="../js/dashboard.js"></script>
 </body>
 </html>
