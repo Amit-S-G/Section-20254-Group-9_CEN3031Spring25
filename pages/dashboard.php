@@ -85,8 +85,6 @@ if (isset($_GET['incomplete_task_id'])) {
   }
 }
 
-
-
 // Delete task logic
 if (isset($_GET['delete_task_id'])) {
     $task_id = $_GET['delete_task_id'];
@@ -144,6 +142,33 @@ $conn->close();
       <h1>HELLO, <?php echo htmlspecialchars($_SESSION["username"]); ?></h1>
       <h2>Your Task Dashboard</h2>
     </header>
+
+    <!-- Pets -->
+    <!-- <div id="pet-modal" class="modal">
+      <div class="modal-content">
+          <h3 class = "pet-header">Select Your Pet</h3>
+          <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <div class="pet-options">
+                <label class="pet-choice">
+                  <input type="radio" name="selected_pet" value="Capybara" required>
+                  <img src="../img/pets/Capybara.png" alt="Capybara">
+                  <span>Capybara</span>
+                </label>
+                <label class="pet-choice">
+                  <input type="radio" name="selected_pet" value="Alligator" required>
+                  <img src="../img/pets/Alligator.png" alt="Alligator">
+                  <span>Alligator</span>
+                </label>
+                <label class="pet-choice">
+                  <input type="radio" name="selected_pet" value="Axolotl" required>
+                  <img src="../img/pets/Axolotl.png" alt="Axolotl">
+                  <span>Axolotl</span>
+                </label>
+            </div>
+            <input type="submit" name="select_pet" value="Choose Pet">
+          </form>
+      </div>
+    </div> -->
 
     <!-- Sounds -->
     <audio id="sound" loop muted>
