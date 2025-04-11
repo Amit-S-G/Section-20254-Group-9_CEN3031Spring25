@@ -31,6 +31,7 @@ CREATE TABLE users (
     email VARCHAR(255) NOT NULL,
     display_name VARCHAR(50) NOT NULL,
     reg_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    coins INT(11) NOT NULL,
     PRIMARY KEY (id),
     UNIQUE (user)
 ) ENGINE = InnoDB; 
@@ -45,9 +46,10 @@ CREATE TABLE tasks (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     task_name VARCHAR(255),
-    task_duedate CHAR(10),
+    task_duedate DATE,
     task_description VARCHAR(255),
     task_completed TINYINT(1) NOT NULL DEFAULT 0,
+    point_value INT NOT NULL DEFAULT 10,
     FOREIGN KEY (user_id) REFERENCES users(id)
 ) ENGINE = InnoDB;
 
@@ -75,6 +77,8 @@ CREATE TABLE inventories (
     user_id INT,
     item_name VARCHAR(255),
     item_description VARCHAR(255),
+    food_or_house TINYINT(1) NOT NULL,
+    points INT(5)
     FOREIGN KEY (user_id) REFERENCES users(id)
 ) ENGINE = InnoDB;
 
@@ -99,13 +103,27 @@ CREATE TABLE pets (
 
 
 CREATE TABLE shop (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    item_name VARCHAR(255),
-    item_description VARCHAR(255),
-    food_or_house TINYINT(1) NOT NULL,
-    cost INT(5),
-    points INT(5)
-) ENGINE = InnoDB;
+    id INT PRIMARY KEY,
+    item_name VARCHAR(50) NOT NULL,
+    type VARCHAR(20) NOT NULL,
+    item_description TEXT,
+    cost INT NOT NULL,
+    hunger_pts INT
+);
+
+INSERT INTO shop (id, item_name, type, item_description, cost, hunger_pts) VALUES
+(1, 'baked_potato', 'food', 'A perfectly baked potato with a crisp, golden skin encasing a soft, fluffy interior. Ideal for butter, herbs, or a hearty topping that enhances its comforting simplicity.', 10, 20),
+(2, 'bread', 'food', 'A freshly baked loaf with a crunchy, caramelized crust and a pillowy, tender crumb. This versatile staple evokes the aroma of traditional ovens and pairs wonderfully with any meal.', 10, 20),
+(3, 'plain_rice', 'food', 'Light, fluffy, and expertly steamed, this plain rice serves as the ideal neutral base for absorbing rich sauces and flavors, making every bite balanced and satisfying.', 10, 20),
+(4, 'comforting_stew', 'food', 'A slow-simmered medley of tender meats and garden-fresh vegetables in a deeply savory broth. Its rich, hearty flavors offer a warm, soul-soothing dining experience during chilly days.', 20, 40),
+(5, 'cheese_pasta', 'food', 'Decadent pasta enveloped in a luxuriously smooth, melted cheese sauce. Each bite delivers a combination of creamy indulgence and timeless comfort, perfect for a cozy meal.', 20, 40),
+(6, 'grilled_fish', 'food', 'Delicately seasoned and expertly grilled, this fish boasts a smoky char on its tender, flaky flesh. The natural flavors are enhanced by light, aromatic herbs and lemon for a delightful, healthy dish.', 20, 40),
+(7, 'ratatouille', 'food', 'A vibrant, rustic dish featuring a medley of colorful vegetables lovingly stewed in a fragrant tomato and herb sauce. This classic brings a taste of Mediterranean sunshine to your table.', 30, 60),
+(8, 'honey_cake', 'food', 'Moist and sweet, this honey cake is infused with a delicate floral aroma and a hint of spice. Every slice offers a blissful balance of sweetness and subtle complexity.', 30, 60),
+(9, 'steak', 'food', 'A juicy, succulent steak grilled to perfection, where a charred, smoky exterior gives way to a tender, melt-in-your-mouth interior. It’s a carnivorous delight that speaks of expert preparation and flavor.', 30, 60),
+(10, 'pleasant_grove', 'habitat', 'A serene haven where sun-dappled clearings meet lush, thriving flora. This peaceful grove invites quiet reflection and the rejuvenating essence of nature.', 100, NULL),
+(11, 'sapphire_springs', 'habitat', 'Enchanting springs that bubble forth with crystal-clear water, their deep sapphire hue evoking a mesmerizing and tranquil aura. A refreshing escape into nature’s subtle beauty.', 300, NULL),
+(12, 'divine_waterfall', 'habitat', 'A majestic waterfall cascading dramatically from a rugged cliff, its constant roar and gentle mist combining to create a scene of natural wonder and timeless grandeur.', 500, NULL);
 
 */
 

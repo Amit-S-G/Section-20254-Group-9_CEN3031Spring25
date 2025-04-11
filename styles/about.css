@@ -9,7 +9,7 @@
 
 body {
     font-family: 'IM Fell DW Pica', serif;
-    background-image: url('../img/taskemon_blur.png');
+    background-image: url('../img/backgrounds/taskemon_blur.png');
     margin: 0;
     color: #ffe29f;
     padding-top: 100px; /* Adjust this depending on header height */

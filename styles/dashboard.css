@@ -1,48 +1,38 @@
 @import url('https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica&family=Cinzel+Decorative:wght@400;700&family=Uncial+Antiqua&display=swap');
 
-/* Basic Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body Styling */
 body {
     font-family: 'IM Fell DW Pica', serif;
-    background-image: url('../img/tree_house.png');
-    /* A soft, muted gold or parchment color for text */
+    background-image: url('../img/backgrounds/tree_house.png');
     color: #e6d8af;
     padding-top: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-repeat: no-repeat;
-    /* Adjust background-size if needed; “cover” often looks good */
     background-size: cover; 
 }
 
-/* Container (Dashboard) */
 .container {
     max-width: 500px;
     width: 90%;
     padding: 30px;
-    /* Positioning & negative margin may be specific to your layout; adjust as needed */
     margin: -15px 0px 40px 1300px;
-    /* Deep purple backdrop, slightly transparent */
     background: rgba(36, 27, 47, 0.95);
     border-radius: 16px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
     text-align: center;
 }
 
-/* Header Styling */
 header {
-    /* Gradient from dark purple to a slightly lighter purple */
     background: linear-gradient(to right, #64a1c6, rgb(47, 221, 227));
     padding: 40px 20px;
     margin: 0 -30px 30px;
-    /* Gold-ish text color for the heading */
     color: #ffe29f;
     font-family: 'Cinzel Decorative', serif;
     font-weight: bold;
@@ -54,7 +44,6 @@ header h1 {
 }
 header h2 {
     font-size: 1.5em;
-    /* Slightly lighter gold so it still pops */
     color: #ffe29f;
 }
 
@@ -80,7 +69,6 @@ header h2 {
     width: 140px;
     height: 140px;
     border-radius: 50%;
-    /* Same container background color to keep it consistent */
     background: rgba(36, 27, 47, 0.95);
 
     display: flex;
@@ -113,17 +101,14 @@ svg {
     position: relative;
 }
 
-/* Brown Outer Ring */
 .brown-ring {
     fill: none;
     stroke: #ffe29f;
     stroke-width: 10px;
 }
 
-/* Teal Progress Ring */
 .progress-ring {
     fill: none;
-    /* Use a teal accent color */
     stroke:  url(#GradientColor);
     stroke-width: 20px;
     stroke-linecap: round;
@@ -183,7 +168,6 @@ svg {
 }
 
 .add-task-section input[type="submit"]:hover {
-    /* Swap to a gold on hover */
     background-color: #ffe29f;
     color: #241b2f;
 }
@@ -194,7 +178,7 @@ svg {
     background: rgba(18,26,19,0.95);
     padding: 20px;
     border-radius: 16px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 4px 0px rgba(0, 0, 0, 0.7);
     overflow-y: auto;
     overflow-x: hidden;
     max-height: 250px;
@@ -222,7 +206,6 @@ svg {
     align-items: center;
     justify-content: space-between;
     padding: 10px 12px;
-    /* Slightly lighter overlay for tasks */
     background: rgba(39, 95, 100, 0.468);
     margin-bottom: 8px;
     border-radius: 10px;
@@ -373,8 +356,8 @@ svg {
   
   .sound-button{
     position: fixed;
-    top: 100px;
-    left: 20px;
+    top: 20px;
+    left: 100px;
     z-index: 100;
     background-color: #ffe29f;        
     border-radius: 50%;          
@@ -391,3 +374,4 @@ svg {
     height: 24px; 
     background-color: transparent; 
   }
+

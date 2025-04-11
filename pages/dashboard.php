@@ -26,22 +26,66 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_task'])) {
     exit();
 }
 
-// Mark task as complete/incomplete logic
 if (isset($_GET['complete_task_id'])) {
-    $task_id = $_GET['complete_task_id'];
-    $stmt = $conn->prepare("UPDATE tasks SET task_completed = 1 WHERE id = ? AND user_id = ?");
-    $stmt->bind_param("ii", $task_id, $_SESSION['user_id']);
-    $stmt->execute();
-    $stmt->close();
+  // Mark task as complete and reward coins
+  $task_id = (int) $_GET['complete_task_id'];
+  $user_id = (int) $_SESSION['user_id'];
+
+  // Update the task's completion status to 1 (complete)
+  $stmt = $conn->prepare("UPDATE tasks SET task_completed = 1 WHERE id = ? AND user_id = ?");
+  $stmt->bind_param("ii", $task_id, $user_id);
+  $stmt->execute();
+  $stmt->close();
+
+  // Retrieve the point value for the task
+  $stmt = $conn->prepare("SELECT point_value FROM tasks WHERE id = ? AND user_id = ?");
+  $stmt->bind_param("ii", $task_id, $user_id);
+  $stmt->execute();
+  $stmt->bind_result($point_value);
+  if ($stmt->fetch()) {
+      $stmt->close();
+
+      // Update user's coins by adding the task's point value
+      $stmt = $conn->prepare("UPDATE users SET coins = coins + ? WHERE id = ?");
+      $stmt->bind_param("ii", $point_value, $user_id);
+      $stmt->execute();
+      $stmt->close();
+  } else {
+      $stmt->close();
+  }
 }
 
 if (isset($_GET['incomplete_task_id'])) {
-    $task_id = $_GET['incomplete_task_id'];
-    $stmt = $conn->prepare("UPDATE tasks SET task_completed = 0 WHERE id = ? AND user_id = ?");
-    $stmt->bind_param("ii", $task_id, $_SESSION['user_id']);
-    $stmt->execute();
-    $stmt->close();
+  // Mark task as incomplete and adjust coins
+  $task_id = (int) $_GET['incomplete_task_id'];
+  $user_id = (int) $_SESSION['user_id'];
+
+  // Update the task's completion status to 0 (incomplete)
+  $stmt = $conn->prepare("UPDATE tasks SET task_completed = 0 WHERE id = ? AND user_id = ?");
+  $stmt->bind_param("ii", $task_id, $user_id);
+  $stmt->execute();
+  $stmt->close();
+
+  // Retrieve the point value for the task
+  $stmt = $conn->prepare("SELECT point_value FROM tasks WHERE id = ? AND user_id = ?");
+  $stmt->bind_param("ii", $task_id, $user_id);
+  $stmt->execute();
+  $stmt->bind_result($point_value);
+  if ($stmt->fetch()) {
+      $stmt->close();
+
+      // Update user's coins by subtracting the task's point value.
+      // Use GREATEST() to ensure coins never fall below 0.
+      $stmt = $conn->prepare("UPDATE users SET coins = GREATEST(coins - ?, 0) WHERE id = ?");
+      $stmt->bind_param("ii", $point_value, $user_id);
+      $stmt->execute();
+      $stmt->close();
+  } else {
+      $stmt->close();
+  }
 }
+
+
 
 // Delete task logic
 if (isset($_GET['delete_task_id'])) {
@@ -93,6 +137,7 @@ $conn->close();
   <title>Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../styles/dashboard.css">
+  <link rel="icon" href= "../img/allyLogo.png" />
 </head>
   <div class="container"> 
     <header>
@@ -100,13 +145,14 @@ $conn->close();
       <h2>Your Task Dashboard</h2>
     </header>
 
+    <!-- Sounds -->
     <audio id="sound" loop muted>
       <source src="../audio/ambient_rain.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
 
     <button class="sound-button" onclick="toggleMute();">
-      <img id="muteIcon" src="../img/speaker_muted.png" alt="Sound Icon">
+      <img id="muteIcon" src="../img/sound_icons/speaker_muted.png" alt="Sound Icon">
     </button>
 
     <!-- Hamburger -->
@@ -119,14 +165,18 @@ $conn->close();
       <nav class="dropdown-menu" id="menu">
         <ul>
           <li><a href="dashboard.php">Dashboard</a></li>
-          <li><a href="profile.php">Profile</a></li>
-          <li><a href="friends.php">Friends</a></li>
-          <li><a href="shop.php">Shop</a></li>
+          <li><a href="#">Profile</a></li>
+          <li><a href="#">Friends</a></li>
+          <li><a href="#">Habitat</a></li>
+          <li><a href="#">Shop</a></li>
+          <li><a href="#">Settings</a></li>
+          <li><a href="#">Logout</a></li>
         </ul>
       </nav>
     </div>
+    
     <!-- Progress Section -->
-    <div class="progress-section">
+    <div class="progress-section">  
       <div class="skill">
         <div class="inner">
           <div id="number" data-target="<?php echo $percentage; ?>">
@@ -194,8 +244,8 @@ $conn->close();
                 <a href="?clear_tasks=true" onclick="return confirm('Are you sure you want to clear all tasks?');">Clear All Tasks</a>
       </div>
     </section>
-
   </div>
+
   <script src="../js/dashboard.js"></script>
 </body>
 </html>

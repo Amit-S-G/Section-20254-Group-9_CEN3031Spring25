@@ -8,14 +8,14 @@
 }
 
 body {
-    background-image: url('../img/taskemon_blur.png');
+    background-image: url('../img/backgrounds/taskemon_blur.png');
     color: #ffe29f;
     font-family: 'IM Fell DW Pica', serif;
     padding-top: 210px; /* Adjust this depending on header height */
 }
 
 
-/* Container Styles */
+
 .container {
     width: 85%;
     max-width: 400px;

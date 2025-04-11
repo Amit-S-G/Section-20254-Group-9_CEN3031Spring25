@@ -21,9 +21,9 @@ function toggleMute() {
     
     // If unmuted and audio is paused, attempt to play it.
     if (!audioElement.muted && audioElement.paused) {
-        const playPromise = audioElement.play();
-        if (playPromise !== undefined) {
-            playPromise.catch(error => {
+        const play = audioElement.play();
+        if (play !== undefined) {
+            play.catch(error => {
                 console.error("Error playing audio:", error);
             });
         }
@@ -31,9 +31,9 @@ function toggleMute() {
     
     // Update the speaker icon based on the muted state.
     if (audioElement.muted) {
-        icon.src = "../img/speaker_muted.png";
+        icon.src = "../img/sound_icons/speaker_muted.png";
     } else {
-        icon.src = "../img/speaker.png";
+        icon.src = "../img/sound_icons/speaker.png";
     }
 }
 
