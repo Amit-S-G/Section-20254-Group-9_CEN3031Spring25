@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica&family=Cinzel+Decorative:wght@400;700&family=Uncial+Antiqua&display=swap');
+body {
+    font-family: 'IM Fell DW Pica', serif;
+    background-image: url('../img/backgrounds/pleasant_grove_rendered.png');
+    color: #e6d8af;
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-size: cover; 
+}
+
+
+.pet-display {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+.pet-display img {
+    position: absolute;
+    left: 150px;
+    top: 300px;   
+    width: 600px;
+    height: auto;
+}
+
+.cta-button {
+    position: absolute;
+    padding: 12px 24px;
+    background-color: #f7e6a9;
+    border: 3px solid #5a3b1d;
+    border-radius: 15px;
+    color: #5a3b1d;
+    font-family: 'IM Fell DW Pica', serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    top: 450px;
+    left: 480px;
+    z-index: 10;
+    box-shadow: 0 0 12px 4px rgba(69, 69, 68, 0.7); /* soft yellow glow */
+}
+
+.cta-button:hover {
+    background-color: #f0d97a;
+    transform: scale(1.05);
+    cursor: pointer;
+    box-shadow: 0 0 12px 4px rgba(247, 230, 169, 0.7); /* soft yellow glow */
+}
+
+/* Container for the hunger bar */
+.hunger-bar-container {
+    top: 390px;
+    left: 380px;
+    width: 300px;               /* Width of the hunger bar */
+    height: 20px;               /* Height of the hunger bar */
+    background-color: #ccc;     /* Color for the empty portion */
+    border: 2px solid #5a3b1d;   /* Dark brown border */
+    border-radius: 10px;        /* Curved edges */
+    overflow: hidden;           /* Hide any overflow */
+    margin: 20px auto;          /* Center horizontally in its container */
+    position: absolute;
+}
+
+/* Filled portion of the hunger bar */
+.hunger-bar {
+    height: 100%;
+    background-color: #ff3232;  /* Red color for the filled section */
+    transition: width 0.5s ease; /* Smoothly animate width changes */
+    display: flex;              /* Use flexbox to center the text vertically and horizontally */
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* Text showing the current hunger percentage */
+.hunger-text {
+    color: white;               /* White font color */
+    font-weight: bold;
+    font-size: 0.9rem;
+    z-index: 2;                 /* Ensure text stays on top of the bar */
+}

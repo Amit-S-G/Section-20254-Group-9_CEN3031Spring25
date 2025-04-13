@@ -3,7 +3,7 @@ session_start();
 
 // Redirect if not logged in
 if (!isset($_SESSION["username"])) {
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit();
 }
 
@@ -125,7 +125,43 @@ $stmtCount->close();
 $circumference = 2 * pi() * 80;
 $dashOffset = $circumference - ($circumference * $percentage / 100);
 
+//Pet Selection Logic
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['choose_pet'])) {
+    $pet_name = trim($_POST['pet_name']);
+    if (!empty($pet_name)) {
+        $pet_hunger = 100;
+        $stmt = $conn->prepare("INSERT INTO pets (user_id, pet_name, pet_hunger) VALUES (?, ?, ?)");
+        $stmt->bind_param("isi", $_SESSION['user_id'], $pet_name, $pet_hunger);
+        $stmt->execute();
+        $stmt->close();
+        // Reload page so that the modal does not display after choosing a pet.
+        header("Location: " . $_SERVER["PHP_SELF"]);
+        exit();
+    }
+}
+
+// Initialize default values
+$pet_name = "";
+$hasPet = false;
+
+// Change the query to retrieve the pet's name instead of just the id.
+$stmtPet = $conn->prepare("SELECT pet_name FROM pets WHERE user_id = ?");
+$stmtPet->bind_param("i", $_SESSION['user_id']);
+$stmtPet->execute();
+$resultPet = $stmtPet->get_result();
+if ($resultPet->num_rows > 0) {
+    $row = $resultPet->fetch_assoc();
+    $pet_name = $row['pet_name'];
+    $hasPet = true;
+}
+$stmtPet->close();
+
 $conn->close();
+?>
+
+<!-- Hamburger and Sound -->
+<?php
+ include("header.php")
 ?>
 
 <!DOCTYPE html>
@@ -135,8 +171,8 @@ $conn->close();
   <title>Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../styles/dashboard.css">
-  <link rel="icon" href= "../img/allyLogo.png" />
 </head>
+<body>
   <div class="container"> 
     <header>
       <h1>HELLO, <?php echo htmlspecialchars($_SESSION["username"]); ?></h1>
@@ -144,62 +180,55 @@ $conn->close();
     </header>
 
     <!-- Pets -->
-    <!-- <div id="pet-modal" class="modal">
-      <div class="modal-content">
-          <h3 class = "pet-header">Select Your Pet</h3>
-          <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <div class="pet-options">
+    <!-- If the user already has a pet, display its image -->
+    <?php if ($hasPet): 
+        // Determine the image source based on the pet's name (case insensitive)
+        $pet_image = "";
+        switch (strtolower($pet_name)) {
+            case "capybara":
+                $pet_image = "../img/pets/Capybara.gif";
+                break;
+            case "alligator":
+                $pet_image = "../img/pets/Alligator.gif";
+                break;
+            case "axolotl":
+                $pet_image = "../img/pets/Axolotl.gif";
+                break;
+        }
+    ?>
+        <div class="pet-display">
+          <img src="<?php echo $pet_image; ?>" alt="<?php echo htmlspecialchars($pet_name); ?>">
+      </div>
+    <?php endif; ?>
+
+    <?php if (!$hasPet): ?>
+        <div id="pet-modal" class="modal">
+            <div class="modal-content">
+            <h3 class="pet-header">Select Your Pet</h3>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                <div class="pet-options">
                 <label class="pet-choice">
-                  <input type="radio" name="selected_pet" value="Capybara" required>
-                  <img src="../img/pets/Capybara.png" alt="Capybara">
-                  <span>Capybara</span>
+                    <input type="radio" name="pet_name" value="Axolotl" required>
+                    <img src="../img/pets/Axolotl.png" alt="Axolotl">
+                    <span>Axolotl</span>
                 </label>
                 <label class="pet-choice">
-                  <input type="radio" name="selected_pet" value="Alligator" required>
-                  <img src="../img/pets/Alligator.png" alt="Alligator">
-                  <span>Alligator</span>
+                    <input type="radio" name="pet_name" value="Capybara" required>
+                    <img src="../img/pets/Capybara.png" alt="Capybara">
+                    <span>Capybara</span>
                 </label>
                 <label class="pet-choice">
-                  <input type="radio" name="selected_pet" value="Axolotl" required>
-                  <img src="../img/pets/Axolotl.png" alt="Axolotl">
-                  <span>Axolotl</span>
+                    <input type="radio" name="pet_name" value="Alligator" required>
+                    <img src="../img/pets/Alligator.png" alt="Alligator">
+                    <span>Alligator</span>
                 </label>
+                </div>
+                <input type="submit" name="choose_pet" value="Choose Pet">
+            </form>
             </div>
-            <input type="submit" name="select_pet" value="Choose Pet">
-          </form>
-      </div>
-    </div> -->
+        </div>
+    <?php endif; ?>
 
-    <!-- Sounds -->
-    <audio id="sound" loop muted>
-      <source src="../audio/ambient_rain.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
-
-    <button class="sound-button" onclick="toggleMute();">
-      <img id="muteIcon" src="../img/sound_icons/speaker_muted.png" alt="Sound Icon">
-    </button>
-
-    <!-- Hamburger -->
-    <div class="hamburger-container">
-      <div id="hamburger" onclick="toggleMenu()">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-      </div>
-      <nav class="dropdown-menu" id="menu">
-        <ul>
-          <li><a href="dashboard.php">Dashboard</a></li>
-          <li><a href="#">Profile</a></li>
-          <li><a href="#">Friends</a></li>
-          <li><a href="#">Habitat</a></li>
-          <li><a href="#">Shop</a></li>
-          <li><a href="#">Settings</a></li>
-          <li><a href="#">Logout</a></li>
-        </ul>
-      </nav>
-    </div>
-    
     <!-- Progress Section -->
     <div class="progress-section">  
       <div class="skill">

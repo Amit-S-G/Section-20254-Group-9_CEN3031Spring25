@@ -8,7 +8,7 @@
 
 body {
     font-family: 'IM Fell DW Pica', serif;
-    background-image: url('../img/backgrounds/divine_waterfall_temple_rendered2.png');
+    background-image: url('../img/backgrounds/tree_house.png');
     color: #e6d8af;
     padding-top: 50px;
     display: flex;
@@ -279,102 +279,6 @@ svg {
     color: #241b2f;
 }
 
-/* Hamburger Menu Container */
-.hamburger-container {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 1000;
-  }
-  
-  #hamburger {
-    width: 50px;
-    height: 50px;
-    background-color: rgba(36, 27, 47, 0.95);
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  #hamburger:hover {
-    background-color: #444;
-  }
-  
-  #hamburger .bar {
-    width: 30px;
-    height: 4px;
-    background: linear-gradient(#ffe29f,#fff4da);
-    margin: 3px 0;
-    transition: 0.3s;
-  }
-  
-  .dropdown-menu {
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-    position: absolute;
-    top: 60px;  /* Adjust spacing below the circular icon */
-    left: 0;
-    background: rgba(36, 27, 47, 0.90);
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  }
-  
-  .dropdown-menu.show {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-  
-  .dropdown-menu ul {
-    list-style: none;
-    margin: 0;
-    padding: 10px;
-  }
-  
-  .dropdown-menu ul li {
-    margin: 5px 0;
-  }
-  
-  .dropdown-menu ul li a {
-    text-decoration: none;
-    color: #ffe29f;
-    font-family: 'Cinzel Decorative', serif;
-    display: block;
-    padding: 8px 12px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .dropdown-menu ul li a:hover {
-    background-color: #555;
-  }
-  
-  .sound-button{
-    position: fixed;
-    top: 20px;
-    left: 100px;
-    z-index: 100;
-    background-color: #ffe29f;        
-    border-radius: 50%;          
-    width: 50px;                 
-    height: 50px;                
-    display: flex;               
-    align-items: center;        
-    justify-content: center;     
-    cursor: pointer;            
-  }
-
-  .sound-button img {
-    width: 24px;  
-    height: 24px; 
-    background-color: transparent; 
-  }
-
 /* Pets */
 .modal {
     position: fixed;
@@ -429,7 +333,7 @@ svg {
 }
 
 .pet-choice img {
-    background: #ffe29f;
+    background-image: linear-gradient(#ffe29f, #cfb372);
     border-radius: 50%;
     width: 200px;
     height: 200px;
@@ -463,6 +367,13 @@ svg {
 }
 
 .modal-content input[type="submit"]:hover {
-    background-color: #ffe29f;
+    background-color: #e3cb93;
     color: #241b2f;
 }
+
+.pet-display img {
+    position: absolute;
+    left: 525px;
+    top: 370px;
+}
+
