@@ -74,13 +74,14 @@ CREATE TABLE friends (
 
 CREATE TABLE inventories (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT,
-    item_name VARCHAR(255),
+    user_id INT NOT NULL,
+    item_type ENUM('habitat', 'food') NOT NULL,
+    item_name VARCHAR(255) NOT NULL,
     item_description VARCHAR(255),
-    food_or_house TINYINT(1) NOT NULL,
-    points INT(5)
+    quantity INT DEFAULT 0,
+    is_selected TINYINT(1) DEFAULT 0,
     FOREIGN KEY (user_id) REFERENCES users(id)
-) ENGINE = InnoDB;
+) ENGINE=InnoDB;
 
 
 ################################################
