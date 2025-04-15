@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica&family=Cinzel+Decorative:wght@400;700&family=Uncial+Antiqua&display=swap');
 body {
     font-family: 'IM Fell DW Pica', serif;
-    background-image: url('../img/backgrounds/pleasant_grove_rendered.png');
     color: #e6d8af;
     padding-top: 50px;
     display: flex;
@@ -58,7 +57,7 @@ body {
     width: 300px;               /* Width of the hunger bar */
     height: 20px;               /* Height of the hunger bar */
     background-color: #ccc;     /* Color for the empty portion */
-    border: 2px solid #5a3b1d;   /* Dark brown border */
+    border: 5px solid #000000;   /* Dark brown border */
     border-radius: 10px;        /* Curved edges */
     overflow: hidden;           /* Hide any overflow */
     margin: 20px auto;          /* Center horizontally in its container */
@@ -68,7 +67,7 @@ body {
 /* Filled portion of the hunger bar */
 .hunger-bar {
     height: 100%;
-    background-color: #ff3232;  /* Red color for the filled section */
+    background: linear-gradient(to right, #730000, #ff3232, #ff5151);  /* Red color for the filled section */
     transition: width 0.5s ease; /* Smoothly animate width changes */
     display: flex;              /* Use flexbox to center the text vertically and horizontally */
     align-items: center;

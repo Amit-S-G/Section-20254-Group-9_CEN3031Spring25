@@ -144,7 +144,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['choose_pet'])) {
 $pet_name = "";
 $hasPet = false;
 
-// Change the query to retrieve the pet's name instead of just the id.
+
 $stmtPet = $conn->prepare("SELECT pet_name FROM pets WHERE user_id = ?");
 $stmtPet->bind_param("i", $_SESSION['user_id']);
 $stmtPet->execute();
