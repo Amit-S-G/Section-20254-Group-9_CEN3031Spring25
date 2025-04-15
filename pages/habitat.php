@@ -9,6 +9,11 @@
 
     include("../database.php");
 
+    // TEST OVERRIDES: Read GET parameters for pet and habitat
+$testPet     = isset($_GET['pet']) ? strtolower($_GET['pet']) : '';
+$testHabitat = isset($_GET['habitat']) ? strtolower($_GET['habitat']) : '';
+
+
     //Grabbing and Displaying Habitat information
     $chosenHabitat = " ";
     $backroundImage = "../img/backgrounds/tree_house.png";
@@ -23,6 +28,11 @@
         $chosenHabitat = $habitatRow['item_name'];
     }
     $stmtHabitat->close();
+
+// Override with test habitat if provided
+if (!empty($testHabitat)) {
+    $chosenHabitat = $testHabitat;
+}
 
     if(!empty($chosenHabitat))
     {
@@ -59,6 +69,12 @@
     }
     $stmtPet->close();
 
+// Override with test pet if provided
+if (!empty($testPet)) {
+    $pet_name = $testPet;
+    $hasPet = true;
+}
+
     if ($hasPet): 
         // Determine the image source based on the pet's name (case insensitive)
         $pet_image = "";
@@ -89,13 +105,20 @@
         }
         $stmt->close();
     ?>
-
     <?php endif;
 
+    $maxHunger = 100;
+    $hungerPercentage = ($pet_hunger / $maxHunger) * 100;
+    if($hungerPercentage > 100){
+        $hungerPercentage = 100;
+    }
+    
     //Defining positions for pet image, feed button and hunger bar based on the background iamge chosen
     $pet_position = "left: 150px; top: 450px;";
     $feed_position = "left: 150px; top: 400px;";
     $hunger_position = "left: 150px; top: 390px;";
+    $hunger_icon_position = "left: 140px; top: 390px;";
+
 
     if(!empty($chosenHabitat))
     {
@@ -107,21 +130,25 @@
                     $pet_position = "left: 150px; top: 330px; width: 500px";
                     $feed_position = "left: 510px; top: 340px;";
                     $hunger_position = "left: 405px; top: 285px;";
+                    $hunger_icon_position = "left: 369px; top: 295px;";
                     break;
                 case "alligator":
                     $pet_position = "left: 150px; top: 280px;";
                     $feed_position = "left: 500px; top: 450px;";
                     $hunger_position = "left: 395px; top: 395px;";
+                    $hunger_icon_position = "left: 359px; top: 405px;";
                     break;
                 case "axolotl":
                     $pet_position = "left: 150px; top: 340px; width: 550px; -webkit-transform: scaleX(-1); transform: scaleX(-1);";
                     $feed_position = "left: 500px; top: 460px;";
                     $hunger_position = "left: 395px; top: 405px;";
+                    $hunger_icon_position = "left: 359px; top: 415px;";
                     break;
                 default:
                     $pet_position = "left: 150px; top: 450px;";
                     $feed_position = "left: 150px; top: 400px;";
                     $hunger_position = "left: 150px; top: 390px;";
+                    $hunger_icon_position = "left: 415px; top: 285px;";
                     break;
             }
         }
@@ -133,21 +160,25 @@
                     $pet_position = "left: 250px; top: 200px; width: 500px";
                     $feed_position = "left: 415px; top: 205px";
                     $hunger_position = "left: 310px; top: 150px";
+                    $hunger_icon_position = "left: 274px; top: 160px;";
                     break;
                 case "alligator":
                     $pet_position = "left: 350px; top: 20px; width: 500px";
                     $feed_position = "left: 350px; top: 150px;";
                     $hunger_position = "left: 245px; top: 95px;";
+                    $hunger_icon_position = "left: 209px; top: 105px;";
                     break;
                 case "axolotl":
                     $pet_position = "left: 350px; top: 50px; width: 450px; -webkit-transform: scaleX(-1); transform: scaleX(-1);";
                     $feed_position = "left: 350px; top: 150px;";
                     $hunger_position = "left: 245px; top: 95px;";
+                    $hunger_icon_position = "left: 209px; top: 105px;";
                     break;
                 default:
                     $pet_position = "left: 150px; top: 450px;";
                     $feed_position = "left: 150px; top: 400px;";
                     $hunger_position = "left: 150px; top: 390px;";
+                    $hunger_icon_position = "left: 415px; top: 285px;";
                     break;
             }
         }
@@ -159,21 +190,25 @@
                     $pet_position = "left: -600px; top: 600px; width: 350px; -webkit-transform: scaleX(-1); transform: scaleX(-1);";
                     $feed_position = "left: 1310px; top: 600px;";
                     $hunger_position = "left: 1200px; top: 540px;";
+                    $hunger_icon_position = "left: 1164px; top: 550px;";
                     break;
                 case "alligator":
                     $pet_position = "left: -580px; top: 640px; width: 350px; -webkit-transform: scaleX(-1); transform: scaleX(-1);";
                     $feed_position = "left: 1270px; top: 720px;";
                     $hunger_position = "left: 1170px; top: 660px;";
+                    $hunger_icon_position = "left: 1134px; top: 670px;";
                     break;
                 case "axolotl":
                     $pet_position = "left: -580px; top: 640px; width: 350px;";
                     $feed_position = "left: 1270px; top: 720px;";
                     $hunger_position = "left: 1170px; top: 660px;";
+                    $hunger_icon_position = "left: 1134px; top: 670px;";
                     break;
                 default:
                     $pet_position = "left: 150px; top: 450px;";
                     $feed_position = "left: 150px; top: 400px;";
                     $hunger_position = "left: 150px; top: 390px;";
+                    $hunger_icon_position = "left: 415px; top: 285px;";
                     break;
             }
         }
@@ -185,21 +220,25 @@
                     $pet_position = "left: 0px; top: 390px; width: 700px;";
                     $feed_position = "left: 565px; top: 400px;";
                     $hunger_position = "left: 460px; top: 345px;";
+                    $hunger_icon_position = "left: 424px; top: 355px;";
                     break;
                 case "alligator":
                     $pet_position = "left: -60px; top: 300px; width: 800px;";
                     $feed_position = "left: 600px; top: 500px;";
                     $hunger_position = "left: 495px; top: 445px;";
+                    $hunger_icon_position = "left: 459px; top: 455px;";
                     break;
                 case "axolotl":
                     $pet_position = "left: -200px; top: 395px; width: 700px; -webkit-transform: scaleX(-1); transform: scaleX(-1);";
                     $feed_position = "left: 750px; top: 550px;";
                     $hunger_position = "left: 645px; top: 495px;";
+                    $hunger_icon_position = "left: 609px; top: 505px;";
                     break;
                 default:
                     $pet_position = "left: 150px; top: 450px;";
                     $feed_position = "left: 150px; top: 400px;";
                     $hunger_position = "left: 150px; top: 390px;";
+                    $hunger_icon_position = "left: 415px; top: 285px;";
                     break;
             }
         }
@@ -230,9 +269,14 @@
     </head>
     <body>
         <div class="container">
-            <div class="hunger-bar-container" style = "<?php echo $hunger_position;?>">
-                <div class="hunger-bar" style="width: <?php echo $pet_hunger; ?>%;">
-                    <span class="hunger-text"><?php echo $pet_hunger; ?></span>
+            <div class="hunger-icon" style="<?php echo $hunger_icon_position; ?>">
+                <img src="../img/icons/hunger_icon.png" alt="Hunger Icon">
+            </div>
+            <div class="hunger-bar-container" style="<?php echo $hunger_position; ?>">
+                <div class="hunger-bar">
+                    <div class="hunger-fill" style="width: <?php echo $hungerPercentage; ?>%;">
+                        <span class="hunger-text"><?php echo $pet_hunger; ?>/<?php echo $maxHunger; ?></span>
+                    </div>
                 </div>
             </div>
 
@@ -243,4 +287,5 @@
             <button id="Feed" class="cta-button" style="<?php echo $feed_position; ?>">Feed</button>
         </div>
     </body>
+    <script src="../js/habitat.js"></script>
 </html>

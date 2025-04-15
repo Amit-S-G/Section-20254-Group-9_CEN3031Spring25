@@ -45,13 +45,13 @@ if (session_status() == PHP_SESSION_NONE) {
                 </div>
                 <nav class="dropdown-menu" id="menu">
                     <ul>
-                        <li><a href="dashboard.php"><img id="dashboard-icon" src="../img/hamburger_icons/dashboard_icon.png" alt="Dashboard Icon">Dashboard</a></li>
-                        <li><a href="#"><img id="profile-icon" src="../img/hamburger_icons/profile_icon.png" alt="Profile Icon">Profile</a></li>
-                        <li><a href="#"><img id="friends-icon" src="../img/hamburger_icons/friends_icon.png" alt="Friends Icon">Friends</a></li>
-                        <li><a href="habitat.php"><img id="habitat-icon" src="../img/hamburger_icons/habitat_icon.png" alt="Habitat Icon">Habitat</a></li>
-                        <li><a href="#"><img id="shop-icon" src="../img/hamburger_icons/shop_icon.png" alt="Shop Icon">Shop</a></li>
-                        <li><a href="#"><img id="settings-icon" src="../img/hamburger_icons/settings_icon.png" alt="Settings Icon">Settings</a></li>
-                        <li><a href="#"><img id="logout-icon" src="../img/hamburger_icons/logout_icon.png" alt="Logout Icon">Logout</a></li>
+                        <li><a href="dashboard.php"><img id="dashboard-icon" src="../img/icons/hamburger_icons/dashboard_icon.png" alt="Dashboard Icon">Dashboard</a></li>
+                        <li><a href="#"><img id="profile-icon" src="../img/icons/hamburger_icons/profile_icon.png" alt="Profile Icon">Profile</a></li>
+                        <li><a href="#"><img id="friends-icon" src="../img/icons/hamburger_icons/friends_icon.png" alt="Friends Icon">Friends</a></li>
+                        <li><a href="habitat.php"><img id="habitat-icon" src="../img/icons/hamburger_icons/habitat_icon.png" alt="Habitat Icon">Habitat</a></li>
+                        <li><a href="shop.php"><img id="shop-icon" src="../img/icons/hamburger_icons/shop_icon.png" alt="Shop Icon">Shop</a></li>
+                        <li><a href="#"><img id="settings-icon" src="../img/icons/hamburger_icons/settings_icon.png" alt="Settings Icon">Settings</a></li>
+                        <li><a href="#"><img id="logout-icon" src="../img/icons/hamburger_icons/logout_icon.png" alt="Logout Icon">Logout</a></li>
                     </ul>
                 </nav>
             </div>
@@ -63,7 +63,7 @@ if (session_status() == PHP_SESSION_NONE) {
             </audio>
 
             <button class="sound-button" onclick="toggleMute();">
-                <img id="muteIcon" src="../img/sound_icons/speaker_muted.png" alt="Sound Icon">
+                <img id="muteIcon" src="../img/icons/sound_icons/speaker_muted.png" alt="Sound Icon">
             </button>
         </header>
         <script src="../js/page_header.js"></script>

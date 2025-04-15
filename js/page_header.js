@@ -24,8 +24,8 @@ function toggleMute() {
     
     // Update the speaker icon based on the muted state.
     if (audioElement.muted) {
-        icon.src = "../img/sound_icons/speaker_muted.png";
+        icon.src = "../img/icons/sound_icons/speaker_muted.png";
     } else {
-        icon.src = "../img/sound_icons/speaker.png";
+        icon.src = "../img/icons/sound_icons/speaker.png";
     }
 }
