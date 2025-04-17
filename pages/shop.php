@@ -72,10 +72,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['buy_item_id'])) {
     
             // Refresh coin count
             $coins = $newCoins;
-            $buyMessage = "✅ Purchased " . htmlspecialchars($item['item_name']) . "!";
+            $buyMessage = "Purchased " . htmlspecialchars($item['item_name']) . "!";
         }
         } else {
-            $buyMessage = "❌ Not enough coins!";
+            $buyMessage = "Not enough coins!";
         }
 }
 
