@@ -14,15 +14,26 @@ if (isset($_POST['item_name'])) {
     $user_id = $_SESSION['user_id'];
     $item_name = $_POST['item_name'];
 
-    // If 'single_select' flag is set, deselect all and select one
-    if (isset($_POST['single_select']) && $_POST['single_select'] == 1) {
-        // Deselect all
-        $stmt = $conn->prepare("UPDATE inventories SET is_selected = 0 WHERE user_id = ?");
-        $stmt->bind_param("i", $user_id);
-        $stmt->execute();
-        $stmt->close();
+    // Get the item type from the shop
+    $stmt = $conn->prepare("SELECT type FROM shop WHERE item_name = ?");
+    $stmt->bind_param("s", $item_name);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $itemInfo = $result->fetch_assoc();
+    $stmt->close();
 
-        // Select the new item
+    if ($itemInfo) {
+        $item_type = $itemInfo['type'];
+
+        // If 'single_select' flag is set, deselect all of this type only
+        if (isset($_POST['single_select']) && $_POST['single_select'] == 1) {
+            $stmt = $conn->prepare("UPDATE inventories SET is_selected = 0 WHERE user_id = ? AND item_type = ?");
+            $stmt->bind_param("is", $user_id, $item_type);
+            $stmt->execute();
+            $stmt->close();
+        }
+
+        // Select this item
         $stmt = $conn->prepare("UPDATE inventories SET is_selected = 1 WHERE user_id = ? AND item_name = ?");
         $stmt->bind_param("is", $user_id, $item_name);
         if ($stmt->execute()) {
@@ -32,9 +43,9 @@ if (isset($_POST['item_name'])) {
         }
         $stmt->close();
     }
+
     exit(); // Important: stop script after AJAX call
 }
-
 // Handle feeding action
 if (isset($_POST['action']) && $_POST['action'] === 'feed') {
     $user_id = $_SESSION['user_id'];
@@ -422,9 +433,33 @@ $conn->close();
                 const itemName = this.getAttribute('data-item-name');
                 const itemType = this.getAttribute('data-item-type');
 
-                if (itemType !== 'habitat') {
-                    return; 
-                }
+                if (itemType === 'habitat') {
+                // Deselect all items in UI
+                inventoryItems.forEach(el => el.classList.remove('selected'));
+                // Select this one
+                this.classList.add('selected');
+
+                // Send AJAX to update selection and reload for habitat change
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', '', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        location.reload(); // Only reload for habitat change
+                    }
+                };
+                xhr.send('item_name=' + encodeURIComponent(itemName) + '&single_select=1');
+            } else if (itemType === 'food') {
+                // Allow selecting food item for feeding, but don't reload
+                inventoryItems.forEach(el => el.classList.remove('selected'));
+                this.classList.add('selected');
+
+                // Send AJAX to mark this food as selected
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', '', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.send('item_name=' + encodeURIComponent(itemName) + '&single_select=0'); // No need to deselect all
+            }
 
                 // Deselect all items in UI
                 inventoryItems.forEach(el => el.classList.remove('selected'));
