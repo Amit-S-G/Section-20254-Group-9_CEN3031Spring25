@@ -1,6 +1,5 @@
 <?php
 if (session_status() == PHP_SESSION_NONE) {
-
     session_start();
 }
     include("../database.php");
@@ -16,7 +15,6 @@ if (session_status() == PHP_SESSION_NONE) {
         $habitatName = strtolower(trim($habitatName));
     }
     $stmtHabitat->close();
-    $conn->close();
 ?>
 
 <?php
@@ -48,7 +46,7 @@ if (session_status() == PHP_SESSION_NONE) {
                 break;
             case "divine waterfall":
                 $audioFile = "../audio/celestial_choir.mp3";
-                $audioVolume = 0.1;
+                $audioVolume = 0.18;
                 break;
             default:
                 $audioFile = "../audio/ambient_rain.mp3";

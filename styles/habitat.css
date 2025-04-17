@@ -398,7 +398,7 @@ body.habitat-divine_waterfall .inventory-section::-webkit-scrollbar
 }
 
 body.habitat-divine_waterfall .inventory-section::-webkit-scrollbar-track {
-    background: linear-gradient(rgba(60, 10, 10, 0.95), rgba(126, 38, 38, 0.95));
+    background: linear-gradient(rgba(145, 20, 20, 0.95),rgba(202, 77, 77, 0.95));
 }
 body.habitat-divine_waterfall .inventory-section::-webkit-scrollbar-thumb {
     background: linear-gradient(#b84f2e, #ffcc70);

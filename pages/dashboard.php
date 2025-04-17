@@ -8,6 +8,7 @@ if (!isset($_SESSION["username"])) {
 }
 
 include("../database.php");
+include("header.php"); 
 
 // Add task logic
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_task'])) {
@@ -157,11 +158,6 @@ if ($resultPet->num_rows > 0) {
 $stmtPet->close();
 
 $conn->close();
-?>
-
-<!-- Hamburger and Sound -->
-<?php
- include("header.php")
 ?>
 
 <!DOCTYPE html>
