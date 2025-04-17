@@ -387,7 +387,9 @@ $conn->close();
             <h2 class = "inventory-header">Your Inventory</h2>
             <div class="inventory-list">
                 <?php foreach ($inventoryItems as $item): ?>
-                    <div class="inventory-item <?php echo ($item['is_selected'] == 1) ? 'selected' : ''; ?>" data-item-name="<?php echo htmlspecialchars($item['item_name']); ?>">
+                    <div class="inventory-item <?php echo ($item['is_selected'] == 1) ? 'selected' : ''; ?>" 
+                        data-item-name="<?php echo htmlspecialchars($item['item_name']); ?>"
+                        data-item-type="<?php echo ($item['hunger_pts'] > 0) ? 'food' : 'habitat'; ?>">
                         <img src="<?php echo htmlspecialchars($item['image_url']); ?>" alt="<?php echo htmlspecialchars($item['item_name']); ?>" />
                         <p><?php echo htmlspecialchars($item['item_name']); ?> x<?php echo $item['quantity']; ?></p>
                     </div>
@@ -415,28 +417,33 @@ $conn->close();
             }
             
 
-    inventoryItems.forEach(item => {
-        item.addEventListener('click', function () {
-            const itemName = this.getAttribute('data-item-name');
+        inventoryItems.forEach(item => {
+            item.addEventListener('click', function () {
+                const itemName = this.getAttribute('data-item-name');
+                const itemType = this.getAttribute('data-item-type');
 
-            // Deselect all items in UI
-            inventoryItems.forEach(el => el.classList.remove('selected'));
-            // Select this one
-            this.classList.add('selected');
-
-            // Send AJAX to clear all selections, then set the clicked one
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', '', true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    location.reload();
+                if (itemType !== 'habitat') {
+                    return; 
                 }
-            };
-            xhr.send('item_name=' + encodeURIComponent(itemName) + '&single_select=1');
+
+                // Deselect all items in UI
+                inventoryItems.forEach(el => el.classList.remove('selected'));
+                // Select this one
+                this.classList.add('selected');
+
+                // Send AJAX to update selection
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', '', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        location.reload();
+                    }
+                };
+                xhr.send('item_name=' + encodeURIComponent(itemName) + '&single_select=1');
+            });
         });
-    });
-});
+        });
     </script>
 
     <script>
