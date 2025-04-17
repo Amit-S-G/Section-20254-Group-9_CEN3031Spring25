@@ -190,10 +190,136 @@ $maxHunger = 100;
 $hungerPercentage = min(($pet_hunger / $maxHunger) * 100, 100);
 
 // Positioning
+//Defining positions for pet image, feed button and hunger bar based on the background iamge chosen
 $pet_position = "left: 150px; top: 450px;";
-$feed_position = "left: 450px; top: 550px;";
-$hunger_position = "left: 350px; top: 490px;";
-$hunger_icon_position = "left: 320px; top: 500px;";
+$feed_position = "left: 150px; top: 400px;";
+$hunger_position = "left: 150px; top: 390px;";
+$hunger_icon_position = "left: 140px; top: 390px;";
+
+
+if(!empty($chosenHabitat))
+{
+    if(strtolower($chosenHabitat) == "pleasant_grove")
+    {
+        switch(strtolower($pet_name))
+        {
+            case "capybara":
+                $pet_position = "left: 150px; top: 330px; width: 500px";
+                $feed_position = "left: 510px; top: 340px;";
+                $hunger_position = "left: 405px; top: 285px;";
+                $hunger_icon_position = "left: 369px; top: 295px;";
+                break;
+            case "alligator":
+                $pet_position = "left: 150px; top: 280px;";
+                $feed_position = "left: 500px; top: 450px;";
+                $hunger_position = "left: 395px; top: 395px;";
+                $hunger_icon_position = "left: 359px; top: 405px;";
+                break;
+            case "axolotl":
+                $pet_position = "left: 150px; top: 340px; width: 550px; -webkit-transform: scaleX(-1); transform: scaleX(-1);";
+                $feed_position = "left: 500px; top: 460px;";
+                $hunger_position = "left: 395px; top: 405px;";
+                $hunger_icon_position = "left: 359px; top: 415px;";
+                break;
+            default:
+                $pet_position = "left: 150px; top: 450px;";
+                $feed_position = "left: 150px; top: 400px;";
+                $hunger_position = "left: 150px; top: 390px;";
+                $hunger_icon_position = "left: 415px; top: 285px;";
+                break;
+        }
+    }
+    elseif(strtolower($chosenHabitat) == "sapphire_springs")
+    {
+        switch(strtolower($pet_name))
+        {
+            case "capybara":
+                $pet_position = "left: 250px; top: 200px; width: 500px";
+                $feed_position = "left: 415px; top: 205px";
+                $hunger_position = "left: 310px; top: 150px";
+                $hunger_icon_position = "left: 274px; top: 160px;";
+                break;
+            case "alligator":
+                $pet_position = "left: 350px; top: 20px; width: 500px";
+                $feed_position = "left: 350px; top: 150px;";
+                $hunger_position = "left: 245px; top: 95px;";
+                $hunger_icon_position = "left: 209px; top: 105px;";
+                break;
+            case "axolotl":
+                $pet_position = "left: 350px; top: 50px; width: 450px; -webkit-transform: scaleX(-1); transform: scaleX(-1);";
+                $feed_position = "left: 350px; top: 150px;";
+                $hunger_position = "left: 245px; top: 95px;";
+                $hunger_icon_position = "left: 209px; top: 105px;";
+                break;
+            default:
+                $pet_position = "left: 150px; top: 450px;";
+                $feed_position = "left: 150px; top: 400px;";
+                $hunger_position = "left: 150px; top: 390px;";
+                $hunger_icon_position = "left: 415px; top: 285px;";
+                break;
+        }
+    }
+    elseif(strtolower($chosenHabitat) == "divine_waterfall")
+    {
+        switch(strtolower($pet_name))
+        {
+            case "capybara":
+                $pet_position = "left: -600px; top: 600px; width: 350px; -webkit-transform: scaleX(-1); transform: scaleX(-1);";
+                $feed_position = "left: 1310px; top: 600px;";
+                $hunger_position = "left: 1200px; top: 540px;";
+                $hunger_icon_position = "left: 1164px; top: 550px;";
+                break;
+            case "alligator":
+                $pet_position = "left: -580px; top: 640px; width: 350px; -webkit-transform: scaleX(-1); transform: scaleX(-1);";
+                $feed_position = "left: 1270px; top: 720px;";
+                $hunger_position = "left: 1170px; top: 660px;";
+                $hunger_icon_position = "left: 1134px; top: 670px;";
+                break;
+            case "axolotl":
+                $pet_position = "left: -580px; top: 640px; width: 350px;";
+                $feed_position = "left: 1270px; top: 720px;";
+                $hunger_position = "left: 1170px; top: 660px;";
+                $hunger_icon_position = "left: 1134px; top: 670px;";
+                break;
+            default:
+                $pet_position = "left: 150px; top: 450px;";
+                $feed_position = "left: 150px; top: 400px;";
+                $hunger_position = "left: 150px; top: 390px;";
+                $hunger_icon_position = "left: 415px; top: 285px;";
+                break;
+        }
+    }
+    else
+    {
+        switch(strtolower($pet_name))
+        {
+            case "capybara":
+                $pet_position = "left: 0px; top: 390px; width: 700px;";
+                $feed_position = "left: 565px; top: 400px;";
+                $hunger_position = "left: 460px; top: 345px;";
+                $hunger_icon_position = "left: 424px; top: 355px;";
+                break;
+            case "alligator":
+                $pet_position = "left: -60px; top: 300px; width: 800px;";
+                $feed_position = "left: 600px; top: 500px;";
+                $hunger_position = "left: 495px; top: 445px;";
+                $hunger_icon_position = "left: 459px; top: 455px;";
+                break;
+            case "axolotl":
+                $pet_position = "left: -200px; top: 395px; width: 700px; -webkit-transform: scaleX(-1); transform: scaleX(-1);";
+                $feed_position = "left: 750px; top: 550px;";
+                $hunger_position = "left: 645px; top: 495px;";
+                $hunger_icon_position = "left: 609px; top: 505px;";
+                break;
+            default:
+                $pet_position = "left: 150px; top: 450px;";
+                $feed_position = "left: 150px; top: 400px;";
+                $hunger_position = "left: 150px; top: 390px;";
+                $hunger_icon_position = "left: 415px; top: 285px;";
+                break;
+        }
+    }
+}
 
 // Fetch inventory
 $inventoryItems = [];
@@ -232,74 +358,9 @@ $conn->close();
             background-repeat: no-repeat;
         }
 
-        .inventory-section {
-            position: absolute;
-            top: 50px;
-            right: 10px;
-            width: 300px;
-            max-height: 800px;
-            overflow-y: auto;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
-            z-index: 999; /* Ensure it stays on top */
-        }
-
-        .inventory-section h2 {
-            text-align: center;
-            margin-bottom: 15px;
-            color: #333;
-        }
-
-        .inventory-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .inventory-item {
-            border: 1px solid #ccc;
-            padding: 8px;
-            border-radius: 8px;
-            background: white;
-            transition: 0.3s ease;
-        }
-
-        .inventory-item:hover {
-            background-color: #f0f8ff;
-        }
-
-        .inventory-item.selected {
-            border: 2px solid #4CAF50;
-            background-color: #e8fce8;
-        }
-
-        .item-name {
-            font-weight: bold;
-        }
-
-        .item-type {
-            font-style: italic;
-            color: #666;
-        }
-
-        .item-status {
-            margin-top: 5px;
-            color: #2e7d32;
-            font-size: 0.9em;
-        }
-
-        .inventory-item img {
-            width: 100px;
-            height: 100px;
-            object-fit: contain;
-            float: right;
-        }
-
     </style>
 </head>
-<body>
+<body class="<?php echo 'habitat-' . strtolower($chosenHabitat); ?>">
     <div class="container">
         <?php if ($hasPet): ?>
             <div class="hunger-icon" style="<?php echo $hunger_icon_position; ?>">
@@ -322,7 +383,7 @@ $conn->close();
 
         <!-- Inventory Display -->
         <div class="inventory-section">
-            <h2>Your Inventory</h2>
+            <h2 class = "inventory-header">Your Inventory</h2>
             <div class="inventory-list">
                 <?php foreach ($inventoryItems as $item): ?>
                     <div class="inventory-item <?php echo ($item['is_selected'] == 1) ? 'selected' : ''; ?>" data-item-name="<?php echo htmlspecialchars($item['item_name']); ?>">

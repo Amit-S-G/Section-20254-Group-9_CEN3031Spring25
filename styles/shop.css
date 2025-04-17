@@ -1,0 +1,239 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English&family=Lora:wght@400;700&family=Open+Sans:wght@400;600&display=swap');
+@import url('https://fonts.cdnfonts.com/css/rustic');
+
+body {
+    margin: 0;
+    font-family: 'Rustic', sans-serif;
+    color: #e0dcd9;
+    background-image: url(../img/backgrounds/owl_shop.gif);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+}
+
+.coin-counter {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(45, 25, 20, 0.9);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    font-family: 'Rustic', 'Times New Roman', Times, serif, sans-serif;
+}
+
+.coin-counter img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+.shop-container {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    height: 45%;
+    overflow: hidden;
+    margin-top: 480px;
+}
+
+.shop-list {
+    width: 40%;
+    overflow-y: auto;
+    background-color: rgba(40, 20, 15, 0.9);
+    border-radius: 15px;
+    padding: 15px;
+    margin-right: 20px;
+    border: 5px solid rgba(53, 27, 20, 0.9);
+}
+
+
+/* Custom Scrollbar for Shop List */
+.shop-list::-webkit-scrollbar {
+    width: 10px;
+}
+.shop-list::-webkit-scrollbar-track {
+    background: #3b2f2a;
+    border-radius: 10px;
+}
+.shop-list::-webkit-scrollbar-thumb {
+    background: #5c4033; 
+    border-radius: 10px;
+}
+.shop-list::-webkit-scrollbar-thumb:hover {
+    background: #6d4c41; 
+}
+
+.shop-item {
+    background: 
+        linear-gradient(rgba(106, 64, 53, 0.7), rgba(171, 116, 74, 0.7), rgba(243, 155, 73, 0.7)),
+        url('../img/backgrounds/wood_texture.png') no-repeat center center;
+    background-size: cover;
+    border: 2px solid rgba(80, 50, 45, 0.7);
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 18px;
+    color: #e0dcd9;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 10px;
+    font-family: 'Rustic', serif;
+    box-shadow: 0 0 10px 2px rgba(30, 21, 13, 0.6);
+}
+
+.shop-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px 2px rgba(150, 75, 0, 0.6);
+    background-blend-mode: multiply;
+    background-color: rgba(142, 86, 75, 0.9);
+}
+
+.item-details {
+    width: 55%;
+    background: 
+    linear-gradient(rgba(106, 64, 53, 0.7), rgba(171, 116, 74, 0.7), rgba(243, 155, 73, 0.7)),
+    url('../img/backgrounds/wood_texture.png') no-repeat center center;
+    background-size: cover;
+    color: #eadcd5;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+    display: none;
+    position: relative;
+    font-family: 'Rustic', sans-serif;
+}
+
+.item-details h2 {
+    font-family: 'Rustic', serif;
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.item-details .cost {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+    font-family: 'Rustic', sans-serif;
+    
+}
+
+.cost{
+    font-family: 'Times New Roman', Times, serif, sans-serif;
+}
+
+.item-details .hunger {
+    font-style: italic;
+    font-size: 16px;
+    color: #eadcd5; 
+    margin-top: 5px;
+    font-family: 'Times New Roman', Times, serif, sans-serif;
+}
+
+.item-details .cost{
+    font-family: 'Times New Roman', Times, serif, sans-serif;
+}
+
+.item-details p {
+    font-family: 'Lora', serif;
+    font-size: 16px;
+    max-width: 60%;
+}
+
+.item-details img.item-image {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 240px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(34, 24, 22, 0.4);
+}
+
+#buy-button {
+    margin-top: 30px;
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background-color: #382820;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    font-family: 'Rustic', sans-serif;
+}
+
+#buy-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 12px 4px rgba(150, 75, 0, 0.7);
+    background-color: #ca6633;
+}
+
+#buy-button:active {
+    transform: scale(0.97);
+    box-shadow: 0 0 14px 5px rgba(150, 75, 0, 0.9);
+    background-color: #4e342e;
+}
+
+.message {
+    position: absolute;
+    font-family: 'Rustic', serif;
+    color: #000000;
+    padding: 30px 40px; /* Increased padding for room around text */
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    z-index: 1000; /* Ensure the text is above the pseudo-element */
+    top: 15%;
+    left: 61%;
+}
+
+.message::before {
+    content: "";
+    position: absolute;
+    /*top: -80px;
+    left: -30px;*/
+    top: -70%;
+    left: -115%;
+    /*width: 300px;
+    height: 300px;*/
+    width: 350%;
+    height: 350%;
+    background: url('../img/text_bubble.png') no-repeat center center;
+    background-size: contain;
+    z-index: -1000;
+}
+
+
+.message.success {
+    background-color: #dff0d8;
+    color: #000000;
+    border-color: #3c763d;
+}
+
+.message.error {
+    background-color: #f2dede;
+    color: #000000;
+    border-color: #a94442;
+}
+
+.message.success,
+.message.error {
+    position: absolute;
+    color: #000000 !important;
+}
+

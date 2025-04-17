@@ -115,3 +115,300 @@ body {
     align-items: center;
     justify-content: center;
 }
+
+/* Inventory Section */
+.inventory-section {
+    color: #ffe29f;
+    font-family: 'IM Fell DW Pica', serif;
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    width: 300px;
+    max-height: 800px;
+    overflow-y: auto;
+    background: rgba(18,26,19,0.95);
+    border-radius: 12px;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    border-radius: 12px;
+    z-index: 999; /* Ensure it stays on top */
+    border: 3px solid transparent;
+    background-image: 
+        linear-gradient(rgba(18,26,19), rgba(18,26,19)),
+        linear-gradient(#00ffaa, #00eaff);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    font-weight: normal;
+}
+
+body.habitat-sapphire_springs .inventory-section {
+    color: #ffe29f;
+    font-family: 'IM Fell DW Pica', serif;
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    width: 300px;
+    max-height: 800px;
+    overflow-y: auto;
+    background: rgba(18,26,19,0.95);
+    border-radius: 12px;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    border-radius: 12px;
+    z-index: 999; /* Ensure it stays on top */
+    border: 3px solid transparent;
+    background-image: 
+        linear-gradient(rgba(18,26,19), rgba(18,26,19)),
+        linear-gradient(#00ffaa, #00eaff);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    font-weight: normal;
+}
+
+body.habitat-divine_waterfall .inventory-section {
+    color: #ffe29f;
+    font-family: 'IM Fell DW Pica', serif;
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    width: 300px;
+    max-height: 800px;
+    overflow-y: auto;
+    background: rgba(18,26,19,0.95);
+    border-radius: 12px;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    border-radius: 12px;
+    z-index: 999; /* Ensure it stays on top */
+    border: 3px solid transparent;
+    background-image: 
+        linear-gradient(rgba(18,26,19), rgba(18,26,19)),
+        linear-gradient(#00ffaa, #00eaff);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    font-weight: normal;
+}
+
+/* Changing inventory h2 based on habitat */
+.inventory-section h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #ffe29f;
+    font-family: 'Cinzel Decorative', serif;
+    font-weight: normal;
+}
+
+
+/* Changing inventory elements based on habitat */
+.inventory-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* base */
+.inventory-item {
+    font-family: 'IM Fell DW Pica', serif;
+    background: rgba(39, 95, 100, 0.468);
+    border: 1px solid #00ffd0;
+    padding: 8px;
+    border-radius: 8px;
+    transition: 0.3s ease;
+    border: 1px solid #58d8e4;
+    font-size: 1.2em;
+}
+
+.inventory-item:hover {
+    background: rgba(73, 180, 190, 0.468);
+}
+
+.inventory-item.selected {
+    border: 2px solid #00ffb3;
+    background: rgba(61, 155, 163, 0.468);
+}
+
+/* grove */
+/* Changing inventory container based on habitat */
+body.habitat-pleasant_grove .inventory-section {
+    color: #ffe29f;
+    font-family: 'IM Fell DW Pica', serif;
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    width: 300px;
+    max-height: 800px;
+    overflow-y: auto;
+    background: rgba(13, 39, 16, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    border-radius: 12px;
+    z-index: 999; /* Ensure it stays on top */
+    border: 3px solid transparent;
+    background-image: 
+        linear-gradient(rgba(13, 39, 16, 0.95), rgba(13, 39, 16, 0.95)),
+        linear-gradient(#135a25, #4dff00);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    font-weight: normal;
+}
+
+body.habitat-pleasant_grove .inventory-section h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #d4ff00;
+    font-family: 'Cinzel Decorative', serif;
+    font-weight: normal;
+}
+
+body.habitat-pleasant_grove .inventory-item {
+    font-family: 'IM Fell DW Pica', serif;
+    background: rgba(56, 81, 60, 0.95);
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 8px;
+    transition: 0.3s ease;
+    color: #d4ff00;
+    border: 1px solid #d4ff00;
+    font-size: 1.2em;
+}
+
+body.habitat-pleasant_grove .inventory-item:hover {
+    background: rgba(72, 114, 79, 0.95);
+}
+
+body.habitat-pleasant_grove .inventory-item.selected {
+    border: 2px solid #c8ff00;
+    background: rgba(87, 149, 97, 0.95);
+}
+
+/* springs */
+body.habitat-sapphire_springs .inventory-section {
+    color: #aefcff;
+    font-family: 'IM Fell DW Pica', serif;
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    width: 300px;
+    max-height: 800px;
+    overflow-y: auto;
+    background: linear-gradient(rgba(10, 69, 78, 0.95), rgba(0, 149, 171, 0.95));
+    border-radius: 12px;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    border-radius: 12px;
+    z-index: 999; /* Ensure it stays on top */
+    border: 3px solid transparent;
+    background-image: 
+        linear-gradient(rgba(10, 69, 78, 0.95), rgba(0, 149, 171, 0.95)),
+        linear-gradient(#0040ff, #00fbff);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    font-weight: normal;
+}
+
+body.habitat-sapphire_springs .inventory-section h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #aefcff;
+    font-family: 'Cinzel Decorative', serif;
+    font-weight: normal;
+}
+
+body.habitat_sapphire_springs .inventory-item {
+    font-family: 'IM Fell DW Pica', serif;
+    background: linear-gradient(rgba(15, 122, 138, 0.95), rgba(54, 204, 227, 0.95));
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 8px;
+    transition: 0.3s ease;
+    color: #aefcff;
+    border: 1px solid #c4fdff;
+    font-size: 1.2em;
+}
+
+body.habitat-sapphire_springs .inventory-item:hover {
+    background: linear-gradient(rgba(19, 156, 177, 0.95), rgba(79, 213, 233, 0.95));
+}
+
+body.habitat-sapphire_springs .inventory-item.selected {
+    border: 2px solid #effeff;
+    background: linear-gradient(rgba(24, 191, 216, 0.95), rgba(112, 233, 252, 0.95));
+}
+
+/*water fall */
+body.habitat-divine_waterfall .inventory-section {
+    color: #ffdca8;
+    font-family: 'IM Fell DW Pica', serif;
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    width: 300px;
+    max-height: 800px;
+    overflow-y: auto;
+    background: linear-gradient(rgba(60, 10, 10, 0.95), rgba(126, 38, 38, 0.95)) ; /* deep crimson backdrop */
+    border-radius: 12px;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    z-index: 999;
+    border: 3px solid transparent;
+    background-image:
+        linear-gradient(rgba(60, 10, 10, 0.95), rgba(126, 38, 38, 0.95)),
+        linear-gradient(#b28500, #ffef94); /* crimson to gold gradient border */
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    font-weight: normal;
+}
+
+body.habitat-divine_waterfall .inventory-section h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #ffd28f; /* regal gold */
+    font-family: 'Cinzel Decorative', serif;
+    font-weight: normal;
+    text-shadow: 1px 1px 2px #5c0000;
+}
+
+body.habitat-divine_waterfall .inventory-item {
+    font-family: 'IM Fell DW Pica', serif;
+    background: linear-gradient(145deg, rgba(90, 20, 20, 0.95), rgba(120, 30, 30, 0.95)); /* muted red */
+    border: 1px solid #ffe8b5; /* pale gold border */
+    padding: 8px;
+    border-radius: 8px;
+    color: #ffd28f;
+    font-size: 1.2em;
+    transition: 0.3s ease, transform 0.2s ease;
+}
+
+body.habitat-divine_waterfall .inventory-item:hover {
+    background: linear-gradient(rgba(120, 30, 30, 0.95),rgba(174, 56, 56, 0.95)); /* deeper hover red */
+    transform: scale(1.02);
+}
+
+body.habitat-divine_waterfall .inventory-item.selected {
+    border: 2px solid #ffee90;
+    background: linear-gradient(rgba(145, 20, 20, 0.95),rgba(202, 77, 77, 0.95));
+}
+
+
+.item-name {
+    font-weight: bold;
+}
+
+.item-type {
+    font-style: italic;
+    color: #666;
+}
+
+.item-status {
+    margin-top: 5px;
+    color: #2e7d32;
+    font-size: 0.9em;
+}
+
+.inventory-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    float: right;
+}
