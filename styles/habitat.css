@@ -139,55 +139,9 @@ body {
     background-origin: border-box;
     background-clip: padding-box, border-box;
     font-weight: normal;
+    overflow-y: auto;
 }
 
-body.habitat-sapphire_springs .inventory-section {
-    color: #ffe29f;
-    font-family: 'IM Fell DW Pica', serif;
-    position: absolute;
-    top: 50px;
-    right: 10px;
-    width: 300px;
-    max-height: 800px;
-    overflow-y: auto;
-    background: rgba(18,26,19,0.95);
-    border-radius: 12px;
-    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);
-    padding: 20px;
-    border-radius: 12px;
-    z-index: 999; /* Ensure it stays on top */
-    border: 3px solid transparent;
-    background-image: 
-        linear-gradient(rgba(18,26,19), rgba(18,26,19)),
-        linear-gradient(#00ffaa, #00eaff);
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
-    font-weight: normal;
-}
-
-body.habitat-divine_waterfall .inventory-section {
-    color: #ffe29f;
-    font-family: 'IM Fell DW Pica', serif;
-    position: absolute;
-    top: 50px;
-    right: 10px;
-    width: 300px;
-    max-height: 800px;
-    overflow-y: auto;
-    background: rgba(18,26,19,0.95);
-    border-radius: 12px;
-    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);
-    padding: 20px;
-    border-radius: 12px;
-    z-index: 999; /* Ensure it stays on top */
-    border: 3px solid transparent;
-    background-image: 
-        linear-gradient(rgba(18,26,19), rgba(18,26,19)),
-        linear-gradient(#00ffaa, #00eaff);
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
-    font-weight: normal;
-}
 
 /* Changing inventory h2 based on habitat */
 .inventory-section h2 {
@@ -220,12 +174,28 @@ body.habitat-divine_waterfall .inventory-section {
 
 .inventory-item:hover {
     background: rgba(73, 180, 190, 0.468);
+    cursor: pointer;
 }
 
 .inventory-item.selected {
     border: 2px solid #00ffb3;
     background: rgba(61, 155, 163, 0.468);
+    cursor: pointer;
 }
+
+.inventory-section::-webkit-scrollbar
+{
+    width: 5px;
+}
+
+.inventory-section::-webkit-scrollbar-track {
+    background: rgba(18,26,19,0.95);
+}
+.inventory-section::-webkit-scrollbar-thumb {
+    background: linear-gradient(#00ffaa, #00eaff);
+    border-radius: 10px;
+}
+
 
 /* grove */
 /* Changing inventory container based on habitat */
@@ -275,11 +245,26 @@ body.habitat-pleasant_grove .inventory-item {
 
 body.habitat-pleasant_grove .inventory-item:hover {
     background: rgba(72, 114, 79, 0.95);
+    cursor: pointer;
 }
 
 body.habitat-pleasant_grove .inventory-item.selected {
     border: 2px solid #c8ff00;
     background: rgba(87, 149, 97, 0.95);
+    cursor: pointer;
+}
+
+body.habitat-pleasant_grove .inventory-section::-webkit-scrollbar
+{
+    width: 5px;
+}
+
+body.habitat-pleasant_grove .inventory-section::-webkit-scrollbar-track {
+    background: rgba(13, 39, 16, 0.95);
+}
+body.habitat-pleasant_grove .inventory-section::-webkit-scrollbar-thumb {
+    background: linear-gradient(#1f5c2c, #66ff66);
+    border-radius: 10px;
 }
 
 /* springs */
@@ -327,13 +312,28 @@ body.habitat_sapphire_springs .inventory-item {
     font-size: 1.2em;
 }
 
+body.habitat-sapphire_springs .inventory-section::-webkit-scrollbar
+{
+    width: 5px;
+}
+
 body.habitat-sapphire_springs .inventory-item:hover {
     background: linear-gradient(rgba(19, 156, 177, 0.95), rgba(79, 213, 233, 0.95));
+    cursor: pointer;
 }
 
 body.habitat-sapphire_springs .inventory-item.selected {
     border: 2px solid #effeff;
     background: linear-gradient(rgba(24, 191, 216, 0.95), rgba(112, 233, 252, 0.95));
+    cursor: pointer;
+}
+
+body.habitat-sapphire_springs .inventory-section::-webkit-scrollbar-track {
+    background: linear-gradient(rgba(10, 69, 78, 0.95), rgba(0, 149, 171, 0.95));
+}
+body.habitat-sapphire_springs .inventory-section::-webkit-scrollbar-thumb {
+    background: linear-gradient(#00cfff, #c8e3ff);
+    border-radius: 10px;
 }
 
 /*water fall */
@@ -383,11 +383,26 @@ body.habitat-divine_waterfall .inventory-item {
 body.habitat-divine_waterfall .inventory-item:hover {
     background: linear-gradient(rgba(120, 30, 30, 0.95),rgba(174, 56, 56, 0.95)); /* deeper hover red */
     transform: scale(1.02);
+    cursor: pointer;
 }
 
 body.habitat-divine_waterfall .inventory-item.selected {
     border: 2px solid #ffee90;
     background: linear-gradient(rgba(145, 20, 20, 0.95),rgba(202, 77, 77, 0.95));
+    cursor: pointer;
+}
+
+body.habitat-divine_waterfall .inventory-section::-webkit-scrollbar
+{
+    width: 5px;
+}
+
+body.habitat-divine_waterfall .inventory-section::-webkit-scrollbar-track {
+    background: linear-gradient(rgba(60, 10, 10, 0.95), rgba(126, 38, 38, 0.95));
+}
+body.habitat-divine_waterfall .inventory-section::-webkit-scrollbar-thumb {
+    background: linear-gradient(#b84f2e, #ffcc70);
+    border-radius: 10px;
 }
 
 
@@ -412,3 +427,4 @@ body.habitat-divine_waterfall .inventory-item.selected {
     object-fit: contain;
     float: right;
 }
+

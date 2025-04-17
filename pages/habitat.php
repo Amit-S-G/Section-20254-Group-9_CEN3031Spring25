@@ -113,6 +113,7 @@ $resultHabitat = $stmtHabitat->get_result();
 if ($resultHabitat->num_rows > 0) {
     $habitatRow = $resultHabitat->fetch_assoc();
     $chosenHabitat = $habitatRow['item_name'];
+    $chosenHabitat = strtolower(trim($habitatRow['item_name']));
 }
 $stmtHabitat->close();
 
@@ -123,13 +124,13 @@ if (!empty($testHabitat)) {
 
 if (!empty($chosenHabitat)) {
     switch (strtolower($chosenHabitat)) {
-        case "pleasant_grove":
+        case "pleasant grove":
             $backgroundImage = "../img/backgrounds/pleasant_grove_rendered.png";
             break;
-        case "sapphire_springs":
+        case "sapphire springs":
             $backgroundImage = "../img/backgrounds/sapphire_springs_rendered.png";
             break;
-        case "divine_waterfall":
+        case "divine waterfall":
             $backgroundImage = "../img/backgrounds/divine_waterfall_rendered.png";
             break;
         default:
@@ -199,7 +200,7 @@ $hunger_icon_position = "left: 140px; top: 390px;";
 
 if(!empty($chosenHabitat))
 {
-    if(strtolower($chosenHabitat) == "pleasant_grove")
+    if(strtolower($chosenHabitat) == "pleasant grove")
     {
         switch(strtolower($pet_name))
         {
@@ -229,7 +230,7 @@ if(!empty($chosenHabitat))
                 break;
         }
     }
-    elseif(strtolower($chosenHabitat) == "sapphire_springs")
+    elseif(strtolower($chosenHabitat) == "sapphire springs")
     {
         switch(strtolower($pet_name))
         {
@@ -259,7 +260,7 @@ if(!empty($chosenHabitat))
                 break;
         }
     }
-    elseif(strtolower($chosenHabitat) == "divine_waterfall")
+    elseif(strtolower($chosenHabitat) == "divine waterfall")
     {
         switch(strtolower($pet_name))
         {
@@ -360,7 +361,7 @@ $conn->close();
 
     </style>
 </head>
-<body class="<?php echo 'habitat-' . strtolower($chosenHabitat); ?>">
+<body class="<?php echo 'habitat-' . strtolower(str_replace(' ', '_', $chosenHabitat)); ?>">
     <div class="container">
         <?php if ($hasPet): ?>
             <div class="hunger-icon" style="<?php echo $hunger_icon_position; ?>">
@@ -481,9 +482,6 @@ $conn->close();
         xhr.send('action=feed');
     });
     </script>
-
-
-
 
 </body>
 </html>

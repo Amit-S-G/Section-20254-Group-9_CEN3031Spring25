@@ -8,10 +8,9 @@ function toggleMenu() {
 function toggleMute() {
     const audioElement = document.getElementById('sound');
     const icon = document.getElementById('muteIcon');
-    
+    audioElement.volume = audioVolume;
     // Toggle the muted property
     audioElement.muted = !audioElement.muted;
-    
     // If unmuted and audio is paused, attempt to play it.
     if (!audioElement.muted && audioElement.paused) {
         const play = audioElement.play();

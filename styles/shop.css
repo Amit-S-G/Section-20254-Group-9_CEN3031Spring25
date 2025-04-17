@@ -64,15 +64,15 @@ body {
     width: 10px;
 }
 .shop-list::-webkit-scrollbar-track {
-    background: #3b2f2a;
+    background-color: rgba(53, 27, 20, 0.9);
     border-radius: 10px;
 }
 .shop-list::-webkit-scrollbar-thumb {
-    background: #5c4033; 
+    background: linear-gradient(#b84f2e, #5c4033);
     border-radius: 10px;
 }
 .shop-list::-webkit-scrollbar-thumb:hover {
-    background: #6d4c41; 
+    background: linear-gradient(#e66037, #825743);
 }
 
 .shop-item {

@@ -1,7 +1,22 @@
 <?php
 if (session_status() == PHP_SESSION_NONE) {
+
     session_start();
 }
+    include("../database.php");
+
+    $habitatName = "default";
+
+    $stmtHabitat = $conn->prepare("SELECT item_name FROM inventories WHERE user_id = ? AND item_type = 'habitat' AND is_selected = 1");
+    $stmtHabitat->bind_param("i", $_SESSION['user_id']);
+    $stmtHabitat->execute();
+    $result = $stmtHabitat->get_result();
+    if ($row = $result->fetch_assoc()) {
+        $habitatName = $row['item_name'];
+        $habitatName = strtolower(trim($habitatName));
+    }
+    $stmtHabitat->close();
+    $conn->close();
 ?>
 
 <?php
@@ -14,14 +29,35 @@ if (session_status() == PHP_SESSION_NONE) {
     // Change audio based on the page
     if ($page == "dashboard.php") {
         $audioFile = "../audio/ambient_rain.mp3";
+        $audioVolume = 0.1;
     } elseif ($page == "profile.php") {
         $audioFile = "../audio/ambient_rain.mp3";
+        $audioVolume = 0.1;
     } elseif ($page == "friends.php") {
         $audioFile = "../audio/ambient_rain.mp3";
+        $audioVolume = 0.1;
     } elseif ($page == "habitat.php") {
-        $audioFile = "../audio/ambient_nature.mp3";
+        switch (strtolower($habitatName)) {
+            case "sapphire springs":
+                $audioFile = "../audio/waterfall_loop.mp3";
+                $audioVolume = 0.1;
+                break;
+            case "pleasant grove":
+                $audioFile = "../audio/ambient_nature.mp3";
+                $audioVolume = 0.8;
+                break;
+            case "divine waterfall":
+                $audioFile = "../audio/celestial_choir.mp3";
+                $audioVolume = 0.1;
+                break;
+            default:
+                $audioFile = "../audio/ambient_rain.mp3";
+                $audioVolume = 0.1;
+                break;
+        }
     } elseif ($page == "shop.php") {
         $audioFile = "../audio/relaxing_jingle.mp3";
+        $audioVolume = 0.05;
     }
 ?>
 
@@ -66,6 +102,9 @@ if (session_status() == PHP_SESSION_NONE) {
                 <img id="muteIcon" src="../img/icons/sound_icons/speaker_muted.png" alt="Sound Icon">
             </button>
         </header>
+        <script>
+            const audioVolume = <?php echo $audioVolume; ?>;
+        </script>
         <script src="../js/page_header.js"></script>
     </body>
 </html>
