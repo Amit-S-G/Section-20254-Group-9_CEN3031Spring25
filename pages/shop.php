@@ -24,42 +24,59 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['buy_item_id'])) {
     $stmt->close();
 
     if ($item && $coins >= $item['cost']) {
-        // Deduct coins
-        $newCoins = $coins - $item['cost'];
-        $stmt = $conn->prepare("UPDATE users SET coins = ? WHERE id = ?");
-        $stmt->bind_param("ii", $newCoins, $_SESSION['user_id']);
-        $stmt->execute();
-        $stmt->close();
-
-        // Check if item exists in inventory
-        $stmt = $conn->prepare("SELECT id, quantity FROM inventories WHERE user_id = ? AND item_name = ?");
-        $stmt->bind_param("is", $_SESSION['user_id'], $item['item_name']);
-        $stmt->execute();
-        $stmt->store_result();
-
-        if ($stmt->num_rows > 0) {
-            $stmt->bind_result($inventoryId, $quantity);
-            $stmt->fetch();
+        $canPurchase = true;
+        // Prevent buying the same habitat again
+        if ($item['type'] === 'habitat') {
+            $stmt = $conn->prepare("SELECT 1 FROM inventories WHERE user_id = ? AND item_type = 'habitat' AND item_name = ?");
+            $stmt->bind_param("is", $_SESSION['user_id'], $item['item_name']);
+            $stmt->execute();
+            $stmt->store_result();
+            if ($stmt->num_rows > 0) {
+                $buyMessage = "Habitat already owned!";
+                $canPurchase = false;
+            }
             $stmt->close();
-
-            $newQuantity = $quantity + 1;
-            $stmt = $conn->prepare("UPDATE inventories SET quantity = ? WHERE id = ?");
-            $stmt->bind_param("ii", $newQuantity, $inventoryId);
-        } else {
-            $stmt->close();
-            $stmt = $conn->prepare("INSERT INTO inventories (user_id, item_type, item_name, item_description, quantity, is_selected) VALUES (?, ?, ?, ?, 1, 0)");
-            $stmt->bind_param("isss", $_SESSION['user_id'], $item['type'], $item['item_name'], $item['item_description']);
         }
-
-        $stmt->execute();
-        $stmt->close();
-
-        // Refresh coin count
-        $coins = $newCoins;
-        $buyMessage = "✅ Purchased " . htmlspecialchars($item['item_name']) . "!";
-    } else {
-        $buyMessage = "❌ Not enough coins!";
-    }
+        
+        // Deduct coins
+        if ($canPurchase) {
+            // Deduct coins
+            $newCoins = $coins - $item['cost'];
+            $stmt = $conn->prepare("UPDATE users SET coins = ? WHERE id = ?");
+            $stmt->bind_param("ii", $newCoins, $_SESSION['user_id']);
+            $stmt->execute();
+            $stmt->close();
+    
+            // Check if item exists in inventory
+            $stmt = $conn->prepare("SELECT id, quantity FROM inventories WHERE user_id = ? AND item_name = ?");
+            $stmt->bind_param("is", $_SESSION['user_id'], $item['item_name']);
+            $stmt->execute();
+            $stmt->store_result();
+    
+            if ($stmt->num_rows > 0) {
+                $stmt->bind_result($inventoryId, $quantity);
+                $stmt->fetch();
+                $stmt->close();
+    
+                $newQuantity = $quantity + 1;
+                $stmt = $conn->prepare("UPDATE inventories SET quantity = ? WHERE id = ?");
+                $stmt->bind_param("ii", $newQuantity, $inventoryId);
+            } else {
+                $stmt->close();
+                $stmt = $conn->prepare("INSERT INTO inventories (user_id, item_type, item_name, item_description, quantity, is_selected) VALUES (?, ?, ?, ?, 1, 0)");
+                $stmt->bind_param("isss", $_SESSION['user_id'], $item['type'], $item['item_name'], $item['item_description']);
+            }
+    
+            $stmt->execute();
+            $stmt->close();
+    
+            // Refresh coin count
+            $coins = $newCoins;
+            $buyMessage = "✅ Purchased " . htmlspecialchars($item['item_name']) . "!";
+        }
+        } else {
+            $buyMessage = "❌ Not enough coins!";
+        }
 }
 
 // Get shop items
@@ -118,10 +135,12 @@ while ($row = $result->fetch_assoc()) {
 
     <?php if ($buyMessage): ?>
             <!-- Display the purchase message -->
-            <div class="message <?php echo $buyMessage === "❌ Not enough coins!" ? 'error' : 'success'; ?>">
-        <?php echo htmlspecialchars($buyMessage); ?>
-    </div>
-        <?php endif; ?>
+            <div class="message-wrapper">
+                <div class="message <?php echo $buyMessage === "❌ Not enough coins!" ? 'error' : 'success'; ?>">
+                    <?php echo htmlspecialchars($buyMessage); ?>
+                </div>
+            </div>
+    <?php endif; ?>
 </div>
 
 <script>
@@ -154,11 +173,11 @@ while ($row = $result->fetch_assoc()) {
 
 <script>
     setTimeout(() => {
-        const msg = document.querySelector('.message');
-        if (msg) {
-            msg.style.transition = 'opacity 0.5s ease';
-            msg.style.opacity = '0';
-            setTimeout(() => msg.remove(), 500);
+        const wrapper = document.querySelector('.message-wrapper');
+        if (wrapper) {
+            wrapper.style.transition = 'opacity 0.5s ease';
+            wrapper.style.opacity = '0';
+            setTimeout(() => wrapper.remove(), 500);
         }
     }, 3000);
 </script>
