@@ -284,14 +284,14 @@ $conn->close();
                   </div>
                 </div>
                 <div class="task-right">
-                  <a class="delete-button" wrap="soft" href="?delete_task_id=<?php echo $row['id']; ?>" onclick="return confirm('Delete this task?');">✕</a>
+                  <a class="delete-button" wrap="soft" href="?delete_task_id=<?php echo $row['id']; ?>">✕</a>
                 </div>
               </li>
           <?php } ?>
         <?php endif; ?>
       </ul>
       <div class="clear-tasks">
-                <a href="?clear_tasks=true" onclick="return confirm('Are you sure you want to clear all tasks?');">Clear All Tasks</a>
+        <a href="?clear_tasks=true">Clear All Tasks</a>
       </div>
     </section>
   </div>

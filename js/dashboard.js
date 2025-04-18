@@ -14,7 +14,7 @@ let interval = setInterval(() => {
 document.addEventListener('DOMContentLoaded', function () {
     const taskSection = document.querySelector('.tasks-section');
 
-    // ✅ Restore scroll only if set
+    // ✅ Restore scroll positions (if stored)
     const savedScrollY = localStorage.getItem('restoreScrollY');
     if (savedScrollY !== null) {
         window.scrollTo(0, parseInt(savedScrollY));
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // ✅ Intercept task checkboxes (complete/incomplete)
+    // ✅ Intercept checkbox task completion/incompletion
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
         checkbox.addEventListener('click', function (e) {
@@ -47,7 +47,46 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // ✅ Add Task form submission (button click or enter)
+    // ✅ Intercept delete task buttons
+    const deleteLinks = document.querySelectorAll('a[href*="delete_task_id"]');
+    deleteLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+            // Allow the confirm dialog to show first
+            const confirmed = confirm('Delete this task?');
+            if (!confirmed) {
+                e.preventDefault();
+                return;
+            }
+
+            e.preventDefault(); // Prevent default redirect
+            const href = this.href;
+            saveScrollState();
+            setTimeout(() => {
+                window.location.href = href;
+            }, 20);
+        });
+    });
+
+    // ✅ Intercept Clear All Tasks link
+    const clearLink = document.querySelector('a[href*="clear_tasks"]');
+    if (clearLink) {
+        clearLink.addEventListener('click', function (e) {
+            const confirmed = confirm('Are you sure you want to clear all tasks?');
+            if (!confirmed) {
+                e.preventDefault();
+                return;
+            }
+
+            e.preventDefault();
+            saveScrollState();
+            const href = this.href;
+            setTimeout(() => {
+                window.location.href = href;
+            }, 20);
+        });
+    }
+
+    // ✅ Save scroll state on Add Task form submit
     const addTaskForm = document.querySelector('form[action*="dashboard.php"]');
     if (addTaskForm) {
         addTaskForm.addEventListener('submit', function () {
