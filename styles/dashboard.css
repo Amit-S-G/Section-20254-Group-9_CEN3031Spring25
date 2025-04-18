@@ -373,7 +373,7 @@ svg {
 
 .pet-display {
     position: absolute;
-    top: 500px;    /* tweak as needed */
+    top: 520px;    /* tweak as needed */
     left: 450px;   /* tweak as needed */
     z-index: 0;
     pointer-events: none;
