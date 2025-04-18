@@ -45,9 +45,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_task'])) {
       $stmtPet->fetch();
       $stmtPet->close();
 
+      $stmtHabitat = $conn->prepare("SELECT item_name FROM inventories WHERE (user_id = ? AND item_type='habitat' AND is_selected = 1)");
+      $stmtHabitat->bind_param("i", $task['user_id']);
+      $stmtHabitat->execute();
+      $stmtHabitat->bind_result($selected_habitat);
+      $stmtHabitat->fetch();
+      $stmtHabitat->close();
+
+      $stmtPts = $conn->prepare("SELECT habitat_pts FROM shop WHERE item_name = ?");
+      $stmtPts->bind_param("s", $selected_habitat);
+      $stmtPts->execute();
+      $stmtPts->bind_result($habitat_pts);
+      $stmtPts->fetch();
+      $stmtPts->close();
+
+      $base_hunger_loss = 10;
+      $hunger_loss = max(0, $base_hunger_loss - $habitat_pts);
+
       // Only subtract if pet's hunger is greater than 10
-      if ($pet_hunger >= 10) {
-          $stmtPet = $conn->prepare("UPDATE pets SET pet_hunger = pet_hunger - 10 WHERE user_id = ?");
+      if ($pet_hunger >= $hunger_loss) {
+          $stmtPet = $conn->prepare("UPDATE pets SET pet_hunger = pet_hunger - $hunger_loss WHERE user_id = ?");
           $stmtPet->bind_param("i", $task['user_id']);
           $stmtPet->execute();
           $stmtPet->close();
