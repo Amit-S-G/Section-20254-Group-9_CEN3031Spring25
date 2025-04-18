@@ -14,7 +14,6 @@ let interval = setInterval(() => {
 document.addEventListener('DOMContentLoaded', function () {
     const taskSection = document.querySelector('.tasks-section');
 
-    // ✅ Restore scroll positions (if stored)
     const savedScrollY = localStorage.getItem('restoreScrollY');
     if (savedScrollY !== null) {
         window.scrollTo(0, parseInt(savedScrollY));
@@ -34,7 +33,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // ✅ Intercept checkbox task completion/incompletion
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
         checkbox.addEventListener('click', function (e) {
@@ -47,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // ✅ Intercept delete task buttons
+
     const deleteLinks = document.querySelectorAll('a[href*="delete_task_id"]');
     deleteLinks.forEach(link => {
         link.addEventListener('click', function (e) {
@@ -67,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // ✅ Intercept Clear All Tasks link
+
     const clearLink = document.querySelector('a[href*="clear_tasks"]');
     if (clearLink) {
         clearLink.addEventListener('click', function (e) {
@@ -86,7 +84,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // ✅ Save scroll state on Add Task form submit
     const addTaskForm = document.querySelector('form[action*="dashboard.php"]');
     if (addTaskForm) {
         addTaskForm.addEventListener('submit', function () {
