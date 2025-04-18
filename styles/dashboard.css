@@ -181,7 +181,7 @@ svg {
     box-shadow: 0 4px 0px rgba(0, 0, 0, 0.7);
     overflow-y: auto;
     overflow-x: hidden;
-    max-height: 250px;
+    max-height: 200px;
 }
 
 .tasks-section::-webkit-scrollbar {
@@ -371,17 +371,13 @@ svg {
     color: #241b2f;
 }
 
-
-
 .pet-display {
     position: absolute;
-    top: 500px;
-    left: 500px; /* adjust based on your design */
-    z-index: 2;
+    top: 500px;    /* tweak as needed */
+    left: 450px;   /* tweak as needed */
+    z-index: 0;
     pointer-events: none;
 }
-
-
 
 /* Tasks Section */
 .expired-tasks-section {

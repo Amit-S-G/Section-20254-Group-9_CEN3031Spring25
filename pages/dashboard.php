@@ -218,13 +218,7 @@ $conn->close();
   <link rel="stylesheet" href="../styles/dashboard.css">
 </head>
 <body>
-  <div class="container"> 
-    <header>
-      <h1>HELLO, <?php echo htmlspecialchars($_SESSION["username"]); ?></h1>
-      <h2>Your Task Dashboard</h2>
-    </header>
-
-    <!-- Pets -->
+      <!-- Pets -->
     <!-- If the user already has a pet, display its image -->
     <?php if ($hasPet): 
         // Determine the image source based on the pet's name (case insensitive)
@@ -241,11 +235,16 @@ $conn->close();
                 break;
         }
     ?>
-        <div class="pet-display">
+      <div class="pet-display">
           <img src="<?php echo $pet_image; ?>" alt="<?php echo htmlspecialchars($pet_name); ?>">
       </div>
     <?php endif; ?>
 
+  <div class="container"> 
+    <header>
+      <h1>HELLO, <?php echo htmlspecialchars($_SESSION["username"]); ?></h1>
+      <h2>Your Task Dashboard</h2>
+    </header>
     <?php if (!$hasPet): ?>
         <div id="pet-modal" class="modal">
             <div class="modal-content">
