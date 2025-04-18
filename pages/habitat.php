@@ -187,13 +187,32 @@ if ($hasPet) {
 
     $pet_hunger = 100;
     $userId = $_SESSION['user_id'];
-    $stmt = $conn->prepare("SELECT pet_hunger FROM pets WHERE user_id = ?");
+    $stmt = $conn->prepare("SELECT pet_hunger, last_hunger_update FROM pets WHERE user_id = ?");
     $stmt->bind_param("i", $userId);
     $stmt->execute();
     $result = $stmt->get_result();
+    
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        $pet_hunger = $row['pet_hunger'];
+        $pet_hunger = intval($row['pet_hunger']);
+        $last_update = $row['last_hunger_update'];
+    
+        $today = new DateTime();
+        $lastUpdateDate = new DateTime($last_update);
+        $interval = $lastUpdateDate->diff($today)->days;
+    
+        if ($interval > 0) {
+            $hunger_loss = 5 * $interval;
+            $new_hunger = max($pet_hunger - $hunger_loss, 0);
+    
+            // Update the database with new hunger and last update date
+            $updateStmt = $conn->prepare("UPDATE pets SET pet_hunger = ?, last_hunger_update = CURDATE() WHERE user_id = ?");
+            $updateStmt->bind_param("ii", $new_hunger, $userId);
+            $updateStmt->execute();
+            $updateStmt->close();
+    
+            $pet_hunger = $new_hunger;
+        }
     }
     $stmt->close();
 }

@@ -95,6 +95,7 @@ CREATE TABLE pets (
     user_id INT,
     pet_name VARCHAR(255),
     pet_hunger TINYINT(10) UNSIGNED NOT NULL DEFAULT 100,
+    last_hunger_update DATE DEFAULT CURDATE(),
     FOREIGN KEY (user_id) REFERENCES users(id)
 ) ENGINE = InnoDB;
 
