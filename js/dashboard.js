@@ -12,82 +12,47 @@ let interval = setInterval(() => {
 }, 18);
 
 document.addEventListener('DOMContentLoaded', function () {
-    const taskSection = document.querySelector('.tasks-section');
-
-    const savedScrollY = localStorage.getItem('restoreScrollY');
+    // Restore main scroll
+    const savedScrollY = localStorage.getItem('scrollY');
     if (savedScrollY !== null) {
         window.scrollTo(0, parseInt(savedScrollY));
-        localStorage.removeItem('restoreScrollY');
+        localStorage.removeItem('scrollY');
     }
 
-    const savedTaskScroll = localStorage.getItem('restoreTaskScrollY');
-    if (savedTaskScroll && taskSection) {
-        taskSection.scrollTop = parseInt(savedTaskScroll);
-        localStorage.removeItem('restoreTaskScrollY');
+    // Restore scroll for task sections
+    const taskSection = document.querySelector('.tasks-section');
+    const expiredTaskSection = document.querySelector('.expired-tasks-section');
+
+    const savedTaskScrollY = localStorage.getItem('taskScrollY');
+    if (savedTaskScrollY !== null && taskSection) {
+        taskSection.scrollTop = parseInt(savedTaskScrollY);
+        localStorage.removeItem('taskScrollY');
     }
 
-    function saveScrollState() {
-        localStorage.setItem('restoreScrollY', window.scrollY);
+    const savedExpiredScrollY = localStorage.getItem('expiredScrollY');
+    if (savedExpiredScrollY !== null && expiredTaskSection) {
+        expiredTaskSection.scrollTop = parseInt(savedExpiredScrollY);
+        localStorage.removeItem('expiredScrollY');
+    }
+
+    // Save scroll before leaving
+    const saveScroll = () => {
+        localStorage.setItem('scrollY', window.scrollY);
         if (taskSection) {
-            localStorage.setItem('restoreTaskScrollY', taskSection.scrollTop);
+            localStorage.setItem('taskScrollY', taskSection.scrollTop);
         }
-    }
+        if (expiredTaskSection) {
+            localStorage.setItem('expiredScrollY', expiredTaskSection.scrollTop);
+        }
+    };
 
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('click', function (e) {
-            e.preventDefault();
-            const link = this.getAttribute('onclick').match(/window\.location\.href='([^']+)'/)[1];
-            saveScrollState();
-            setTimeout(() => {
-                window.location.href = link;
-            }, 20);
-        });
+    // Attach saveScroll to key elements
+    document.querySelectorAll('a.delete-button, .clear-tasks a, input[type="checkbox"]').forEach(el => {
+        el.addEventListener('click', saveScroll);
     });
 
-
-    const deleteLinks = document.querySelectorAll('a[href*="delete_task_id"]');
-    deleteLinks.forEach(link => {
-        link.addEventListener('click', function (e) {
-            // Allow the confirm dialog to show first
-            const confirmed = confirm('Delete this task?');
-            if (!confirmed) {
-                e.preventDefault();
-                return;
-            }
-
-            e.preventDefault(); // Prevent default redirect
-            const href = this.href;
-            saveScrollState();
-            setTimeout(() => {
-                window.location.href = href;
-            }, 20);
-        });
-    });
-
-
-    const clearLink = document.querySelector('a[href*="clear_tasks"]');
-    if (clearLink) {
-        clearLink.addEventListener('click', function (e) {
-            const confirmed = confirm('Are you sure you want to clear all tasks?');
-            if (!confirmed) {
-                e.preventDefault();
-                return;
-            }
-
-            e.preventDefault();
-            saveScrollState();
-            const href = this.href;
-            setTimeout(() => {
-                window.location.href = href;
-            }, 20);
-        });
-    }
-
-    const addTaskForm = document.querySelector('form[action*="dashboard.php"]');
-    if (addTaskForm) {
-        addTaskForm.addEventListener('submit', function () {
-            saveScrollState();
-        });
+    const form = document.querySelector('.add-task-section form');
+    if (form) {
+        form.addEventListener('submit', saveScroll);
     }
 });

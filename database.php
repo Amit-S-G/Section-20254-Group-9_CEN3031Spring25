@@ -50,6 +50,7 @@ CREATE TABLE tasks (
     task_description VARCHAR(255),
     task_completed TINYINT(1) NOT NULL DEFAULT 0,
     point_value INT NOT NULL DEFAULT 10,
+    hunger_decreased TINYINT(1) NOT NULL DEFAULT 0, //tracks to make sure hunger is only decreased once per task
     FOREIGN KEY (user_id) REFERENCES users(id)
 ) ENGINE = InnoDB;
 

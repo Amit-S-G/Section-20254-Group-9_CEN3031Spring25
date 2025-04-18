@@ -371,9 +371,63 @@ svg {
     color: #241b2f;
 }
 
-.pet-display img {
+
+
+.pet-display {
     position: absolute;
-    left: 525px;
-    top: 370px;
+    top: 500px;
+    left: 500px; /* adjust based on your design */
+    z-index: 2;
+    pointer-events: none;
 }
 
+
+
+/* Tasks Section */
+.expired-tasks-section {
+    margin-top: 20px;
+    background: rgba(18,26,19,0.95);
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 0px rgba(0, 0, 0, 0.7);
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 150px;
+}
+
+.expired-tasks-section::-webkit-scrollbar {
+    width: 15px;
+}
+.expired-tasks-section::-webkit-scrollbar-thumb {
+    background: linear-gradient(#00ffaa, #00eaff);
+    border-radius: 10px;
+}
+.expired-tasks-section::-webkit-scrollbar-track {
+    background-color: rgba(36, 27, 47, 0.95);
+}
+
+/* Task List Items */
+.expired-tasks-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.expired-tasks-section li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    background: rgba(39, 95, 100, 0.468);
+    margin-bottom: 8px;
+    border-radius: 10px;
+}
+
+.expired-tasks-header
+{
+    color: #db5966;
+}
+
+.task-section-header
+{
+    color: #c7a557;
+}

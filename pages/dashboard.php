@@ -23,9 +23,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_task'])) {
         $stmt->execute();
         $stmt->close();
     }
-    header("Location: " . $_SERVER["PHP_SELF"]); //loads the same page again but via a get request, there was a bug were the task list would duplicate whenever user refreshed the page, this prevents that
+    header("Location: " . strtok($_SERVER["REQUEST_URI"], '?'));//loads the same page again but via a get request, there was a bug were the task list would duplicate whenever user refreshed the page, this prevents that
     exit();
 }
+
+
+
+  // Decrease pet's hunger if the due date has passed
+  $current_date = date('Y-m-d');
+  $stmtTasks = $conn->prepare("SELECT id, task_duedate, user_id, hunger_decreased FROM tasks WHERE DATE(task_duedate) < ? AND task_completed = 0 AND hunger_decreased = 0 AND user_id = ?");
+  $stmtTasks->bind_param("si", $current_date, $_SESSION['user_id']);
+  $stmtTasks->execute();
+  $resultTasks = $stmtTasks->get_result();
+
+  while ($task = $resultTasks->fetch_assoc()) {
+      // Decrease pet's hunger by 10 if the task's due date has passed (task is overdue and hunger hasn't been decreased yet)
+      $stmtPet = $conn->prepare("SELECT pet_hunger FROM pets WHERE user_id = ?");
+      $stmtPet->bind_param("i", $task['user_id']);
+      $stmtPet->execute();
+      $stmtPet->bind_result($pet_hunger);
+      $stmtPet->fetch();
+      $stmtPet->close();
+
+      // Only subtract if pet's hunger is greater than 10
+      if ($pet_hunger >= 10) {
+          $stmtPet = $conn->prepare("UPDATE pets SET pet_hunger = pet_hunger - 10 WHERE user_id = ?");
+          $stmtPet->bind_param("i", $task['user_id']);
+          $stmtPet->execute();
+          $stmtPet->close();
+      } else {
+          // If hunger is less than 10, set it to 0
+          $stmtPet = $conn->prepare("UPDATE pets SET pet_hunger = 0 WHERE user_id = ?");
+          $stmtPet->bind_param("i", $task['user_id']);
+          $stmtPet->execute();
+          $stmtPet->close();
+      }
+
+      // Mark the task as having its hunger decreased
+      $stmtUpdate = $conn->prepare("UPDATE tasks SET hunger_decreased = 1 WHERE id = ?");
+      $stmtUpdate->bind_param("i", $task['id']);
+      $stmtUpdate->execute();
+      $stmtUpdate->close();
+  }
+  $stmtTasks->close();
+
 
 if (isset($_GET['complete_task_id'])) {
   // Mark task as complete and reward coins
@@ -105,12 +146,20 @@ if (isset($_GET['clear_tasks'])) {
   exit();
 }
 
-// Fetch tasks for the user
-$user_id = $_SESSION['user_id'];
-$stmt = $conn->prepare("SELECT id, task_name, task_duedate, task_description, task_completed FROM tasks WHERE user_id = ?");
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$result = $stmt->get_result();
+  // Fetch tasks for the user
+  // Fetch non-expired tasks
+  $user_id = $_SESSION['user_id'];
+  $current_date = date('Y-m-d');
+  $stmt = $conn->prepare("SELECT id, task_name, task_duedate, task_description, task_completed FROM tasks WHERE user_id = ? AND DATE(task_duedate) >= ?");
+  $stmt->bind_param("is", $user_id, $current_date);
+  $stmt->execute();
+  $result = $stmt->get_result();
+
+  // Fetch expired tasks
+  $stmtExpired = $conn->prepare("SELECT id, task_name, task_duedate, task_description, task_completed FROM tasks WHERE user_id = ? AND DATE(task_duedate) < ?");
+  $stmtExpired->bind_param("is", $user_id, $current_date);
+  $stmtExpired->execute();
+  $resultExpired = $stmtExpired->get_result();
 
 // Fetch counts for progress
 $stmtCount = $conn->prepare("SELECT COUNT(*) AS total, SUM(task_completed) AS completed FROM tasks WHERE user_id = ?");
@@ -263,13 +312,45 @@ $conn->close();
     </section>
 
     <!-- Task List Section -->
-    <section class="tasks-section">
+    <section class="tasks-section" id="tasks-section">
+      <h3 class= "task-section-header"> Current Tasks</h3>
       <ul>
-        <?php if ($totalTasks == 0): ?>
+      <?php if ($totalTasks == 0): ?>
           <li class="no-tasks">No tasks yet</li>
           <?php else: ?>
             <?php while ($row = $result->fetch_assoc()) { ?>
               <li class="task-item">
+                <div class="task-left">
+                  <input type="checkbox"
+                  <?php if ($row['task_completed']) echo 'checked'; ?>
+                  onclick="window.location.href='?<?php echo $row['task_completed'] ? 'incomplete_task_id' : 'complete_task_id'; ?>=<?php echo $row['id']; ?>';" />
+                  <div class="task-info">
+                    <strong class="task-name"><?php echo htmlspecialchars($row['task_name']); ?></strong>
+                    <?php
+                      $formattedDueDate = date("m/d/Y", strtotime($row['task_duedate']));
+                    ?>
+                    <span class="task-date">Due: <?php echo htmlspecialchars($formattedDueDate); ?></span>
+                    <span class="desc"><?php echo htmlspecialchars($row['task_description']); ?></span>
+                  </div>
+                </div>
+                <div class="task-right">
+                  <a class="delete-button" wrap="soft" href="?delete_task_id=<?php echo $row['id']; ?>" onclick="return confirm('Delete this task?');">✕</a>
+                </div>
+              </li>
+          <?php } ?>
+        <?php endif; ?>
+      </ul>
+    </section>
+
+    <!-- Expired Tasks Section -->
+    <section class="expired-tasks-section" id="expired-tasks-section">
+      <h3 class = "expired-tasks-header">Expired Tasks</h3>
+      <ul>
+        <?php if ($resultExpired->num_rows == 0): ?>
+          <li class="no-tasks">No expired tasks</li>
+        <?php else: ?>
+          <?php while ($row = $resultExpired->fetch_assoc()) { ?>
+            <li class="task-item">
                 <div class="task-left">
                   <input type="checkbox"
                   <?php if ($row['task_completed']) echo 'checked'; ?>
@@ -290,10 +371,11 @@ $conn->close();
           <?php } ?>
         <?php endif; ?>
       </ul>
-      <div class="clear-tasks">
-        <a href="?clear_tasks=true">Clear All Tasks</a>
-      </div>
     </section>
+
+    <div class="clear-tasks">
+        <a href="?clear_tasks=true">Clear All Tasks</a>
+    </div>
   </div>
 
   <script src="../js/dashboard.js"></script>

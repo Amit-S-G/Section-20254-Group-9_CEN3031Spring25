@@ -59,6 +59,10 @@ if (session_status() == PHP_SESSION_NONE) {
     }
 ?>
 
+<?php
+date_default_timezone_set('America/New_York');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
