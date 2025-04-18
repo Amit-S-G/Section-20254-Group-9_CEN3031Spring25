@@ -525,5 +525,24 @@ $conn->close();
     });
     </script>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const invSection = document.querySelector('.inventory-section');
+            const savedScroll = localStorage.getItem('invScrollTop');
+            if (savedScroll && invSection) {
+                invSection.scrollTop = parseInt(savedScroll);
+                localStorage.removeItem('invScrollTop');
+            }
+
+            const inventoryItems = document.querySelectorAll('.inventory-item');
+            inventoryItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    const itemType = this.getAttribute('data-item-type');
+                    localStorage.setItem('invScrollTop', invSection.scrollTop);
+                });
+            });
+        });
+    </script>
+
 </body>
 </html>
