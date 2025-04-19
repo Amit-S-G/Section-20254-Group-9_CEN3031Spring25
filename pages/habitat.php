@@ -8,6 +8,11 @@ if (!isset($_SESSION["username"])) {
 }
 
 include("../database.php");
+
+$hasPet = false;
+$pet_name = "";
+$pet_hunger = 0; // Avoid undefined warnings
+
 date_default_timezone_set('America/New_York');
 // Check for AJAX request to update is_selected
 if (isset($_POST['item_name'])) {
@@ -361,6 +366,16 @@ $stmtInventory->close();
 
 $conn->close();
 ?>
+
+<!-- No pet Choosen -->
+<?php if ($hasPet): ?>
+    <!-- All habitat UI like hunger bar, pet image, buttons, etc goes here -->
+<?php else: ?>
+    <div style="text-align: center; margin-top: 100px;">
+        <h2>You haven't selected a pet yet!</h2>
+        <p>Please choose a pet before accessing this page.</p>
+    </div>
+<?php endif; ?>
 
 <?php include("header.php") ?>
 

@@ -15,6 +15,17 @@ if (session_status() == PHP_SESSION_NONE) {
         $habitatName = strtolower(trim($habitatName));
     }
     $stmtHabitat->close();
+
+    $hasPet = false;
+    $stmtPet = $conn->prepare("SELECT pet_name FROM pets WHERE user_id = ?");
+    $stmtPet->bind_param("i", $_SESSION['user_id']);
+    $stmtPet->execute();
+    $resultPet = $stmtPet->get_result();
+    if ($resultPet->num_rows > 0) {
+        $hasPet = true;
+    }
+    $stmtPet->close();
+
 ?>
 
 <?php
@@ -86,7 +97,11 @@ date_default_timezone_set('America/New_York');
                         <li><a href="dashboard.php"><img id="dashboard-icon" src="../img/icons/hamburger_icons/dashboard_icon.png" alt="Dashboard Icon">Dashboard</a></li>
                         <li><a href="profile.php"><img id="profile-icon" src="../img/icons/hamburger_icons/profile_icon.png" alt="Profile Icon">Profile</a></li>
                         <li><a href="#"><img id="friends-icon" src="../img/icons/hamburger_icons/friends_icon.png" alt="Friends Icon">Friends</a></li>
-                        <li><a href="habitat.php"><img id="habitat-icon" src="../img/icons/hamburger_icons/habitat_icon.png" alt="Habitat Icon">Habitat</a></li>
+                        <?php if ($hasPet): ?>
+                            <li><a href="habitat.php"><img id="habitat-icon" src="../img/icons/hamburger_icons/habitat_icon.png" alt="Habitat Icon">Habitat</a></li>
+                        <?php else: ?>
+                            <li><a href=""><img id="habitat-icon" src="../img/icons/hamburger_icons/habitat_icon.png" alt="Habitat Icon">Habitat</a></li>
+                        <?php endif; ?>
                         <li><a href="shop.php"><img id="shop-icon" src="../img/icons/hamburger_icons/shop_icon.png" alt="Shop Icon">Shop</a></li>
                         <li><a href="#"><img id="settings-icon" src="../img/icons/hamburger_icons/settings_icon.png" alt="Settings Icon">Settings</a></li>
                         <li><a href="#"><img id="logout-icon" src="../img/icons/hamburger_icons/logout_icon.png" alt="Logout Icon">Logout</a></li>
