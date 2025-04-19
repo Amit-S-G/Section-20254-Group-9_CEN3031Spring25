@@ -181,6 +181,43 @@ while ($row = $result->fetch_assoc()) {
         }
     }, 3000);
 </script>
+<!-- AJAX code to ensure shop remains in a consistent state after refresh -->
+<script>
+    document.getElementById('buy-form').addEventListener('submit', function (e) {
+        e.preventDefault(); // prevent default form submission
+
+        const itemId = document.getElementById('buy-item-id').value;
+        const formData = new FormData();
+        formData.append('buy_item_id', itemId);
+
+        fetch(window.location.href, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(html => {
+            // Replace the current document with the new HTML
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+
+            // Update the coin counter
+            const newCoinCounter = doc.querySelector('.coin-counter');
+            const currentCoinCounter = document.querySelector('.coin-counter');
+            if (newCoinCounter && currentCoinCounter) {
+                currentCoinCounter.innerHTML = newCoinCounter.innerHTML;
+            }
+
+            // Update message if any
+            const newMessage = doc.querySelector('.message-wrapper');
+            const oldMessage = document.querySelector('.message-wrapper');
+            if (oldMessage) oldMessage.remove();
+            if (newMessage) document.querySelector('.shop-container').appendChild(newMessage);
+
+            // Re-show the item details for the same item
+            showDetails(parseInt(itemId));
+        });
+    });
+</script>
 
 </body>
 </html>
