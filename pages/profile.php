@@ -127,30 +127,5 @@ $background_color = $profile['background_color'] ?? '#1a1a1a';
     </ul>
 </div>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("profile-form");
-
-    form.addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        const formData = new FormData(form);
-
-        fetch("update_profile.php", {
-            method: "POST",
-            body: formData
-        })
-        .then(res => res.text())
-        .then(response => {
-            console.log("Profile updated via AJAX.");
-            // No glow animation applied
-        })
-        .catch(error => {
-            console.error("Error updating profile:", error);
-        });
-    });
-});
-</script>
-
 </body>
 </html>
