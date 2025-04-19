@@ -116,6 +116,21 @@ CREATE TABLE shop (
     image_url VARCHAR(255)
 );
 
+####################################################
+### SQL QUERY FOR CREATING 'user_profiles" TABLE ###
+####################################################
+
+CREATE TABLE user_profiles (
+    user_id INT PRIMARY KEY,
+    display_name VARCHAR(255) DEFAULT '',
+    bio TEXT,
+    base_model VARCHAR(50) NOT NULL DEFAULT 'default',
+    head_accessory VARCHAR(50),
+    body_accessory VARCHAR(50),
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
 INSERT INTO shop (id, item_name, type, item_description, cost, hunger_pts, habitat_pts, image_url) VALUES
 (1, 'Baked Potato', 'food', 'A perfectly baked potato with a crisp, golden skin encasing a soft, fluffy interior. Ideal for butter, herbs, or a hearty topping that enhances its comforting simplicity.', 10, 20, NULL, '../img/food/baked_potato.png'),
 (2, 'Bread', 'food', 'A freshly baked loaf with a crunchy, caramelized crust and a pillowy, tender crumb. This versatile staple evokes the aroma of traditional ovens and pairs wonderfully with any meal.', 10, 20, NULL, '../img/food/bread.png'),
@@ -131,5 +146,7 @@ INSERT INTO shop (id, item_name, type, item_description, cost, hunger_pts, habit
 (12, 'Divine Waterfall', 'habitat', 'A majestic waterfall cascading dramatically from a rugged cliff, its constant roar and gentle mist combining to create a scene of natural wonder and timeless grandeur.', 500, NULL, 7, '../img/habitats/divine_waterfall_temple.png');
 
 */
+
+
 
  ?>

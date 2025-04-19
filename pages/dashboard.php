@@ -10,6 +10,24 @@ if (!isset($_SESSION["username"])) {
 include("../database.php");
 include("header.php"); 
 
+$user_id = $_SESSION['user_id'];
+$username = $_SESSION['username']; // fallback value
+$display_name = $username;
+
+// Try to fetch non-default display_name from user_profiles
+$stmt = $conn->prepare("
+    SELECT display_name 
+    FROM user_profiles 
+    WHERE user_id = ? AND display_name IS NOT NULL AND TRIM(display_name) != ''
+");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+if ($row = $result->fetch_assoc()) {
+    $display_name = $row['display_name'];
+}
+$stmt->close();
+
 // Add task logic
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_task'])) {
     $task_name = trim($_POST['task_name']);
@@ -26,8 +44,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_task'])) {
     header("Location: " . strtok($_SERVER["REQUEST_URI"], '?'));//loads the same page again but via a get request, there was a bug were the task list would duplicate whenever user refreshed the page, this prevents that
     exit();
 }
-
-
 
   // Decrease pet's hunger if the due date has passed
   $current_date = date('Y-m-d');
@@ -63,8 +79,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_task'])) {
       $hunger_loss = max(0, $base_hunger_loss - $habitat_pts);
 
       // Only subtract if pet's hunger is greater than 10
-      if ($pet_hunger >= $hunger_loss) {
-          $stmtPet = $conn->prepare("UPDATE pets SET pet_hunger = pet_hunger - $hunger_loss WHERE user_id = ?");
+      if ($pet_hunger >= 10) {
+          $stmtPet = $conn->prepare("UPDATE pets SET pet_hunger = pet_hunger - 10 WHERE user_id = ?");
           $stmtPet->bind_param("i", $task['user_id']);
           $stmtPet->execute();
           $stmtPet->close();
@@ -259,7 +275,7 @@ $conn->close();
 
   <div class="container"> 
     <header>
-      <h1>HELLO, <?php echo htmlspecialchars($_SESSION["username"]); ?></h1>
+      <h1>HELLO, <?= htmlspecialchars($display_name); ?>!</h1>
       <h2>Your Task Dashboard</h2>
     </header>
     <?php if (!$hasPet): ?>
