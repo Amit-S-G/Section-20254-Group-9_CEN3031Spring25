@@ -8,7 +8,7 @@ if (!isset($_SESSION["username"])) {
 }
 
 include("../database.php");
-
+date_default_timezone_set('America/New_York');
 // Check for AJAX request to update is_selected
 if (isset($_POST['item_name'])) {
     $user_id = $_SESSION['user_id'];
@@ -109,9 +109,6 @@ if (isset($_POST['action']) && $_POST['action'] === 'feed') {
 }
 
 
-// TEST OVERRIDES: Read GET parameters for pet and habitat
-$testPet     = isset($_GET['pet']) ? strtolower($_GET['pet']) : '';
-$testHabitat = isset($_GET['habitat']) ? strtolower($_GET['habitat']) : '';
 
 // Habitat setup
 $chosenHabitat = " ";
@@ -128,10 +125,6 @@ if ($resultHabitat->num_rows > 0) {
 }
 $stmtHabitat->close();
 
-// Override with test habitat
-if (!empty($testHabitat)) {
-    $chosenHabitat = $testHabitat;
-}
 
 if (!empty($chosenHabitat)) {
     switch (strtolower($chosenHabitat)) {
@@ -196,18 +189,15 @@ if ($hasPet) {
         $row = $result->fetch_assoc();
         $pet_hunger = intval($row['pet_hunger']);
         $last_update = $row['last_hunger_update'];
+        
+        $today = date('Y-m-d');
     
-        $today = new DateTime();
-        $lastUpdateDate = new DateTime($last_update);
-        $interval = $lastUpdateDate->diff($today)->days;
-    
-        if ($interval > 0) {
-            $hunger_loss = 5 * $interval;
+        if ($last_update < $today) {
+            $hunger_loss = 5;
             $new_hunger = max($pet_hunger - $hunger_loss, 0);
     
-            // Update the database with new hunger and last update date
-            $updateStmt = $conn->prepare("UPDATE pets SET pet_hunger = ?, last_hunger_update = CURDATE() WHERE user_id = ?");
-            $updateStmt->bind_param("ii", $new_hunger, $userId);
+            $updateStmt = $conn->prepare("UPDATE pets SET pet_hunger = ?, last_hunger_update = ? WHERE user_id = ?");
+            $updateStmt->bind_param("isi", $new_hunger, $today, $userId);
             $updateStmt->execute();
             $updateStmt->close();
     
@@ -536,8 +526,8 @@ $conn->close();
                 } catch (e) {
                     console.error("Failed to parse response:", e);
                 }
+                location.reload();
             }
-            location.reload();
         };
 
         xhr.send('action=feed');
