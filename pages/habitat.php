@@ -8,11 +8,6 @@ if (!isset($_SESSION["username"])) {
 }
 
 include("../database.php");
-
-$hasPet = false;
-$pet_name = "";
-$pet_hunger = 0; // Avoid undefined warnings
-
 date_default_timezone_set('America/New_York');
 // Check for AJAX request to update is_selected
 if (isset($_POST['item_name'])) {
@@ -198,7 +193,15 @@ if ($hasPet) {
         $today = date('Y-m-d');
     
         if ($last_update < $today) {
-            $hunger_loss = 5;
+           $last_update_time = strtotime($last_update); //converts then to second times
+           $today_time = strtotime($today);
+
+           $diff_sec = $today_time - $last_update_time;
+
+           $diff_day = round($diff_sec / (60*60*24));
+
+
+            $hunger_loss = 5 * $diff_day;
             $new_hunger = max($pet_hunger - $hunger_loss, 0);
     
             $updateStmt = $conn->prepare("UPDATE pets SET pet_hunger = ?, last_hunger_update = ? WHERE user_id = ?");
@@ -367,15 +370,7 @@ $stmtInventory->close();
 $conn->close();
 ?>
 
-<!-- No pet Choosen -->
-<?php if ($hasPet): ?>
-    <!-- All habitat UI like hunger bar, pet image, buttons, etc goes here -->
-<?php else: ?>
-    <div style="text-align: center; margin-top: 100px;">
-        <h2>You haven't selected a pet yet!</h2>
-        <p>Please choose a pet before accessing this page.</p>
-    </div>
-<?php endif; ?>
+
 
 <?php include("header.php") ?>
 
