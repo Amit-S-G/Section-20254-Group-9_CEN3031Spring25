@@ -83,3 +83,45 @@ ul{
 ul li{
     padding: 12px 0;
 }
+
+.creator-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.creator-card {
+    text-align: center;
+    color: #ffe29f;
+}
+
+.creator-card img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #00ffff;
+    box-shadow: 0 0 10px #00ffaa80;
+    transition: transform 0.3s ease;
+}
+
+.creator-card img:hover {
+    transform: scale(1.05);
+}
+
+.creator-card p {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.creator-name
+{
+    color: #ffefca;
+}
+
+.surely-not-right
+{
+    font-size: 10px;
+}
