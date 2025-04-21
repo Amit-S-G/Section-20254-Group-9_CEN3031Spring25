@@ -62,7 +62,7 @@ CREATE TABLE tasks (
 CREATE TABLE friendship (
     usersname VARCHAR(50) NOT NULL,
     friend_username VARCHAR(50) NOT NULL,
-    status ENUM('pending', 'accepted'),
+    status ENUM('pending', 'accepted')
 ) ENGINE = InnoDB; 
  
 
