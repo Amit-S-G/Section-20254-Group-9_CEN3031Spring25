@@ -170,7 +170,7 @@ if (isset($_GET['delete_task_id'])) {
 }
 
 //Clear Tasks
-if (isset($_GET['clear_tasks'])) {
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['clear_tasks'])) {
   $stmt = $conn->prepare("DELETE FROM tasks WHERE user_id = ?");
   $stmt->bind_param("i", $_SESSION['user_id']);
   $stmt->execute();
@@ -406,7 +406,10 @@ $conn->close();
     </section>
 
     <div class="clear-tasks">
-        <a href="?clear_tasks=true">Clear All Tasks</a>
+      <form method="post" onsubmit="return confirm('Are you sure you want to clear all tasks?');">
+        <input type="hidden" name="clear_tasks" value="1">
+        <button type="submit">Clear All Tasks</button>
+      </form>
     </div>
   </div>
 

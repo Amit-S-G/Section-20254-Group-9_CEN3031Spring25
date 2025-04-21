@@ -47,12 +47,17 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     // Attach saveScroll to key elements
-    document.querySelectorAll('a.delete-button, .clear-tasks a, input[type="checkbox"]').forEach(el => {
+    document.querySelectorAll('a.delete-button, .clear-tasks button, input[type="checkbox"]').forEach(el => {
         el.addEventListener('click', saveScroll);
     });
 
     const form = document.querySelector('.add-task-section form');
     if (form) {
         form.addEventListener('submit', saveScroll);
+    }
+
+    const clearForm = document.querySelector('.clear-tasks form');
+    if (clearForm) {
+        clearForm.addEventListener('submit', saveScroll);
     }
 });
