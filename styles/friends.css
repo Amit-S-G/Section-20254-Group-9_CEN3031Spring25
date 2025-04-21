@@ -7,7 +7,7 @@
 }
 
 body {
-    background-image: url('../img/backgrounds/taskemon_blur.png');
+    background-image: url('../img/backgrounds/tree_house_blur.png');
     background-size: cover;
     color: #ffe29f;
     font-family: 'IM Fell DW Pica', serif;
@@ -42,6 +42,7 @@ body {
 .request_panel {
     padding: 20px;
     border-right: 2px solid #00eaff;
+    text-align: center;
 }
 
 .friends_panel {

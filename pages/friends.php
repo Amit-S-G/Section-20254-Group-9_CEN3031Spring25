@@ -73,7 +73,7 @@ $conn->close(); // Close DB connection
 <body>
     <div class = "friend-wrapper">
         <div class = "friends_panel">
-            <h3> List of Friends </h3>
+            <h3> Friends </h3>
             <div class = "friendship_container">
                 <?php while ($row = $result_friends->fetch_assoc()): ?>
                     <p><?= htmlspecialchars($row['friend_username']) ?></p>
