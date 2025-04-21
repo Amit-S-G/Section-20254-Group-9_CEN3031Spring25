@@ -45,12 +45,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // Fetch friends and friend requests
-$stmt = $conn->prepare("SELECT friend_username FROM friends WHERE user_id = ? UNION SELECT friend_username FROM friendships WHERE user_id = ?");
-$stmt->bind_param("ii", $user_id, $user_id);
+$stmt = $conn->prepare("SELECT friend_username FROM friends WHERE user_id = ?");
+$stmt->bind_param("i", $user_id);
 $stmt->execute();
-$result = $stmt->get_result();
-
-
+$result_friends = $stmt->get_result();
+// All friendships i.e., pending friendships
+$stmt = $conn->prepare("SELECT friend_username FROM friendships WHERE usersname = ?");
+$stmt->bind_param("i", $username);
+$stmt->execute();
+$result_friendships = $stmt->get_result();
+$conn->close(); // Close DB connection
 
 ?>
 
@@ -83,7 +87,3 @@ $result = $stmt->get_result();
 </body>
 
 </html>
-
-<?php
-$conn->close(); // Close DB connection
-?>
