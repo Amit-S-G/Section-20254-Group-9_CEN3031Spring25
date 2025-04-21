@@ -2,21 +2,20 @@
  It is NOT for insertion into the database, only setting up the connection
  Include it and use MySQL in other files where necessary, and make sure to close the connection -->
 
- <?php
+<?php
 
-    $db_server = "localhost";
-    $db_user = "root";
-    $db_pass = "";
-    $db_name = "users";
-    $conn = "";
+$db_server = "localhost";
+$db_user = "root";
+$db_pass = "";
+$db_name = "users";
+$conn = "";
 
-    try{
-        $conn = mysqli_connect($db_server,$db_user,$db_pass,$db_name);
-    }
-    catch(mysqli_sql_exception){
-        echo "Could not connect to db";
-    }
-   
+try {
+    $conn = mysqli_connect($db_server, $db_user, $db_pass, $db_name);
+} catch (mysqli_sql_exception) {
+    echo "Could not connect to db";
+}
+
 /* 
 
 ################################################
@@ -54,6 +53,18 @@ CREATE TABLE tasks (
     FOREIGN KEY (user_id) REFERENCES users(id)
 ) ENGINE = InnoDB;
 
+
+################################################
+###  SQL QUERY FOR CREATING 'friendship' TABLE  ###
+################################################
+
+
+CREATE TABLE friendship (
+    usersname VARCHAR(50) NOT NULL,
+    friend_username VARCHAR(50) NOT NULL,
+    status ENUM('pending', 'accepted')
+) ENGINE = InnoDB; 
+ 
 
 ################################################
 ###  SQL QUERY FOR CREATING 'friends' TABLE  ###
@@ -150,4 +161,4 @@ INSERT INTO shop (id, item_name, type, item_description, cost, hunger_pts, habit
 
 
 
- ?>
+?>
