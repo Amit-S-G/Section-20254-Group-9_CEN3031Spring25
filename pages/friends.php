@@ -9,7 +9,7 @@ if (!isset($_SESSION["username"])) {
 }
 
 include("database.php"); // Includes database script
-include("header1.html");
+include("header.html");
 
 $user_id = $_SESSION['user_id'];
 $username = $_SESSION['username']; // fallback value
