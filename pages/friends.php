@@ -8,7 +8,7 @@ if (!isset($_SESSION["username"])) {
     exit();
 }
 
-include("database.php"); // Includes database script
+include("../database.php"); // Includes database script
 include("header.html");
 
 $user_id = $_SESSION['user_id'];
