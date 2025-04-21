@@ -55,11 +55,11 @@ CREATE TABLE tasks (
 
 
 ################################################
-###  SQL QUERY FOR CREATING 'friendship' TABLE  ###
+###  SQL QUERY FOR CREATING 'friendships' TABLE  ###
 ################################################
 
 
-CREATE TABLE friendship (
+CREATE TABLE friendships (
     usersname VARCHAR(50) NOT NULL,
     friend_username VARCHAR(50) NOT NULL,
     status ENUM('pending', 'accepted')
