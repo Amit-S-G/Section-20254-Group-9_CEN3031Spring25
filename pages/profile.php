@@ -119,11 +119,6 @@ $background_color = $profile['background_color'] ?? '#1a1a1a';
 
         <input type="submit" value="Save Changes">
     </form>
-
-    <h2>Friends Online</h2>
-    <ul>
-        <!-- Friends online can go here -->
-    </ul>
 </div>
 
 </body>

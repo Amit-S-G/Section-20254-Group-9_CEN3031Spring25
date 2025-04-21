@@ -102,16 +102,6 @@ input[type="submit"]:hover {
     height: 150px;
 }
 
-/* Friends Section Placeholder */
-ul {
-    list-style: none;
-    padding: 0;
-    text-align: center;
-    color: #ffe29f;
-    font-family: 'Uncial Antiqua', cursive;
-    font-size: 1.2em;
-}
-
 .avatar-circle {
     width: 150px;
     height: 150px;
