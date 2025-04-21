@@ -32,6 +32,9 @@ $stmt->close();
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_task'])) {
     $task_name = trim($_POST['task_name']);
     $task_duedate = trim($_POST['task_duedate']);
+    if (empty($task_duedate)) {
+        $task_duedate = date('Y-m-d');
+    }
     $task_description = trim($_POST['task_description']);
     $user_id = $_SESSION['user_id'];
 
