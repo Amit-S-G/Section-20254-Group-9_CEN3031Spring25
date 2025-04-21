@@ -33,15 +33,13 @@ body {
     display: flex;
     width: 85%;
     max-width: 1000px;
-    min-height: 400px;
-    max-height: 800px;
+    max-height: 350px;
 
 }
 
 .friends_panel,
 .request_panel {
     padding: 20px;
-    border-right: 2px solid #00eaff;
     text-align: center;
 }
 
@@ -58,7 +56,7 @@ body {
     border-radius: 10px;
 }
 .friends_panel::-webkit-scrollbar-track {
-    background-color: rgba(36, 27, 47, 0.95);
+    background-color: rgba(18,26,19);
 }
 
 .request_panel {
@@ -70,6 +68,7 @@ h3 {
     font-family: 'Cinzel Decorative', serif;
     margin-bottom: 20px;
     font-size: 1.8em;
+    color: #ffefca;
 }
 
 .input-container {
@@ -140,7 +139,6 @@ input[type="submit"]:hover {
 
 .success-message,
 .error-message  a {
-    color: #c7a557;
     font-size: 1em;
     text-align: center;
     display: block;
@@ -149,7 +147,17 @@ input[type="submit"]:hover {
     font-weight: bold;
 }
 
-.error-message a
+.error-message
 {
     color: #db5966;
+}
+
+.success-message
+{
+    color: #c7a557;
+}
+
+.friends-list-container
+{
+    color: #c7a557;
 }

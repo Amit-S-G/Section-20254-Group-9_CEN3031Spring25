@@ -37,9 +37,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $status = 'pending';
             $stmt->bind_param("sss", $username, $friend_name, $status);
             $stmt->execute();
-            echo "<div class='success-message'>Request Sent!</div>";
+            $_SESSION['message'] = "<div class='success-message'>Request Sent!</div>";
+            header("Location: " . $_SERVER['PHP_SELF']);
+            exit();
         } else {
-            echo "<div class='error-message'>Invalid Username.</div>";
+            $_SESSION['message'] = "<div class='error-message'>Invalid Username.</div>";
+            header("Location: " . $_SERVER['PHP_SELF']); //Prevents request being sent again everytime page is reloaded
+            exit();
         }
         $stmt->close();
     }
@@ -71,12 +75,27 @@ $conn->close(); // Close DB connection
 </head>
 
 <body>
+    <?php
+        if (isset($_SESSION['message'])) {
+            echo $_SESSION['message'];
+            unset($_SESSION['message']); //clears the message after the message is sent once
+        }
+    ?>
+
     <div class = "friend-wrapper">
         <div class = "friends_panel">
             <h3> Friends </h3>
+            <h4><i class="fas fa-user-friends"></i> Friends </h4>
             <div class = "friendship_container">
                 <?php while ($row = $result_friends->fetch_assoc()): ?>
-                    <p><?= htmlspecialchars($row['friend_username']) ?></p>
+                    <p class = "friends-list-container"><?= htmlspecialchars($row['friend_username']) ?></p>
+                <?php endwhile; ?>
+            </div>
+
+            <h4> <i class="fas fa-circle-notch fa-spin"></i> Pending Friend Requests </h4>
+            <div class = "pending-friendship_container">
+                <?php while ($row = $result_friendships->fetch_assoc()): ?>
+                    <p class = "friends-list-container"><?= htmlspecialchars($row['friend_username']) ?></p>
                 <?php endwhile; ?>
             </div>
         </div>
