@@ -7,7 +7,7 @@
 }
 
 body {
-    background-image: url('../img/backgrounds/tree_house_blur.png');
+    background-image: url('../img/backgrounds/tree_house.png');
     background-size: cover;
     color: #ffe29f;
     font-family: 'IM Fell DW Pica', serif;
@@ -41,12 +41,11 @@ body {
 .request_panel {
     padding: 20px;
     text-align: center;
-    max-height: 500px;
 }
 
 .friends_panel {
     flex: 3;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .friends_panel::-webkit-scrollbar {
@@ -173,14 +172,46 @@ input[type="submit"]:hover {
     background-color: #f9f9f9;
 }
 
-.incoming-request {
-    background-color: #fff9e6;
+.confirmed {
+    background-color: #e6ffe6;
 }
 
 .pending {
     background-color: #fff9e6;
 }
 
-.confirmed {
-    background-color: #e6ffe6;
+.incoming-request {
+    background-color: #fff9e6;
+}
+
+.status-label {
+    font-style: italic;
+    color: #999;
+}
+
+.visit-button {
+    background-color: #c7a557;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+form button {
+    margin-left: 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+form button[value="accept"] {
+    background-color: #4CAF50;
+    color: white;
+}
+
+form button[value="reject"] {
+    background-color: #f44336;
+    color: white;
 }

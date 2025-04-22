@@ -19,7 +19,7 @@ $display_name = $username;
 // Send friend request
 // We want to verify that the person we're sending to exists, 
 // then add them as a frienship with pending status
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['send-request'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $friend_name = trim($_POST["friendName"]);
     if (empty($friend_name)) {
         echo "<div class='error-message'>You must enter a username</div>";
@@ -37,34 +37,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['send-request'])) {
             $stmt->bind_param("sss", $username, $friend_name, $status);
             $status = 'pending';
             $stmt->execute();
-            $_SESSION['message'] = "<div class='success-message'>Request Sent!</div>";
-            header("Location: " . $_SERVER['PHP_SELF']);
-            exit();
+            echo "<div class='success-message'>Request Sent!</div>";
         } else {
-            $_SESSION['message'] = "<div class='success-message'>Request Sent!</div>";
-            header("Location: " . $_SERVER['PHP_SELF']);
-            exit();
+            //echo "<div class='error-message'>Invalid Username.</div>";
         }
         $stmt->close();
     }
-}
-
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['accepted'])) {
-    $friend_name = trim($_POST["requester"]);
-    $stmt = $conn->prepare("INSERT INTO friends (user_id, friend_username) VALUES (?, ?)");
-    $stmt->bind_param("is", $user_id, $friend_name);
-    $stmt->execute();
-    $stmt->close();
-    //header("Location :" . strtok("REQUEST_URI"), '?');
-    //exit();
-}
-
-if ($_SERVER["REQUEST_METHOD"] == "POST" && (isset($_POST['accepted']) || isset($_POST['rejected']))) {
-    $friend_name = trim($_POST["requester"]);
-    $stmt = $conn->prepare("DELETE from friendships where usersname = ? and friend_username = ?");
-    $stmt->bind_param("ss", $friend_name, $username);
-    $stmt->execute();
-    $stmt->close();
 }
 
 // Fetch friends and friend requests
@@ -103,33 +81,10 @@ $conn->close(); // Close DB connection
 </head>
 
 <body>
-    <?php
-    if (isset($_SESSION['message'])) {
-        echo $_SESSION['message'];
-        unset($_SESSION['message']); //clears the message after the message is sent once
-    }
-    ?>
+    <div class="friends_container">
+        <div class="friendships_container">
 
-    <div class="friend-wrapper">
-        <div class="friends_panel">
-            <h3> Friends </h3>
-
-            <!-- Received Friend Requests -->
-            <h4><i class="fas fa-user-friends"></i> Incoming Requests </h4>
-            <?php while ($row = $result_friends_pending->fetch_assoc()): ?>
-                <div class="friend-box incoming-request">
-                    <p style="color: black;"><?= htmlspecialchars($row['usersname']) ?></p>
-                    <form method="POST" action="friends.php">
-                        <input type="hidden" name="requester" value="<?= htmlspecialchars($row['usersname']) ?>">
-                        <button name="accepted" value="accept">Accept</button>
-                        <button name="rejected" value="reject">Reject</button>
-                    </form>
-                </div>
-            <?php endwhile; ?>
-
-
-            <!-- Actual friends -->
-            <h4><i class="fas fa-user-friends"></i> Friends </h4>
+            <h3>Friends</h3>
             <?php while ($row = $result_friends->fetch_assoc()): ?>
                 <div class="friend-box confirmed">
                     <p style="color: black;"><?= htmlspecialchars($row['friend_username']) ?></p>
@@ -137,38 +92,36 @@ $conn->close(); // Close DB connection
                 </div>
             <?php endwhile; ?>
 
-
-        </div>
-
-        <div class="request_panel">
-            <h3> Send Friend Request </h3>
-            <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post">
-                <div class="input-container">
-                    <i class="fas fa-user"></i>
-                    <input type="text" name="friendName" placeholder="Friend's Username" required>
+            <!-- Received Friend Requests -->
+            <?php while ($row = $result_friends_pending->fetch_assoc()): ?>
+                <div class="friend-box incoming-request">
+                    <p style="color: black;"><?= htmlspecialchars($row['usersname']) ?></p>
+                    <form method="POST" action="handle_request.php">
+                        <input type="hidden" name="requester" value="<?= htmlspecialchars($row['usersname']) ?>">
+                        <button name="action" value="accept">Accept</button>
+                        <button name="action" value="reject">Reject</button>
+                    </form>
                 </div>
-                <input type="submit" name="send-request" value="Send Request">
-            </form>
-            <br></br>
+            <?php endwhile; ?>
+
             <!-- Sent Friend Requests (Pending) -->
-            <h4> <i class="fas fa-circle-notch fa-spin"></i> Pending Friend Requests </h4>
             <?php while ($row = $result_friendships->fetch_assoc()): ?>
                 <div class="friend-box pending">
                     <p style="color: black;"><?= htmlspecialchars($row['friend_username'] . ' (Pending)') ?></p>
                 </div>
             <?php endwhile; ?>
+
         </div>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <div class="friend_request_container">
+                <h3>Send a Friend Request</h3>
+                <div class="input-container">
+                    <i class="fas fa-user"></i>
+                    <input type="text" name="friendName" placeholder="Friend's Username" required>
+                </div>
+                <input type="submit" name="login" value="Send Request">
+        </form>
     </div>
 </body>
-<script>
-    setTimeout(() => {
-        document.querySelectorAll('.success-message, .error-message').forEach(msg => {
-            msg.style.transition = "opacity 0.8s ease, transform 0.8s ease";
-            msg.style.opacity = "0";
-            msg.style.transform = "translate(-50%, -40%)";
-            setTimeout(() => msg.remove(), 800);
-        });
-    }, 1000);
-</script>
 
 </html>
