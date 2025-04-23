@@ -153,6 +153,23 @@ INSERT INTO shop (id, item_name, type, item_description, cost, hunger_pts, habit
 (12, 'Divine Waterfall', 'habitat', 'A majestic waterfall cascading dramatically from a rugged cliff, its constant roar and gentle mist combining to create a scene of natural wonder and timeless grandeur.', 500, NULL, 7, '../img/habitats/divine_waterfall_temple.png');
 
 
+####################################################
+### SQL QUERY FOR CREATING 'user_profiles" TABLE ###
+####################################################
+
+CREATE TABLE user_profiles (
+    user_id INT PRIMARY KEY,
+    display_name VARCHAR(255) DEFAULT '',
+    bio TEXT,
+    base_model VARCHAR(50) NOT NULL DEFAULT 'default',
+    head_accessory VARCHAR(50),
+    body_accessory VARCHAR(50),
+    background_color VARCHAR(20) NOT NULL DEFAULT '#1a1a1a',
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
 */
+
 
 ?>
