@@ -190,8 +190,10 @@ if ($hasPet) {
         $pet_hunger = intval($row['pet_hunger']);
         $last_update = $row['last_hunger_update'];
         
+        //Access date (not time)
         $today = date('Y-m-d');
     
+        //Remove 5 hunger per day
         if ($last_update < $today) {
            $last_update_time = strtotime($last_update); //converts then to second times
            $today_time = strtotime($today);
@@ -199,7 +201,6 @@ if ($hasPet) {
            $diff_sec = $today_time - $last_update_time;
 
            $diff_day = round($diff_sec / (60*60*24));
-
 
             $hunger_loss = 5 * $diff_day;
             $new_hunger = max($pet_hunger - $hunger_loss, 0);
@@ -219,7 +220,7 @@ $maxHunger = 100;
 $hungerPercentage = min(($pet_hunger / $maxHunger) * 100, 100);
 
 // Positioning
-//Defining positions for pet image, feed button and hunger bar based on the background iamge chosen
+//Defining positions for pet image, feed button and hunger bar based on the background image chosen
 $pet_position = "left: 150px; top: 450px;";
 $feed_position = "left: 150px; top: 400px;";
 $hunger_position = "left: 150px; top: 390px;";
