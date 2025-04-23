@@ -19,7 +19,7 @@ $display_name = $username;
 // Send friend request
 // We want to verify that the person we're sending to exists, 
 // then add them as a frienship with pending status
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['send-request'])) {
     $friend_name = trim($_POST["friendName"]);
     if (empty($friend_name)) {
         echo "<div class='error-message'>You must enter a username</div>";
@@ -33,20 +33,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($result->num_rows == 1) {
             $row = $result->fetch_assoc();
             // Create new friendship
-            $stmt = $conn->prepare("INSERT INTO friendship (usersname, friend_username, status) VALUES (?, ?, ?)");
-            $status = 'pending';
+            $stmt = $conn->prepare("INSERT INTO friendships (usersname, friend_username, status) VALUES (?, ?, ?)");
             $stmt->bind_param("sss", $username, $friend_name, $status);
+            $status = 'pending';
             $stmt->execute();
             $_SESSION['message'] = "<div class='success-message'>Request Sent!</div>";
             header("Location: " . $_SERVER['PHP_SELF']);
             exit();
         } else {
-            $_SESSION['message'] = "<div class='error-message'>Invalid Username.</div>";
-            header("Location: " . $_SERVER['PHP_SELF']); //Prevents request being sent again everytime page is reloaded
+            $_SESSION['message'] = "<div class='success-message'>Request Sent!</div>";
+            header("Location: " . $_SERVER['PHP_SELF']);
             exit();
         }
         $stmt->close();
     }
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['accepted'])) {
+    $friend_name = trim($_POST["requester"]);
+    $stmt = $conn->prepare("INSERT INTO friends (user_id, friend_username) VALUES (?, ?)");
+    $stmt->bind_param("is", $user_id, $friend_name);
+    $stmt->execute();
+    $stmt->close();
+    //header("Location :" . strtok("REQUEST_URI"), '?');
+    //exit();
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && (isset($_POST['accepted']) || isset($_POST['rejected']))) {
+    $friend_name = trim($_POST["requester"]);
+    $stmt = $conn->prepare("DELETE from friendships where usersname = ? and friend_username = ?");
+    $stmt->bind_param("ss", $friend_name, $username);
+    $stmt->execute();
+    $stmt->close();
 }
 
 // Fetch friends and friend requests
@@ -54,11 +72,21 @@ $stmt = $conn->prepare("SELECT friend_username FROM friends WHERE user_id = ?");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result_friends = $stmt->get_result();
-// All friendships i.e., pending friendships
-$stmt = $conn->prepare("SELECT friend_username FROM friendship WHERE usersname = ?");
-$stmt->bind_param("i", $username);
+
+// All friendships which the user has sent
+$stmt = $conn->prepare("SELECT friend_username FROM friendships WHERE usersname = ?");
+$stmt->bind_param("s", $username);
 $stmt->execute();
 $result_friendships = $stmt->get_result();
+
+// All friendships this person has received
+$stmt = $conn->prepare("SELECT usersname FROM friendships WHERE friend_username = ?");
+$stmt->bind_param("s", $username);
+$stmt->execute();
+$result_friends_pending = $stmt->get_result();
+
+$sum = $result_friends->num_rows + $result_friendships->num_rows + $result_friends_pending->num_rows;
+
 $conn->close(); // Close DB connection
 
 ?>
@@ -76,39 +104,59 @@ $conn->close(); // Close DB connection
 
 <body>
     <?php
-        if (isset($_SESSION['message'])) {
-            echo $_SESSION['message'];
-            unset($_SESSION['message']); //clears the message after the message is sent once
-        }
+    if (isset($_SESSION['message'])) {
+        echo $_SESSION['message'];
+        unset($_SESSION['message']); //clears the message after the message is sent once
+    }
     ?>
 
-    <div class = "friend-wrapper">
-        <div class = "friends_panel">
+    <div class="friend-wrapper">
+        <div class="friends_panel">
             <h3> Friends </h3>
-            <h4><i class="fas fa-user-friends"></i> Friends </h4>
-            <div class = "friendship_container">
-                <?php while ($row = $result_friends->fetch_assoc()): ?>
-                    <p class = "friends-list-container"><?= htmlspecialchars($row['friend_username']) ?></p>
-                <?php endwhile; ?>
-            </div>
 
-            <h4> <i class="fas fa-circle-notch fa-spin"></i> Pending Friend Requests </h4>
-            <div class = "pending-friendship_container">
-                <?php while ($row = $result_friendships->fetch_assoc()): ?>
-                    <p class = "friends-list-container"><?= htmlspecialchars($row['friend_username']) ?></p>
-                <?php endwhile; ?>
-            </div>
+            <!-- Received Friend Requests -->
+            <h4><i class="fas fa-envelope-open-text"></i> Incoming Requests </h4>
+            <?php while ($row = $result_friends_pending->fetch_assoc()): ?>
+                <div class="friend-box incoming-request">
+                    <p style="color: #c7a557;"><?= htmlspecialchars($row['usersname']) ?></p>
+                    <form method="POST" action="friends.php">
+                        <input type="hidden" name="requester" value="<?= htmlspecialchars($row['usersname']) ?>">
+                        <button name="accepted" value="accept">Accept</button>
+                        <button name="rejected" value="reject">Reject</button>
+                    </form>
+                </div>
+            <?php endwhile; ?>
+
+
+            <!-- Actual friends -->
+            <h4><i class="fas fa-user-friends"></i> Friends </h4>
+            <?php while ($row = $result_friends->fetch_assoc()): ?>
+                <div class="friend-box confirmed">
+                    <p style="color: #c7a557;"><?= htmlspecialchars($row['friend_username']) ?></p>
+                    <button class="visit-button">Visit</button>
+                </div>
+            <?php endwhile; ?>
+
+
         </div>
 
-        <div class = "request_panel">
+        <div class="request_panel">
             <h3> Send Friend Request </h3>
-            <form action = "<?= htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post">
-                <div class = "input-container">
-                    <i class = "fas fa-user"></i>
-                    <input type = "text" name = "friendName" placeholder="Friend's Username" required>
+            <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post">
+                <div class="input-container">
+                    <i class="fas fa-user"></i>
+                    <input type="text" name="friendName" placeholder="Friend's Username" required>
                 </div>
-                <input type = "submit" name = "send-request" value = "Send Request">
+                <input type="submit" name="send-request" value="Send Request">
             </form>
+            <br></br>
+            <!-- Sent Friend Requests (Pending) -->
+            <h4> <i class="fas fa-circle-notch fa-spin"></i> Pending Friend Requests </h4>
+            <?php while ($row = $result_friendships->fetch_assoc()): ?>
+                <div class="friend-box-pending">
+                    <p style="color: #c7a557;"><?= htmlspecialchars($row['friend_username'] . ' (Pending)') ?></p>
+                </div>
+            <?php endwhile; ?>
         </div>
     </div>
 </body>
@@ -122,4 +170,5 @@ $conn->close(); // Close DB connection
         });
     }, 1000);
 </script>
+
 </html>
