@@ -27,19 +27,19 @@
 
       <div class="step">
         <!-- Example icon/image -->
-        <img src="img/capy_art.png" alt="Capybara" />
+        <img src="img/index_assets/capy_art.png" alt="Capybara" />
         <h3>First, choose your pet!</h3>
         <p>Select your favorite companion.</p>
       </div>
 
       <div class="step">
-        <img src="img/task_scroll.png" alt="Do your work!" />
+        <img src="img/index_assets/task_scroll.png" alt="Do your work!" />
         <h3>Then, do your work!</h3>
         <p>Stay productive and complete tasks.</p>
       </div>
 
       <div class="step">
-        <img src="img/pleasant_grove.png" alt="Rewards" />
+        <img src="img/index_assets/pleasant_grove.png" alt="Rewards" />
         <h3>Get rewards for your pet!</h3>
         <p>Earn coins and keep them happy.</p>
       </div>

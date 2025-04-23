@@ -11,34 +11,53 @@ let interval = setInterval(() => {
     }
 }, 18);
 
-// Toggle Audio Mute and Update Speaker Icon
-function toggleMute() {
-    const audioElement = document.getElementById('sound');
-    const icon = document.getElementById('muteIcon');
-    
-    // Toggle the muted property
-    audioElement.muted = !audioElement.muted;
-    
-    // If unmuted and audio is paused, attempt to play it.
-    if (!audioElement.muted && audioElement.paused) {
-        const playPromise = audioElement.play();
-        if (playPromise !== undefined) {
-            playPromise.catch(error => {
-                console.error("Error playing audio:", error);
-            });
-        }
+document.addEventListener('DOMContentLoaded', function () {
+    // Restore main scroll
+    const savedScrollY = localStorage.getItem('scrollY');
+    if (savedScrollY !== null) {
+        window.scrollTo(0, parseInt(savedScrollY));
+        localStorage.removeItem('scrollY');
     }
-    
-    // Update the speaker icon based on the muted state.
-    if (audioElement.muted) {
-        icon.src = "../img/speaker_muted.png";
-    } else {
-        icon.src = "../img/speaker.png";
-    }
-}
 
-// Toggle the Hamburger Menu Visibility
-function toggleMenu() {
-    var menu = document.getElementById("menu");
-    menu.classList.toggle("show");
-}
+    // Restore scroll for task sections
+    const taskSection = document.querySelector('.tasks-section');
+    const expiredTaskSection = document.querySelector('.expired-tasks-section');
+
+    const savedTaskScrollY = localStorage.getItem('taskScrollY');
+    if (savedTaskScrollY !== null && taskSection) {
+        taskSection.scrollTop = parseInt(savedTaskScrollY);
+        localStorage.removeItem('taskScrollY');
+    }
+
+    const savedExpiredScrollY = localStorage.getItem('expiredScrollY');
+    if (savedExpiredScrollY !== null && expiredTaskSection) {
+        expiredTaskSection.scrollTop = parseInt(savedExpiredScrollY);
+        localStorage.removeItem('expiredScrollY');
+    }
+
+    // Save scroll before leaving
+    const saveScroll = () => {
+        localStorage.setItem('scrollY', window.scrollY);
+        if (taskSection) {
+            localStorage.setItem('taskScrollY', taskSection.scrollTop);
+        }
+        if (expiredTaskSection) {
+            localStorage.setItem('expiredScrollY', expiredTaskSection.scrollTop);
+        }
+    };
+
+    // Attach saveScroll to key elements
+    document.querySelectorAll('a.delete-button, .clear-tasks button, input[type="checkbox"]').forEach(el => {
+        el.addEventListener('click', saveScroll);
+    });
+
+    const form = document.querySelector('.add-task-section form');
+    if (form) {
+        form.addEventListener('submit', saveScroll);
+    }
+
+    const clearForm = document.querySelector('.clear-tasks form');
+    if (clearForm) {
+        clearForm.addEventListener('submit', saveScroll);
+    }
+});
