@@ -9,32 +9,44 @@
 
 body {
     font-family: 'IM Fell DW Pica', serif;
-    background-color: #121a13;
-    color: #d4e157;
+    background-image: url('../img/backgrounds/taskemon_blur.png');
     margin: 0;
-    padding-top: 100px; /* Adjust this depending on header height */
+    color: #ffe29f;
+    background-size: cover;
+    background-position: center;
+    padding: 100px;
 }
 
 .about-header {
-    background: linear-gradient(to right, #1b5e20, #2e7d32);
+    /*background: linear-gradient(to right,  #64a1c6, rgb(47, 221, 227));*/
     text-align: center;
-    color: white;
+    color: #ffe29f;
     padding: 50px 20px;
-    font-weight: bold;
 }
 
 h1 {
     font-family: 'Cinzel Decorative', serif;
     font-size: 3em;
     margin-bottom: 20px;
-    color: #aeea00;
+    color: #ffe29f;
     text-align: center;
+}
+
+.mission-title{
+    font-size: 3em;
+}
+.mission{
+    color: #ffe29f;
+}
+
+.slogan {
+    color: #ffe29f;
 }
 
 h2 {
     font-family: 'Cinzel Decorative', serif;
-    color: #aeea00;
-    font-size: 2.2em;
+    color: #ffefca;
+    font-size: 2.5em;
     margin-top: 30px;
     margin-bottom: 15px;
     text-align: center;
@@ -44,23 +56,74 @@ p, li {
     font-family: 'EB Garamond', serif;
     font-size: 1.2em;
     line-height: 1.6;
+    
 }
 
 .about-content {
     width: 80%;
     max-width: 800px;
-    margin: 60px auto;
-    background: rgba(30,50,30,0.9);
+    margin: -20px auto 60px;
+    background: rgba(18,26,19,0.95);
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0,0,0, 0.3);
+    border: 3px solid transparent;
+    background-image: 
+        linear-gradient(rgba(18,26,19), rgba(18,26,19)),
+        linear-gradient(#00ffaa, #00eaff);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
 }
 
-u1{
+
+ul{
     list-style: none;
     padding: 0;
+    color: #ffe29f
 }
 
 ul li{
     padding: 12px 0;
+}
+
+.creator-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.creator-card {
+    text-align: center;
+    color: #ffe29f;
+}
+
+.creator-card img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #00ffff;
+    box-shadow: 0 0 10px #00ffaa80;
+    transition: transform 0.3s ease;
+}
+
+.creator-card img:hover {
+    transform: scale(1.05);
+}
+
+.creator-card p {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.creator-name
+{
+    color: #ffefca;
+}
+
+.surely-not-right
+{
+    font-size: 10px;
 }

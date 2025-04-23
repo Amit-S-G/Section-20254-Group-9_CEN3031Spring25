@@ -1,0 +1,429 @@
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica&family=Cinzel+Decorative:wght@400;700&family=Uncial+Antiqua&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'IM Fell DW Pica', serif;
+    background-image: url('../img/backgrounds/tree_house.png');
+    color: #e6d8af;
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-size: cover; 
+}
+
+.container {
+    max-width: 500px;
+    width: 90%;
+    padding: 30px;
+    margin: -15px 0px 40px 1300px;
+    background: rgba(36, 27, 47, 0.95);
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+    text-align: center;
+}
+
+header {
+    background: linear-gradient(to right, #64a1c6, rgb(47, 221, 227));
+    padding: 40px 20px;
+    margin: 0 -30px 30px;
+    color: #ffe29f;
+    font-family: 'Cinzel Decorative', serif;
+    font-weight: bold;
+}
+
+header h1 {
+    margin-bottom: 10px;
+    font-size: 2em;
+}
+header h2 {
+    font-size: 1.5em;
+    color: #ffe29f;
+}
+
+/* Progress Section */
+.progress-section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.skill {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin: 0 auto;
+}
+
+.inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: rgba(36, 27, 47, 0.95);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.7),
+                inset -3px -3px 6px rgba(255, 255, 255, 0.02);
+}
+
+#number {
+    font-weight: 600;
+    color: #ffe29f;
+    text-align: center;
+    font-size: 1.5em;
+}
+#number p {
+    font-size: 0.8rem;
+    color: #c7a557;
+    margin-top: 4px;
+}
+
+/* SVG rings */
+svg {
+    width: 220px;
+    height: 220px;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+}
+
+.brown-ring {
+    fill: none;
+    stroke: #ffe29f;
+    stroke-width: 10px;
+}
+
+.progress-ring {
+    fill: none;
+    stroke:  url(#GradientColor);
+    stroke-width: 20px;
+    stroke-linecap: round;
+    stroke-dasharray: 502.65; 
+    stroke-dashoffset: 502.65;
+    animation: dashAnim 2s linear forwards;
+}
+
+.progress-info {
+    display: block;
+    margin-top: 5px;
+    font-size: 1em;
+    color: #ffd87e;
+    text-align: center;
+}
+
+@keyframes dashAnim {
+  to {
+    stroke-dashoffset: var(--target-offset);
+  }
+}
+
+/* Add Task Form Section */
+.add-task-section {
+    margin-top: 20px;
+    background: rgba(18,26,19,0.95);
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+    text-align: center;
+}
+
+/* Inputs */
+.add-task-section input[type="text"],
+.add-task-section input[type="date"],
+.add-task-section textarea {
+    padding: 8px;
+    border: 1px solid #58d8e4;
+    border-radius: 8px;
+    margin: 5px;
+    background: rgba(39, 95, 100, 0.468);
+    color: #ffe29f;
+    width: 90%;
+}
+
+/* Submit Button */
+.add-task-section input[type="submit"] {
+    padding: 8px 16px;
+    background-color: #61f2ff;
+    color: #5b5133;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Uncial Antiqua', serif;
+    font-size: 1em;
+    margin-top: 10px;
+}
+
+.add-task-section input[type="submit"]:hover {
+    background-color: #ffe29f;
+    color: #241b2f;
+}
+
+/* Tasks Section */
+.tasks-section {
+    margin-top: 20px;
+    background: rgba(18,26,19,0.95);
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 0px rgba(0, 0, 0, 0.7);
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 200px;
+}
+
+.tasks-section::-webkit-scrollbar {
+    width: 15px;
+}
+.tasks-section::-webkit-scrollbar-thumb {
+    background: linear-gradient(#00ffaa, #00eaff);
+    border-radius: 10px;
+}
+.tasks-section::-webkit-scrollbar-track {
+    background-color: rgba(36, 27, 47, 0.95);
+}
+
+/* Task List Items */
+.tasks-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.tasks-section li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    background: rgba(39, 95, 100, 0.468);
+    margin-bottom: 8px;
+    border-radius: 10px;
+}
+
+.task-left {
+    display: flex;
+    align-items: center;
+}
+.task-left input[type="checkbox"] {
+    transform: scale(1.2);
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.task-info {
+    text-align: left;
+    max-width: 300px;
+}
+
+.task-info .task-name {
+    font-weight: 500;
+    color: #e6d8af;
+    display: block;
+    margin-bottom: 4px;
+    font-size: 1.1em;
+}
+
+.task-date {
+    font-size: 12px;
+    color: #c7a557;
+}
+
+.desc {
+    white-space: normal;
+    word-wrap: break-word;       
+    overflow-wrap: break-word; 
+    color: #ffe29f;
+}
+
+.delete-button {
+    text-decoration: none;
+    /* Muted red for delete */
+    color: #db5966;
+    font-weight: bold;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.no-tasks {
+    text-align: center;
+    color: #ffde90;
+    font-style: italic;
+    padding: 10px;
+}
+
+.clear-tasks button {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #61f2ff;
+    color: #5b5133;;
+    text-decoration: none;
+    border-radius: 8px;
+    font-family: 'Uncial Antiqua', serif;
+    font-size: 1em;
+    margin-top: 10px;
+}
+
+.clear-tasks button:hover {
+    background-color: #ffd87e;
+    color: #241b2f;
+}
+
+/* Pets */
+.modal {
+    position: fixed;
+    z-index: 10000;
+    left: 525px;
+    top: 300px;
+    background-color: rgba(36, 27, 47, 0.95); /* matching the dark overlay of the container */
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+}
+.pet-header{
+    font-size: 2.5em;
+}
+.modal-content {
+    background: rgba(22, 16, 29, 0.95);
+    padding: 20px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+    width: 800px;
+    height: 400px;
+    border: 3px solid transparent;
+    background-image: 
+        linear-gradient(rgba(22, 16, 29, 0.95), rgba(22, 16, 29, 0.95)),
+        linear-gradient(#00ffaa, #00eaff);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+
+.modal-content h3 {
+    color: #ffe29f;
+    margin-bottom: 20px;
+    font-family: 'Cinzel Decorative', serif;
+}
+
+/* Pet Options Container */
+.pet-options {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+/* Each Pet Choice */
+.pet-choice {
+    text-align: center;
+    cursor: pointer;
+}
+
+.pet-choice input[type="radio"] {
+    display: none;
+}
+
+.pet-choice img {
+    background-image: linear-gradient(#ffe29f, #cfb372);
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    border: 3px solid transparent;
+    transition: border 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+}
+
+.pet-choice input[type="radio"]:checked + img {
+    border: 5px solid #28b0bd;
+}
+
+.pet-choice span {
+    display: block;
+    margin-top: 8px;
+    color: #ffe29f;
+    font-family: 'IM Fell DW Pica', serif;
+}
+
+/* Submit Button (matches the page style) */
+.modal-content input[type="submit"] {
+    padding: 8px 16px;
+    background-color: #61f2ff;
+    color: #5b5133;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Uncial Antiqua', serif;
+    font-size: 1em;
+}
+
+.modal-content input[type="submit"]:hover {
+    background-color: #e3cb93;
+    color: #241b2f;
+}
+
+.pet-display {
+    position: absolute;
+    top: 500px;    /* tweak as needed */
+    left: 450px;   /* tweak as needed */
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Tasks Section */
+.expired-tasks-section {
+    margin-top: 20px;
+    background: rgba(18,26,19,0.95);
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 0px rgba(0, 0, 0, 0.7);
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 150px;
+}
+
+.expired-tasks-section::-webkit-scrollbar {
+    width: 15px;
+}
+.expired-tasks-section::-webkit-scrollbar-thumb {
+    background: linear-gradient(#00ffaa, #00eaff);
+    border-radius: 10px;
+}
+.expired-tasks-section::-webkit-scrollbar-track {
+    background-color: rgba(36, 27, 47, 0.95);
+}
+
+/* Task List Items */
+.expired-tasks-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.expired-tasks-section li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    background: rgba(39, 95, 100, 0.468);
+    margin-bottom: 8px;
+    border-radius: 10px;
+}
+
+.expired-tasks-header
+{
+    color: #db5966;
+}
+
+.task-section-header
+{
+    color: #c7a557;
+}

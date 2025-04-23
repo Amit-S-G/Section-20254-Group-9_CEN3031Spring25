@@ -8,28 +8,34 @@
 }
 
 body {
-    background-color: #121a13;
-    color: #e8f5e9;
+    background-image: url('../img/backgrounds/taskemon_blur.png');
+    color: #ffe29f;
     font-family: 'IM Fell DW Pica', serif;
     padding-top: 210px; /* Adjust this depending on header height */
 }
 
 
-/* Container Styles */
+
 .container {
     width: 85%;
     max-width: 400px;
     margin: 50px auto;
     padding: 30px;
-    background: rgba(30, 50, 30, 0.95);
+    background: rgba(18,26,19,0.95);
     border-radius: 12px;
     box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);
     text-align: center;
+    border: 3px solid transparent;
+    background-image: 
+        linear-gradient(rgba(18,26,19), rgba(18,26,19)),
+        linear-gradient(#00ffaa, #00eaff);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
 }
 
 h2 {
     font-size: 2.5em;
-    color: #aeea00;
+    color: #ffe29f;
     font-family: 'Cinzel Decorative', serif;
     margin-bottom: 20px;
 }
@@ -37,14 +43,15 @@ h2 {
 .input-container {
     display: flex;
     align-items: center;
-    background: rgba(50, 80, 50, 0.85);
+    background: rgba(39, 95, 100, 0.468);
+    border: 1px solid #58d8e4;
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 15px;
 }
 
 .input-container i {
-    color: #cddc39;
+    color: #ffe29f;
     font-size: 1.2em;
     margin-right: 10px;
 }
@@ -53,7 +60,7 @@ h2 {
     width: 100%;
     border: none;
     background: transparent;
-    color: #e8f5e9;
+    color: #ffe29f;
     font-size: 1em;
     outline: none;
     padding: 8px;
@@ -62,23 +69,23 @@ h2 {
 .input-container input:focus {
     background: none;
     outline: none;
-    box-shadow: 0 0 8px #aeea00;
 }
 
 input[type="submit"] {
-    background-color: #4caf50;
-    color: rgb(18, 32, 18);
+    background-color: #61f2ff;
+    color: #5b5133;
     font-size: 1.2em;
     padding: 12px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    font-family: 'IM Fell DW Pica', serif;
+    font-family: 'EB Garamond', serif;
     transition: background-color 0.3s;
 }
 
 input[type="submit"]:hover {
-    background-color: #d4ff00;
+    background-color: #ffe29f;
+    color: #241b2f;
 }
 
 /* Error Messages */
@@ -91,7 +98,7 @@ input[type="submit"]:hover {
 
 /* "Don't have an account?" message */
 .register-link a {
-    color: #4caf50; /* Link color */
+    color: #c7a557; /* Link color */
     font-size: 1em;
     text-align: center;
     display: block;
@@ -101,6 +108,6 @@ input[type="submit"]:hover {
 }
 
 .register-link a:hover {
-    color: #d4ff00; /* Hover color */
+    color: #ffe29f; /* Hover color */
     text-decoration: underline;
 }

@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica&family=Cinzel+Decorative:wght@400;700&family=Uncial+Antiqua&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'IM Fell DW Pica', serif;
+    background-image: url('../img/backgrounds/tree_house_blur.png');
+    background-size: cover;
+    background-attachment: fixed;
+    margin: 0;
+    color: #ffe29f;
+    padding-top: 100px; /* Adjust depending on header */
+}
+
+.profile-content {
+    width: 80%;
+    max-width: 800px;
+    margin: -20px auto 60px;
+    background: rgba(18, 26, 19, 0.95);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border: 3px solid transparent;
+    background-image:
+        linear-gradient(rgba(18, 26, 19), rgba(18, 26, 19)),
+        linear-gradient(#00ffaa, #00eaff);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+
+h1, h2 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 3em;
+    margin-bottom: 20px;
+    color: #ffe29f;
+    text-align: center;
+    font-weight: normal;
+}
+
+.profile-section {
+    margin-bottom: 25px;
+    color: #ffe29f;
+}
+
+input[type="text"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    background: rgba(39, 95, 100, 0.468);
+    border: 1px solid #58d8e4;
+    color: #ffe29f;
+    font-family: 'IM Fell DW Pica', serif;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: border 0.3s;
+}
+
+input[type="text"]:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border: 1px solid #00ffaa;
+}
+
+input[type="submit"] {
+    background-color: #61f2ff;
+    color: #5b5133;
+    font-size: 1.2em;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Cinzel Decorative', serif;
+    transition: background-color 0.3s, color 0.3s;
+    display: block;
+    margin: 30px auto 10px;
+}
+
+input[type="submit"]:hover {
+    background-color: #ffe29f;
+    color: #241b2f;
+}
+
+/* Avatar Layered Display */
+.avatar-stack {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 20px auto;
+}
+
+.avatar-stack .layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150px;
+    height: 150px;
+}
+
+.avatar-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #00ffaa;
+    box-shadow: 0 0 10px #00ffaa80;
+}
+
+.avatar-stack {
+    position: relative;
+    width: 150px;
+    height: 150px;
+}
+
+.avatar-stack .layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150px;
+    height: 150px;
+}

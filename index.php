@@ -1,43 +1,50 @@
 <?php
     include("header1.html")
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="styles/index.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Taskémon Landing</title>
+  <link rel="stylesheet" href="styles/index.css"/>
+  <script src="js/index.js"></script>
 </head>
-<script src="js/index.js"></script>
+
 <body>
-    <section class  = "mission">
-        <h1> Gotta Complete Them All </h1>
-        <p class= "phrase"> Complete tasks, earn rewards, and keep your pet happy! </p>
-        <button id = "get-started-btn" class="cta-button"> Get Started </button>
-    </section>
 
-    <section class = "features">
-        <h2>What Features Do We Have?</h2>
-        <div class = "feature">
-            <h2> 🌿 Task Completion Rewards </h2>
-            <p> Earn coins, Buy Items every time you complete a task! </p>
-        </div>
+  <section class="container">
+    <h1 class="main-heading">Gotta Finish 'em All!</h1>
+    <p class="sub-heading">Choose your Taskémon partner and become more productive today!</p>
+    <button id = "get-started-btn" class="cta-button">Register Now</button>
+  </section>
 
-        <div class = "feature">
-            <h2> 🐾 Interactive Pets </h2>
-            <p> Use your earned coins to take care of your virtual pet. </p>
-        </div>
+  <!-- HOW IT WORKS SECTION -->
+  <section class="how-it-works">
+    <h2>How It Works:</h2>
+    <div class="steps-container">
 
-        <div class = "feature">
-            <h2> 👥 Play with Friends </h2>
-            <p> Add Friends, Compete who can make more progress! </p>
-        </div>
-    </section>
+      <div class="step">
+        <!-- Example icon/image -->
+        <img src="img/index_assets/capy_art.png" alt="Capybara" />
+        <h3>First, choose your pet!</h3>
+        <p>Select your favorite companion.</p>
+      </div>
+
+      <div class="step">
+        <img src="img/index_assets/task_scroll.png" alt="Do your work!" />
+        <h3>Then, do your work!</h3>
+        <p>Stay productive and complete tasks.</p>
+      </div>
+
+      <div class="step">
+        <img src="img/index_assets/pleasant_grove.png" alt="Rewards" />
+        <h3>Get rewards for your pet!</h3>
+        <p>Earn coins and keep them happy.</p>
+      </div>
+
+    </div>
+  </section>
 </body>
 </html>
-
-<?php
-    echo "This will be our landing page. It should look nice with our project name, a mission statement, intended functionality, etc.<br><br>";
-    echo "Tbh just use this to test code designs for now and see what looks good<br><br><hr>"
-?>

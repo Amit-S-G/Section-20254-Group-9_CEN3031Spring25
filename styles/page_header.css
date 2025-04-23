@@ -1,0 +1,112 @@
+.hamburger-container {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+#hamburger {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(36, 27, 47, 0.95);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#hamburger:hover {
+    background-color: #444;
+}
+
+#hamburger .bar {
+    width: 30px;
+    height: 4px;
+    background-color: #ffe29f;
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+.dropdown-menu {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background: rgba(36, 27, 47, 0.90);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 10px;
+}
+
+.dropdown-menu ul li {
+    margin: 5px 0;
+}
+
+.dropdown-menu ul li a {
+    text-decoration: none;
+    color: #ffe29f;
+    font-family: 'Cinzel Decorative', serif;
+    display: flex;
+    padding: 8px 12px;
+    transition: background-color 0.3s ease;
+    align-items: center;
+}
+
+.dropdown-menu ul li a:hover {
+    background-color: #555;
+}
+
+.dropdown-menu ul li a img {
+    width: 24px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.site-header {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    width: auto;
+    height: auto;
+    display: block;
+}
+
+  /* Sounds */
+  .sound-button{
+    position: fixed;
+    top: 20px;
+    left: 100px;
+    z-index: 100;
+    background-color: #ffe29f;        
+    border-radius: 50%;          
+    width: 50px;                 
+    height: 50px;                
+    display: flex;               
+    align-items: center;        
+    justify-content: center;     
+    cursor: pointer;            
+  }
+
+  .sound-button img {
+    width: 24px;  
+    height: 24px; 
+    background-color: transparent; 
+  }
