@@ -115,10 +115,10 @@ $conn->close(); // Close DB connection
             <h3> Friends </h3>
 
             <!-- Received Friend Requests -->
-            <h4><i class="fas fa-user-friends"></i> Incoming Requests </h4>
+            <h4><i class="fas fa-envelope-open-text"></i> Incoming Requests </h4>
             <?php while ($row = $result_friends_pending->fetch_assoc()): ?>
                 <div class="friend-box incoming-request">
-                    <p style="color: black;"><?= htmlspecialchars($row['usersname']) ?></p>
+                    <p style="color: #c7a557;"><?= htmlspecialchars($row['usersname']) ?></p>
                     <form method="POST" action="friends.php">
                         <input type="hidden" name="requester" value="<?= htmlspecialchars($row['usersname']) ?>">
                         <button name="accepted" value="accept">Accept</button>
@@ -132,7 +132,7 @@ $conn->close(); // Close DB connection
             <h4><i class="fas fa-user-friends"></i> Friends </h4>
             <?php while ($row = $result_friends->fetch_assoc()): ?>
                 <div class="friend-box confirmed">
-                    <p style="color: black;"><?= htmlspecialchars($row['friend_username']) ?></p>
+                    <p style="color: #c7a557;"><?= htmlspecialchars($row['friend_username']) ?></p>
                     <button class="visit-button">Visit</button>
                 </div>
             <?php endwhile; ?>
@@ -153,8 +153,8 @@ $conn->close(); // Close DB connection
             <!-- Sent Friend Requests (Pending) -->
             <h4> <i class="fas fa-circle-notch fa-spin"></i> Pending Friend Requests </h4>
             <?php while ($row = $result_friendships->fetch_assoc()): ?>
-                <div class="friend-box pending">
-                    <p style="color: black;"><?= htmlspecialchars($row['friend_username'] . ' (Pending)') ?></p>
+                <div class="friend-box-pending">
+                    <p style="color: #c7a557;"><?= htmlspecialchars($row['friend_username'] . ' (Pending)') ?></p>
                 </div>
             <?php endwhile; ?>
         </div>

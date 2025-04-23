@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica&family=Cinzel+Decorative:wght@400;700&display=swap');
+css for friend @import url('https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica&family=Cinzel+Decorative:wght@400;700&display=swap');
 
 * {
     margin: 0;
@@ -41,12 +41,11 @@ body {
 .request_panel {
     padding: 20px;
     text-align: center;
-    max-height: 500px;
 }
 
 .friends_panel {
     flex: 3;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .friends_panel::-webkit-scrollbar {
@@ -62,10 +61,30 @@ body {
     background-color: rgba(18, 26, 19);
 }
 
+.request_panel::-webkit-scrollbar {
+    width: 5px;
+}
+
+.request_panel::-webkit-scrollbar-thumb {
+    background: linear-gradient(#00ffaa, #00eaff);
+    border-radius: 10px;
+}
+
+.request_panel::-webkit-scrollbar-track {
+    background-color: rgba(18, 26, 19);
+}
+
 .request_panel {
     border-right: none;
     /* gets ride of the border on the right side of request panel */
     flex: 7;
+    overflow-y: auto;
+    direction: rtl;
+}
+
+.request_panel>* {
+    direction: ltr;
+    /* Resets direction for child elements */
 }
 
 h3 {
@@ -160,27 +179,4 @@ input[type="submit"]:hover {
 
 .friends-list-container {
     color: #c7a557;
-}
-
-.friend-box {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #f9f9f9;
-}
-
-.incoming-request {
-    background-color: #fff9e6;
-}
-
-.pending {
-    background-color: #fff9e6;
-}
-
-.confirmed {
-    background-color: #e6ffe6;
 }
