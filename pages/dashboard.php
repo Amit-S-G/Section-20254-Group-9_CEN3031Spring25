@@ -37,6 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_task'])) {
     }
     $task_description = trim($_POST['task_description']);
     $user_id = $_SESSION['user_id'];
+    $point_value = 10; // Default value
 
     if (!empty($task_name)) {
         $stmt = $conn->prepare("INSERT INTO tasks (user_id, task_name, task_duedate, task_description) VALUES (?, ?, ?, ?)");
@@ -163,9 +164,10 @@ if (isset($_GET['incomplete_task_id'])) {
   }
 }
 
+
 // Delete task logic
 if (isset($_GET['delete_task_id'])) {
-    $task_id = $_GET['delete_task_id'];
+    $task_id = (int)$_GET['delete_task_id'];
     $stmt = $conn->prepare("DELETE FROM tasks WHERE id = ? AND user_id = ?");
     $stmt->bind_param("ii", $task_id, $_SESSION['user_id']);
     $stmt->execute();

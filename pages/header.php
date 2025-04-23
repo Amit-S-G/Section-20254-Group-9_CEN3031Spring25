@@ -103,7 +103,7 @@ date_default_timezone_set('America/New_York');
                             <li><a href=""><img id="habitat-icon" src="../img/icons/hamburger_icons/habitat_icon.png" alt="Habitat Icon">Habitat</a></li>
                         <?php endif; ?>
                         <li><a href="shop.php"><img id="shop-icon" src="../img/icons/hamburger_icons/shop_icon.png" alt="Shop Icon">Shop</a></li>
-                        <li><a href="#"><img id="settings-icon" src="../img/icons/hamburger_icons/settings_icon.png" alt="Settings Icon">Settings</a></li>
+                        <li><a href="settings.php"><img id="settings-icon" src="../img/icons/hamburger_icons/settings_icon.png" alt="Settings Icon">Settings</a></li>
                         <li><a href="logout.php"><img id="logout-icon" src="../img/icons/hamburger_icons/logout_icon.png" alt="Logout Icon">Logout</a></li>
                     </ul>
                 </nav>
