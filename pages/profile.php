@@ -35,7 +35,6 @@ $background_color = $profile['background_color'] ?? '#1a1a1a';
     <meta charset="UTF-8">
     <title>Your Profile</title>
     <link rel="stylesheet" href="../styles/profile.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
 
@@ -66,10 +65,10 @@ $background_color = $profile['background_color'] ?? '#1a1a1a';
             <!-- Head accessories -->
             <?php if ($head_accessory === 'cap'): ?>
                 <img src="../img/profile-assets/head/cap.png" class="layer">
-            <?php elseif ($head_accessory === 'straw-hat'): ?>
-                <img src="../img/profile-assets/head/straw-hat.png" class="layer">
-            <?php elseif ($head_accessory === 'sun-glasses'): ?>
-                <img src="../img/profile-assets/head/sun-glasses.png" class="layer">
+            <?php elseif ($head_accessory === 'strawhat'): ?>
+                <img src="../img/profile-assets/head/strawhat.png" class="layer">
+            <?php elseif ($head_accessory === 'sunglasses'): ?>
+                <img src="../img/profile-assets/head/sunglasses.png" class="layer">
             <?php endif; ?>
         </div>
     </div>
@@ -88,8 +87,8 @@ $background_color = $profile['background_color'] ?? '#1a1a1a';
             <select name="head_accessory">
                 <option value="" <?= $head_accessory === '' ? 'selected' : '' ?>>None</option>
                 <option value="cap" <?= $head_accessory === 'cap' ? 'selected' : '' ?>>Cap</option>
-                <option value="sun-glasses" <?= $head_accessory === 'sun-glasses' ? 'selected' : '' ?>>Sun Glasses</option>
-                <option value="straw-hat" <?= $head_accessory === 'straw-hat' ? 'selected' : '' ?>>Straw Hat</option>
+                <option value="sunglasses" <?= $head_accessory === 'sunglasses' ? 'selected' : '' ?>>Sun Glasses</option>
+                <option value="strawhat" <?= $head_accessory === 'strawhat' ? 'selected' : '' ?>>Straw Hat</option>
             </select>
         </div>
 
@@ -120,11 +119,6 @@ $background_color = $profile['background_color'] ?? '#1a1a1a';
 
         <input type="submit" value="Save Changes">
     </form>
-
-    <h2>Friends Online</h2>
-    <ul>
-        <!-- Friends online can go here -->
-    </ul>
 </div>
 
 </body>

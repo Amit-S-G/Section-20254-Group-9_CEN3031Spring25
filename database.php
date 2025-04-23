@@ -2,7 +2,7 @@
  It is NOT for insertion into the database, only setting up the connection
  Include it and use MySQL in other files where necessary, and make sure to close the connection -->
 
-<?php
+ <?php
 
 $db_server = "localhost";
 $db_user = "root";
@@ -22,7 +22,6 @@ try {
 ####  SQL QUERY FOR CREATING 'users' TABLE  ####
 ################################################
 
-
 CREATE TABLE users (
     id INT(11) NOT NULL AUTO_INCREMENT,
     user VARCHAR(30) NOT NULL,
@@ -36,10 +35,26 @@ CREATE TABLE users (
 ) ENGINE = InnoDB; 
  
 
+####################################################
+### SQL QUERY FOR CREATING 'user_profiles" TABLE ###
+####################################################
+
+CREATE TABLE user_profiles (
+    user_id INT PRIMARY KEY,
+    display_name VARCHAR(255) DEFAULT '',
+    bio TEXT,
+    base_model VARCHAR(50) NOT NULL DEFAULT 'default',
+    head_accessory VARCHAR(50),
+    body_accessory VARCHAR(50),
+    background_color VARCHAR(20) NOT NULL DEFAULT '#1a1a1a',
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+
 ################################################
 ####  SQL QUERY FOR CREATING 'tasks' TABLE  ####
 ################################################
-
 
 CREATE TABLE tasks (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -49,27 +64,14 @@ CREATE TABLE tasks (
     task_description VARCHAR(255),
     task_completed TINYINT(1) NOT NULL DEFAULT 0,
     point_value INT NOT NULL DEFAULT 10,
-    hunger_decreased TINYINT(1) NOT NULL DEFAULT 0, //tracks to make sure hunger is only decreased once per task
+    hunger_decreased TINYINT(1) NOT NULL DEFAULT 0,
     FOREIGN KEY (user_id) REFERENCES users(id)
 ) ENGINE = InnoDB;
 
 
 ################################################
-###  SQL QUERY FOR CREATING 'friendships' TABLE  ###
-################################################
-
-
-CREATE TABLE friendships (
-    usersname VARCHAR(50) NOT NULL,
-    friend_username VARCHAR(50) NOT NULL,
-    status ENUM('pending', 'accepted')
-) ENGINE = InnoDB; 
- 
-
-################################################
 ###  SQL QUERY FOR CREATING 'friends' TABLE  ###
 ################################################
-
 
 CREATE TABLE friends (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -80,9 +82,19 @@ CREATE TABLE friends (
 
 
 ################################################
-#  SQL QUERY FOR CREATING 'inventories' TABLE  #
+#  SQL QUERY FOR CREATING 'friendships' TABLE  #
 ################################################
 
+CREATE TABLE friendships (
+    usersname VARCHAR(50) NOT NULL,
+    friend_username VARCHAR(50) NOT NULL,
+    status ENUM('pending', 'accepted')
+) ENGINE = InnoDB; 
+ 
+
+################################################
+#  SQL QUERY FOR CREATING 'inventories' TABLE  #
+################################################
 
 CREATE TABLE inventories (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -97,9 +109,8 @@ CREATE TABLE inventories (
 
 
 ################################################
-###  SQL QUERY FOR CREATING 'pets' TABLE  ###
+####   SQL QUERY FOR CREATING 'pets' TABLE  ####
 ################################################
-
 
 CREATE TABLE pets (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -112,7 +123,7 @@ CREATE TABLE pets (
 
 
 ################################################
-###  SQL QUERY FOR CREATING 'shop' TABLE  ###
+####   SQL QUERY FOR CREATING 'shop' TABLE  ####
 ################################################
 
 
@@ -159,7 +170,6 @@ CREATE TABLE user_profiles (
 );
 
 */
-
 
 
 ?>

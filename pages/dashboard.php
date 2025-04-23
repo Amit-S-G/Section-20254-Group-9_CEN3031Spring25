@@ -32,8 +32,12 @@ $stmt->close();
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_task'])) {
     $task_name = trim($_POST['task_name']);
     $task_duedate = trim($_POST['task_duedate']);
+    if (empty($task_duedate)) {
+        $task_duedate = date('Y-m-d');
+    }
     $task_description = trim($_POST['task_description']);
     $user_id = $_SESSION['user_id'];
+    $point_value = 10; // Default value
 
     if (!empty($task_name)) {
         $stmt = $conn->prepare("INSERT INTO tasks (user_id, task_name, task_duedate, task_description) VALUES (?, ?, ?, ?)");
@@ -160,9 +164,10 @@ if (isset($_GET['incomplete_task_id'])) {
   }
 }
 
+
 // Delete task logic
 if (isset($_GET['delete_task_id'])) {
-    $task_id = $_GET['delete_task_id'];
+    $task_id = (int)$_GET['delete_task_id'];
     $stmt = $conn->prepare("DELETE FROM tasks WHERE id = ? AND user_id = ?");
     $stmt->bind_param("ii", $task_id, $_SESSION['user_id']);
     $stmt->execute();
@@ -170,7 +175,7 @@ if (isset($_GET['delete_task_id'])) {
 }
 
 //Clear Tasks
-if (isset($_GET['clear_tasks'])) {
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['clear_tasks'])) {
   $stmt = $conn->prepare("DELETE FROM tasks WHERE user_id = ?");
   $stmt->bind_param("i", $_SESSION['user_id']);
   $stmt->execute();
@@ -406,7 +411,10 @@ $conn->close();
     </section>
 
     <div class="clear-tasks">
-        <a href="?clear_tasks=true">Clear All Tasks</a>
+      <form method="post" onsubmit="return confirm('Are you sure you want to clear all tasks?');">
+        <input type="hidden" name="clear_tasks" value="1">
+        <button type="submit">Clear All Tasks</button>
+      </form>
     </div>
   </div>
 

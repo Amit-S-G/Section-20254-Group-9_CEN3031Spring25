@@ -20,13 +20,13 @@ body {
     width: 85%;
     margin: 50px auto;
     padding: 30px;
-    background: rgba(18, 26, 19, 0.95);
+    background: rgba(18,26,19,0.95);
     border-radius: 12px;
     box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);
     text-align: center;
     border: 3px solid transparent;
-    background-image:
-        linear-gradient(rgba(18, 26, 19), rgba(18, 26, 19)),
+    background-image: 
+        linear-gradient(rgba(18,26,19), rgba(18,26,19)),
         linear-gradient(#00ffaa, #00eaff);
     background-origin: border-box;
     background-clip: padding-box, border-box;
@@ -51,14 +51,12 @@ body {
 .friends_panel::-webkit-scrollbar {
     width: 5px;
 }
-
 .friends_panel::-webkit-scrollbar-thumb {
     background: linear-gradient(#00ffaa, #00eaff);
     border-radius: 10px;
 }
-
 .friends_panel::-webkit-scrollbar-track {
-    background-color: rgba(18, 26, 19);
+    background-color: rgba(18,26,19);
 }
 
 .request_panel::-webkit-scrollbar {
@@ -75,8 +73,7 @@ body {
 }
 
 .request_panel {
-    border-right: none;
-    /* gets ride of the border on the right side of request panel */
+    border-right: none; /* gets ride of the border on the right side of request panel */
     flex: 7;
     overflow-y: auto;
     direction: rtl;
@@ -136,7 +133,8 @@ input[type="submit"]:hover {
 }
 
 .success-message,
-.error-message {
+.error-message
+{
     position: fixed;
     top: 50%;
     left: 50%;
@@ -151,16 +149,16 @@ input[type="submit"]:hover {
     box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);
     text-align: center;
     border: 3px solid transparent;
-    background: rgba(18, 26, 19);
-    background-image:
-        linear-gradient(rgba(18, 26, 19), rgba(18, 26, 19)),
+    background: rgba(18,26,19);
+    background-image: 
+        linear-gradient(rgba(18,26,19), rgba(18,26,19)),
         linear-gradient(#00ffaa, #00eaff);
     background-origin: border-box;
     background-clip: padding-box, border-box;
 }
 
 .success-message,
-.error-message a {
+.error-message  a {
     font-size: 1em;
     text-align: center;
     display: block;
@@ -169,14 +167,17 @@ input[type="submit"]:hover {
     font-weight: bold;
 }
 
-.error-message {
+.error-message
+{
     color: #db5966;
 }
 
-.success-message {
+.success-message
+{
     color: #c7a557;
 }
 
-.friends-list-container {
+.friends-list-container
+{
     color: #c7a557;
 }

@@ -262,7 +262,7 @@ svg {
     padding: 10px;
 }
 
-.clear-tasks a {
+.clear-tasks button {
     display: inline-block;
     padding: 8px 16px;
     background-color: #61f2ff;
@@ -274,7 +274,7 @@ svg {
     margin-top: 10px;
 }
 
-.clear-tasks a:hover {
+.clear-tasks button:hover {
     background-color: #ffd87e;
     color: #241b2f;
 }

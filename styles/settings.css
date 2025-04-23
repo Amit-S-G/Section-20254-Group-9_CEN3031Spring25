@@ -1,0 +1,97 @@
+/* Settings Styles */
+body {
+    font-family: 'IM Fell DW Pica', serif;
+    background-image: url('../img/backgrounds/tree_house_blur.png');
+    background-size: cover;
+    background-attachment: fixed;
+    margin: 0;
+    color: #ffe29f;
+    padding-top: 100px; /* Adjust depending on header */
+}
+
+
+.settings-container {
+    width: 85%;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    border: 3px solid transparent;
+    background: rgba(18,26,19);
+    background-image:
+        linear-gradient(rgba(18,26,19), rgba(18,26,19)),
+        linear-gradient(#00ffaa, #00eaff);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+
+.settings-container h2 {
+    font-size: 2.5em;
+    color: #ffe29f;
+    font-family: 'Cinzel Decorative', serif;
+    margin-bottom: 20px;
+}
+
+.settings-container h3 {
+    font-size: 1.8em;
+    color: #ffe29f;
+    font-family: 'Cinzel Decorative', serif;
+    margin-bottom: 15px;
+}
+
+.password-reset-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.password-reset-form label {
+    color: #ffe29f;
+    margin-bottom: 5px;
+    text-align: left;
+    width: 100%;
+}
+
+.password-reset-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #58d8e4;
+    background: rgba(39, 95, 100, 0.468);
+    color: #ffe29f;
+    font-size: 1em;
+    outline: none;
+}
+
+.password-reset-form input[type="password"]:focus {
+    background: rgba(39, 95, 100, 0.6);
+    border-color: #00eaff;
+}
+
+.password-reset-form button {
+    background-color: #61f2ff;
+    color: #5b5133;
+    font-size: 1.2em;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'IM Fell DW Pica', serif;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+.password-reset-form button:hover {
+    background-color: #ffe29f;
+    color: #241b2f;
+}
+
+.reset-message {
+    color: #ff6b6b; /* Or a success color */
+    font-size: 1em;
+    margin-top: 10px;
+    text-align: center;
+}

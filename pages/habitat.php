@@ -8,7 +8,7 @@ if (!isset($_SESSION["username"])) {
 }
 
 include("../database.php");
-
+date_default_timezone_set('America/New_York');
 // Check for AJAX request to update is_selected
 if (isset($_POST['item_name'])) {
     $user_id = $_SESSION['user_id'];
@@ -109,9 +109,6 @@ if (isset($_POST['action']) && $_POST['action'] === 'feed') {
 }
 
 
-// TEST OVERRIDES: Read GET parameters for pet and habitat
-$testPet     = isset($_GET['pet']) ? strtolower($_GET['pet']) : '';
-$testHabitat = isset($_GET['habitat']) ? strtolower($_GET['habitat']) : '';
 
 // Habitat setup
 $chosenHabitat = " ";
@@ -128,10 +125,6 @@ if ($resultHabitat->num_rows > 0) {
 }
 $stmtHabitat->close();
 
-// Override with test habitat
-if (!empty($testHabitat)) {
-    $chosenHabitat = $testHabitat;
-}
 
 if (!empty($chosenHabitat)) {
     switch (strtolower($chosenHabitat)) {
@@ -196,18 +189,24 @@ if ($hasPet) {
         $row = $result->fetch_assoc();
         $pet_hunger = intval($row['pet_hunger']);
         $last_update = $row['last_hunger_update'];
+        
+        //Access date (not time)
+        $today = date('Y-m-d');
     
-        $today = new DateTime();
-        $lastUpdateDate = new DateTime($last_update);
-        $interval = $lastUpdateDate->diff($today)->days;
-    
-        if ($interval > 0) {
-            $hunger_loss = 5 * $interval;
+        //Remove 5 hunger per day
+        if ($last_update < $today) {
+           $last_update_time = strtotime($last_update); //converts then to second times
+           $today_time = strtotime($today);
+
+           $diff_sec = $today_time - $last_update_time;
+
+           $diff_day = round($diff_sec / (60*60*24));
+
+            $hunger_loss = 5 * $diff_day;
             $new_hunger = max($pet_hunger - $hunger_loss, 0);
     
-            // Update the database with new hunger and last update date
-            $updateStmt = $conn->prepare("UPDATE pets SET pet_hunger = ?, last_hunger_update = CURDATE() WHERE user_id = ?");
-            $updateStmt->bind_param("ii", $new_hunger, $userId);
+            $updateStmt = $conn->prepare("UPDATE pets SET pet_hunger = ?, last_hunger_update = ? WHERE user_id = ?");
+            $updateStmt->bind_param("isi", $new_hunger, $today, $userId);
             $updateStmt->execute();
             $updateStmt->close();
     
@@ -221,7 +220,7 @@ $maxHunger = 100;
 $hungerPercentage = min(($pet_hunger / $maxHunger) * 100, 100);
 
 // Positioning
-//Defining positions for pet image, feed button and hunger bar based on the background iamge chosen
+//Defining positions for pet image, feed button and hunger bar based on the background image chosen
 $pet_position = "left: 150px; top: 450px;";
 $feed_position = "left: 150px; top: 400px;";
 $hunger_position = "left: 150px; top: 390px;";
@@ -371,6 +370,8 @@ $stmtInventory->close();
 
 $conn->close();
 ?>
+
+
 
 <?php include("header.php") ?>
 
@@ -536,8 +537,8 @@ $conn->close();
                 } catch (e) {
                     console.error("Failed to parse response:", e);
                 }
+                location.reload();
             }
-            location.reload();
         };
 
         xhr.send('action=feed');

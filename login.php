@@ -17,7 +17,7 @@ session_start(); // Start session for login
 <body>
     <div class="container">
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <h2>Welcome to Taskemon</h2>
+            <h2>Welcome to TaskÉmon</h2>
             <br><br>
 
             <?php

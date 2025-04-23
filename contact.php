@@ -16,7 +16,7 @@
     </header>
 
     <section class="contact-container">
-        <h2>Get in Touch</h2>
+        <h2> ~ Get in Touch ~ </h2>
         <p class ="get-in-touch">If you have any questions, feedback, or suggestions, feel free to reach out.</p>
 
         <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
