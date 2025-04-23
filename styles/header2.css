@@ -1,0 +1,104 @@
+
+.brand {
+    display: inline-block;
+    margin-left: 40px; /* Moves brand image slightly to the right */
+    margin-top: 6px; /* Center vertically */
+    vertical-align: middle; /* Helps keep it centered */
+}
+
+.brand img {
+    box-sizing: content-box; /* Prevent padding and border from affecting the size */
+    height: 45px; /* Adjust to fit header */
+    width: auto;  /* Maintain aspect ratio */
+    display: block;
+    padding: 0;
+    align-items: center;
+}*
+
+{
+    margin: 0;
+    padding: 0;
+  }
+
+  body{
+    min-height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  nav{
+    background-color:rgba(50, 80, 50, 0.85);
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+    position: fixed; /* Fixes the navbar to the top */
+    top: 0; /* Ensures it stays at the top */
+    width: 100%; /* Makes it span the full width */
+    z-index: 1000; /* Ensures it stays above other elements */
+  }
+  nav ul{
+    width: 100%;
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  nav li{
+    height: 60px;
+  }
+  nav a{
+    height: 100%;
+    padding: 0 30px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    color: #aeea00;
+  }
+  nav .brand:hover {
+    background-color: transparent;
+  }
+  nav ul li:not(:first-child) a:hover {
+    background-color: rgba(30, 50, 30, 0.95); /* Ensures Taskemon logo does not have hover effect */
+  }
+  .sidebar li:first-child a:hover {
+    background-color: rgba(30, 50, 30, 0.95); /* Ensures sidebar close image has hover effect */
+}
+  nav li:first-child{
+    margin-right: auto;
+  }
+  .sidebar{
+    position: fixed;
+    top: 0; 
+    right: 0;
+    height: 100vh;
+    width: 250px;
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    box-shadow: -10px 0 10px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .sidebar li{
+    width: 100%;
+  }
+  .sidebar a{
+    width: 100%;
+  }
+  .menu-button{
+    display: none;
+  }
+  @media(max-width: 1000px){
+    .hideOnMobile{
+      display: none;
+    }
+    .menu-button{
+      display: block;
+    }
+  }
+  @media(max-width: 500px){
+    .sidebar{
+      width: 100%;
+    }
+  }
